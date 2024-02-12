@@ -1,0 +1,8 @@
+image: python:3.6
+
+before_script:
+    - date
+    - uname -a
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - printenv | sort

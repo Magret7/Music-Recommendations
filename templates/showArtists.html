@@ -1,0 +1,49 @@
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Music Recommendation WebApp</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+
+<body>
+	<h1>My Artist</h1>
+	{% if artists == [] %}
+	<p>No Artists exist</p>
+
+	<div>
+		{% else %}
+		{% for i in artists %}
+		<div class="row">
+			<div class="column">
+				<table>
+					<tr>
+						<th>Replace with Artist Name</th>
+					</tr>
+					<tr>
+						<td><b>Biography: </b> Replace with Artist Biography</td>
+					</tr>
+					<tr>
+						<td><b>Songs: </b> Replace with Artist Songs</td>
+					</tr>
+					<tr>
+						<td><b>Albums: </b> Replace with Artist Albums</td>
+					</tr>
+					<tr>
+						<td><b>Genres: </b> Replace with Artist Genres</td>
+					</tr>
+					<tr>
+						<td><b>Related Artists: </b> Replace with Artist Related Artists</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+	</div>
+</body>
+
+</html>

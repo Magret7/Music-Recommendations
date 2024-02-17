@@ -34,6 +34,17 @@ def showArtist():
 def about():
     return render_template('about.html')
 
+@app.route('/<artist_name>/relatedArtists', methods=['GET','POST'])
+def relatedArtists(artist_name):
+    artist = None
+    for a in artists:
+        if a['name'] == artist_name:
+            artist = a
+            break
+    if artist:
+         return render_template('relatedArtists.html', artist = artist)
+    else:
+        return "Artist not found", 404
 
 # @app.route('/unitTests')
 # def unittests():

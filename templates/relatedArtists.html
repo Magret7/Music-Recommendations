@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Music Recommendation WebApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+<body>
+    <h1>Related Artists for {{artist.name}}</h1>
+    {% if artist.RelatedArtists == [] %}
+    <p>No Related Artists exist</p>
+    {% else %}
+    <table>
+        <tr>
+            <th>Related Artists</th>
+        </tr>
+        {% for i in artist.RelatedArtists %}
+        <tr>
+            <td>{{i}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>

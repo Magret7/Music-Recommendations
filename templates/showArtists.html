@@ -36,7 +36,10 @@
 						<td><b>Genres: </b> Replace with Artist Genres</td>
 					</tr>
 					<tr>
-						<td><b>Related Artists: </b> Replace with Artist Related Artists</td>
+						<td>
+							<b>Related Artists: </b> 
+							<a href="{{url_for('relatedArtists', artist_name = i.name)}}">Related Artists</a><br/>
+						</td>
 					</tr>
 				</table>
 			</div>

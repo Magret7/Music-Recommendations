@@ -10,40 +10,37 @@
 
 
 <body>
-	<h1>My Artist</h1>
-	{% if artists == [] %}
-	<p>No Artists exist</p>
-
-	<div>
-		{% else %}
-		{% for i in artists %}
-		<div class="row">
-			<div class="column">
-				<table>
-					<tr>
-						<th>Replace with Artist Name</th>
-					</tr>
-					<tr>
-						<td><b>Biography: </b> Replace with Artist Biography</td>
-					</tr>
-					<tr>
-						<td><b>Songs: </b> Replace with Artist Songs</td>
-					</tr>
-					<tr>
-						<td><b>Albums: </b> Replace with Artist Albums</td>
-					</tr>
-					<tr>
-						<td><b>Genres: </b> Replace with Artist Genres</td>
-					</tr>
-					<tr>
-						<td><b>Related Artists: </b> Replace with Artist Related Artists</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		{% endfor %}
-		{% endif %}
-	</div>
+    <h1>My Artist</h1>
+    {% if artists == [] %}
+        <p>No Artists exist</p>
+    {% else %}
+        {% for artist in artists %}
+            <div class="row">
+                <div class="column">
+                    <table>
+                        <tr>
+                            <th>{{ artist.name }}</th>
+                        </tr>
+                        <tr>
+                            <td><b>Biography: </b> {{ artist.Biography }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Songs: </b> {{ artist.Songs | join(', ') }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Albums: </b> {{ artist.Albums | join(', ') }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Genres: </b> {{ artist.Genres | join(', ') }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Related Artists: </b> {{ artist.RelatedArtists | join(', ') }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 </body>
 
 </html>

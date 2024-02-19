@@ -46,20 +46,15 @@ def relatedArtists(artist_name):
     else:
         return "Artist not found", 404
     
-@app.route('/')
-@app.route('/genres/')
-def showGenre():
-    return render_template('showGenres.html', genres = genres )
-
-@app.route('/<genre_name>/relatedGenres', methods=['GET','POST'])
-def relatedGenres(genre_name):
+@app.route('/<genre_name>/')
+def showGenre(genre_name):
     genre = None
-    for i in genres:
-        if i['name'] == genre_name:
-            genre = i
+    for g in genres:
+        if g['name'] == genre_name:
+            genre = g
             break
     if genre:
-         return render_template('relatedGenres.html', genre = genre)
+         return render_template('showGeneres.html', genre = genre)
     else:
         return "Genre not found", 404
 

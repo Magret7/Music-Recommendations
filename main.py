@@ -46,11 +46,10 @@ def relatedArtists(artist_name):
     else:
         return "Artist not found", 404
     
-# #TODOshowGenre
-# @app.route('/')
-# @app.route('/genres/')
-# def showGenre():
-#     return render_template('showGenres.html', genres = genres )
+@app.route('/')
+@app.route('/genres/')
+def showGenre():
+    return render_template('showGenres.html', genres = genres )
 
 # #TODOrelatedGenre
 # @app.route('/<genre_name>/relatedGenres', methods=['GET','POST'])

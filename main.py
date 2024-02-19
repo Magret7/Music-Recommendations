@@ -54,7 +54,7 @@ def showGenre(genre_name):
             genre = g
             break
     if genre:
-         return render_template('showGeneres.html', genre = genre)
+         return render_template('showGenre.html', genre = genre)
     else:
         return "Genre not found", 404
 

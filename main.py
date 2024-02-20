@@ -34,7 +34,7 @@ def showArtist():
 def about():
     return render_template('about.html')
 
-@app.route('/<artist_name>/relatedArtists', methods=['GET','POST'])
+@app.route('/<artist_name>/relatedArtists')
 def relatedArtists(artist_name):
     artist = None
     for a in artists:

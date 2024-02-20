@@ -45,7 +45,7 @@
                             <td><b>Genres: </b> {{ artist.Genres | join(', ') }}</td>
                         </tr>
                         <tr>
-                            <td><a href="{{url_for('relatedArtists', artist_name=artist.name)}}">Related Artists</a> </td>
+                            <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related Artists</a> </td>
                         </tr>
                     </table>
                 </div>

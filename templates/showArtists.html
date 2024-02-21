@@ -43,8 +43,14 @@
                         <tr>
                             <td><b>Albums: </b> {{ artist.Albums | join(', ') }}</td>
                         </tr>
-                        <tr>
-                            <td><b>Genres: </b> {{ artist.Genres | join(', ') }}</td>
+                        <!-- put hyperlinks for genres to link to genre info (showGenres.html)-->
+                        <tr> 
+                            <td>
+                                <b>Genres: </b>  
+                                {% for genre in artist.Genres %}
+                                    <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
+                                {% endfor %}
+                            </td>
                         </tr>
                         <tr>
                             <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related Artists</a>

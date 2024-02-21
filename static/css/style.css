@@ -1,51 +1,56 @@
 /* style for the table */
 * {
-    box-sizing: border-box;
-  }
-  
-  .row {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-    
-  .column {
-    float: left;
-    width: 33.33%;
-    padding: 1rem;
-    max-height: 30rem;
-  }
-  
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-  }
-  
-  th, td {
-    text-align: center;
-    padding: 0.75rem;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
+  box-sizing: border-box;
+}
+
+.row {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 1rem;
+  max-height: 30rem;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 0.75rem;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.column-RelatedArtists {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  width: 30rem;
+}
+
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
   }
 
-  .column-RelatedArtists{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-    width: 30rem;
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
   }
+}
 
-  .card-columns {
-    @include media-breakpoint-only(lg) {
-      column-count: 4;
-    }
-    @include media-breakpoint-only(xl) {
-      column-count: 5;
-    }
-  }
-
-
+#music-icon {
+  max-height: 50px; 
+  max-width: 50px;
+}

@@ -24,9 +24,9 @@
         
         <main>
 			<h1>{{genre.name}}</h1>
-    {% if genres == [] %}
-        <p>No Genres exist</p>
-    {% else %}
+            {% if genres == [] %}
+            <p>No Genres exist</p>
+            {% else %}
             <div class="row">
                 <div class="column">
                     <table>
@@ -45,7 +45,7 @@
                     </table>
                 </div>
             </div>
-    {% endif %}
+            {%endif%}
         </main>
 
         <footer>

@@ -23,11 +23,10 @@
         </header>
         
         <main>
-			<h1>Genre</h1>
+			<h1>{{genre.name}}</h1>
     {% if genres == [] %}
         <p>No Genres exist</p>
     {% else %}
-        {% for genre in genres %}
             <div class="row">
                 <div class="column">
                     <table>
@@ -46,7 +45,6 @@
                     </table>
                 </div>
             </div>
-        {% endfor %}
     {% endif %}
         </main>
 

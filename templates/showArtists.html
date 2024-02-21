@@ -46,7 +46,7 @@
                             <td>
                                 <b>Genres: </b>  
                                 {% for genre in artist.Genres %}
-                                    <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
+                                    <a href="{{ url_for('showGenre', genre=genre.name) }}">{{ genre }}</a>
                                 {% endfor %}
                             </td>
                         </tr>

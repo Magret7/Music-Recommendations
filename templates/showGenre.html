@@ -23,12 +23,12 @@
         </header>
         
         <main>
-			<h1>{{genre.name}}</h1>
+			<h1 tyle="text-align: center;">{{genre.name}}</h1>
             {% if genres == [] %}
             <p>No Genres exist</p>
             {% else %}
             <div class="row">
-                <div class="column">
+                <div class="column-RelatedArtists">
                     <table>
                         <tr>
                             <th>{{ genre.name }}</th>

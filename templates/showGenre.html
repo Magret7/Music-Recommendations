@@ -1,3 +1,5 @@
+<!-- create page with info about genre when clicked on from artist? -->
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -17,47 +19,33 @@
 
     <body>
         <header>
-            <!-- place navbar here -->
+            <!-- place navbar here eventually -->
         </header>
         
         <main>
-			<h1>My Artist</h1>
-    {% if artists == [] %}
-        <p>No Artists exist</p>
-    {% else %}
-        {% for artist in artists %}
+			<h1 tyle="text-align: center;">{{genre.name}}</h1>
+            {% if genres == [] %}
+            <p>No Genres exist</p>
+            {% else %}
             <div class="row">
-                <div class="column">
+                <div class="column-RelatedArtists">
                     <table>
                         <tr>
-                            <th>{{ artist.name }}</th>
+                            <th>{{ genre.name }}</th>
                         </tr>
                         <tr>
-                            <td><b>Biography: </b> {{ artist.Biography }}</td>
+                            <td><b>Information: </b> {{ genre.info }}</td>
                         </tr>
                         <tr>
-                            <td><b>Songs: </b> {{ artist.Songs | join(', ') }}</td>
+                            <td><b>Related Artists: </b> {{ genre.related_Artists | join(', ') }}</td>
                         </tr>
                         <tr>
-                            <td><b>Albums: </b> {{ artist.Albums | join(', ') }}</td>
-                        </tr>
-                        <!-- put hyperlinks for genres to link to genre info (showGenres.html)-->
-                        <tr> 
-                            <td>
-                                <b>Genres: </b>  
-                                {% for genre in artist.Genres %}
-                                    <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related Artists</a> </td>
+                            <td><b>Related Albums: </b> {{ genre.related_Albums | join(', ') }}</td>
                         </tr>
                     </table>
                 </div>
             </div>
-        {% endfor %}
-    {% endif %}
+            {%endif%}
         </main>
 
         <footer>

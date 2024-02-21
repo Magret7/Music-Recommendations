@@ -25,6 +25,10 @@ def bookJSON():
 
 
 @app.route('/')
+def home():
+     return render_template('home.html')
+
+
 @app.route('/artists/')
 def showArtist():
     return render_template('showArtists.html', artists = artists )

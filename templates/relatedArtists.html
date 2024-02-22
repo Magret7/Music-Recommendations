@@ -19,27 +19,31 @@
 
 <body>
     {% include 'header.html' %}
-    {% include 'sidebar.html' %}
 
     <main>
-        <div class="container">
-            <h1 style="text-align: center">Related Artists for {{artist.name}}</h1>
-            {% if artist.RelatedArtists == [] %}
-            <p>No Related Artists exist</p>
-            {% else %}
-            <div class="column-RelatedArtists">
-                <table>
-                    <tr>
-                        <th>Related Artists</th>
-                    </tr>
-                    {% for i in artist.RelatedArtists %}
-                    <tr>
-                        <td>{{i}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
+        <div class="container-fluid p-3">
+            <div class="row">
+                {% include 'sidebar.html' %}
+                <div class="col-11">
+                    <h1>Related Artists for {{artist.name}}</h1>
+                    {% if artist.RelatedArtists == [] %}
+                    <p>No Related Artists exist</p>
+                    {% else %}
+                    <div class="column-RelatedArtists">
+                        <table>
+                            <tr>
+                                <th>Related Artists</th>
+                            </tr>
+                            {% for i in artist.RelatedArtists %}
+                            <tr>
+                                <td>{{i}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-            {% endif %}
         </div>
     </main>
 

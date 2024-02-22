@@ -19,48 +19,53 @@
 
 <body>
     {% include 'header.html' %}
-    {% include 'sidebar.html' %}
-    
+
     <main>
-        <div class="container">
-            <h1 style="text-align: center">My Artists</h1>
-            {% if artists == [] %}
-            <p>No Artists exist</p>
-            {% else %}
-            {% for artist in artists %}
-            <div class="flex-row">
-                <div class="column">
-                    <table>
-                        <tr>
-                            <th>{{ artist.name }}</th>
-                        </tr>
-                        <tr>
-                            <td><b>Biography: </b> {{ artist.Biography }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Songs: </b> {{ artist.Songs | join(', ') }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Albums: </b> {{ artist.Albums | join(', ') }}</td>
-                        </tr>
-                        <!-- put hyperlinks for genres to link to genre info (showGenres.html)-->
-                        <tr> 
-                            <td>
-                                <b>Genres: </b>  
-                                {% for genre in artist.Genres %}
-                                    <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related Artists</a>
-                            </td>
-                        </tr>
-                    </table>
+        <div class="container-fluid p-3">
+            <div class="row">
+                {% include 'sidebar.html' %}
+                <div class="col-11">
+                    <h1>My Artists</h1>
+                    {% if artists == [] %}
+                    <p>No Artists exist</p>
+                    {% else %}
+                    <div class="row">
+                    {% for artist in artists %}
+                        <div class="column">   <!-- TODO: Why does this make it display well? -->
+                            <table>
+                                <tr>
+                                    <th>{{ artist.name }}</th>
+                                </tr>
+                                <tr>
+                                    <td><b>Biography: </b> {{ artist.Biography }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Songs: </b> {{ artist.Songs | join(', ') }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Albums: </b> {{ artist.Albums | join(', ') }}</td>
+                                </tr>
+                                <!-- put hyperlinks for genres to link to genre info (showGenres.html)-->
+                                <tr>
+                                    <td>
+                                        <b>Genres: </b>
+                                        {% for genre in artist.Genres %}
+                                        <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related
+                                            Artists</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
-            {% endfor %}
-            {% endif %}
         </div>
     </main>
 

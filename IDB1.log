@@ -1,3 +1,60 @@
+commit 9eefa41e11d12260df957e4d644d2344b630d47b
+Merge: cf40bb2 d8119d3
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Thu Feb 22 00:37:08 2024 +0000
+
+    Merge branch 'ryan-bootstrap' into 'main'
+    
+    Fix sidebar alignment so it doesn't shift main content beneath it.  Remove...
+    
+    See merge request magretadekunle/cs331e-idb!19
+
+commit d8119d3735a720e2112e826f5e14fcb500e4566e
+Merge: 2fcc6f0 cf40bb2
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Thu Feb 22 00:36:18 2024 +0000
+
+    Merge branch 'main' into 'ryan-bootstrap'
+    
+    # Conflicts:
+    #   templates/about.html
+    #   templates/home.html
+    #   templates/relatedArtists.html
+    #   templates/showArtists.html
+    #   templates/showGenre.html
+
+commit cf40bb29fa0a72a810d424ff8938596133a789e5
+Merge: 17422e7 06ddcb5
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Thu Feb 22 00:32:59 2024 +0000
+
+    Merge branch 'MagretsBranch' into 'main'
+    
+    Updated Git log and Centered Headings on Pages
+    
+    See merge request magretadekunle/cs331e-idb!20
+
+commit 06ddcb514d0dffd6fc2c6574c25590b0e18d68ce
+Author: Magret <magretadekunle@gmail.com>
+Date:   Wed Feb 21 18:32:03 2024 -0600
+
+    Updated Git log and Centered Headings on Pages
+
+commit 2fcc6f020d97df46d07f032df3192bfb096ce2c1
+Merge: 7d4dd3f 17422e7
+Author: Ryan W Mullowney <rmullowney@austin.utexas.edu>
+Date:   Wed Feb 21 18:26:55 2024 -0600
+
+    Merge branch 'main' into ryan-bootstrap.
+    Add mild changes to container div of newer header.
+    Update "My Artist" page title to "My Artists"
+
+commit 7d4dd3fab1ecc2af541e855516cca071a1b89256
+Author: Ryan W Mullowney <rmullowney@austin.utexas.edu>
+Date:   Wed Feb 21 18:20:28 2024 -0600
+
+    Fix sidebar alignment so it doesn't shift main content beneath it.  Remove Home page until it's more developed.
+
 commit 17422e73981227a75bb0d0cf0f22b573b433785b
 Author: Magret Adekunle <magretadekunle@gmail.com>
 Date:   Wed Feb 21 23:40:30 2024 +0000

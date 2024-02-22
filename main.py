@@ -29,11 +29,12 @@ def bookJSON():
     return r
 
 
+# TODO: Flesh out home screen with content once we decide what to display there
+# @app.route('/')
+# def home():
+#     return render_template('home.html')
+
 @app.route('/')
-def home():
-    return render_template('home.html')
-
-
 @app.route('/artists/')
 def showArtist():
     return render_template('showArtists.html', artists=artists)

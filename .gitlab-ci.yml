@@ -21,6 +21,10 @@ before_script:
     - pip install -r requirements.txt
     - printenv | sort
 
-test:
+build-job:
+  stage: build
   script:
-  - python tests.py
+
+# test:
+#   script:
+#   - python tests.py

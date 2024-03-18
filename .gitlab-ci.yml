@@ -10,7 +10,7 @@ services:
 variables:
   POSTGRES_DB: musicdb
   POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: 
+  POSTGRES_PASSWORD: ""
   POSTGRES_HOST_AUTH_METHOD: trust
   DB_STRING: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/$POSTGRES_DB"
   
@@ -21,6 +21,6 @@ before_script:
     - pip install -r requirements.txt
     - printenv | sort
 
-# test:
-#   script:
-#   - python app/tests.py
+test:
+  script:
+  - python app/tests.py

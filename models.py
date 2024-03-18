@@ -4,9 +4,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-cwd = os.getcwd() 
-print("Current working directory:", cwd)
-
 # initializing Flask app 
 app = Flask(__name__)
 

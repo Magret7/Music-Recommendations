@@ -21,48 +21,55 @@
     {% include 'header.html' %}
 
     <main>
-        <div class="container-fluid p-3">
+        <div class="container-fluid p-4">
             <div class="row">
                 {% include 'sidebar.html' %}
                 <div class="col-11">
-                    <h1 style="text-align: center;">My Artists</h1>
-                    {% if artists == [] %}
-                    <p>No Artists exist</p>
+                    <h1 style="text-align: center;">All Genres</h1>
+                    {% if genres == [] %}
+                    <p>No Genres exist</p>
                     {% else %}
-                    <div class="row">
-                    {% for artist in artists %}
-                        <div class="column">   <!-- TODO: Why does this make it display well? -->
+                    {% for genre in genres %}
+                        <div class= "column">   <!-- TODO: Why does this make it display well? -->
                             <table>
                                 <tr>
-                                    <th>{{ artist.name }}</th>
+                                    <th>{{ genre.name }}</th>
                                 </tr>
+
                                 <tr>
-                                    <td><b>Biography: </b> {{ artist.Biography }}</td>
+                                    <td><b>Information: </b> {{ genre.info}}</td>
                                 </tr>
-                                <tr>
-                                    <td><b>Songs: </b> {{ artist.Songs | join(', ') }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Albums: </b> {{ artist.Albums | join(', ') }}</td>
-                                </tr>
-                                <!-- put hyperlinks for genres to link to genre info (showGenres.html)-->
+   
                                 <tr>
                                     <td>
-                                        <b>Genres: </b>
-                                        {% for genre in artist.Genres %}
-                                        <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
+                                        <b>Related Artists: </b>
+                                        {% for i in genre.related_Artists %}
+                                        <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ i }}</a>
                                         {% endfor %}
                                     </td>
-                                </tr>
+                                </tr> 
+
                                 <tr>
-                                    <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related
-                                            Artists</a>
+                                    <td>
+                                        <b>Related Albums: </b>
+                                        {% for i in genre.related_Albums %}
+                                        <a href="{{ url_for('showAlbums', albums_name=albums)}}">{{ i }}</a>
+                                        {% endfor %}
                                     </td>
-                                </tr>
+                                </tr>  
+
+                                <tr>
+                                    <td>
+                                        <b>Related Songs: </b><br>
+                                        {% for i in genre.related_Songs %}
+                                        {{i}} <br>
+                                        <!-- <a href="{{ url_for('showGenre', genre_name=genre)}}">{{ i }}</a> -->
+                                        {% endfor %}
+                                    </td>
+                                </tr> 
                             </table>
                         </div>
                         {% endfor %}
-                    </div>
                     {% endif %}
                 </div>
             </div>

@@ -32,23 +32,43 @@
                 {% if genres == [] %}
                 <p>No Genres exist</p>
                 {% else %}
-                <div class="row">
-                    <div class="column-RelatedArtists">
+                <div class="column-RelatedArtists">
                         <table>
                             <tr>
                                 <th>{{ genre.name }}</th>
                             </tr>
                             <tr>
-                                <td><b>Information: </b> {{ genre.info }}</td>
+                                <td><b>Information: </b>{{ genre.info }}</td>
                             </tr>
+
                             <tr>
-                                <td><b>Related Artists: </b> {{ genre.related_Artists | join(', ') }}</td>
+                                <td>
+                                    <b>Related Artists: </b>
+                                    {% for i in genre.related_Artists %}
+                                    <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ i }}</a>
+                                    {% endfor %}
+                                </td>
                             </tr>
+
                             <tr>
-                                <td><b>Related Albums: </b> {{ genre.related_Albums | join(', ') }}</td>
+                                <td>
+                                    <b>Related Albums: </b>
+                                    {% for i in genre.related_Albums %}
+                                    <a href="{{ url_for('showAlbums', albums_name=albums)}}">{{ i }}</a>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Related Songs: </b><br>
+                                    {% for i in genre.related_Songs %}
+                                    {{i}} <br>
+                                    <!-- <a href="{{ url_for('relatedArtists', artist_name = genre.related_Artists )}}">{{ i }}</a> -->
+                                    {% endfor %}
+                                </td>
                             </tr>
                         </table>
-                    </div>
                 </div>
                 {%endif%}
             </div>

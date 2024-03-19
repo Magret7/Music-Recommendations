@@ -23,7 +23,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 
-
+# ------------
 # Artists
 # ------------
 class Artists(db.Model):
@@ -158,6 +158,39 @@ class Genres(db.Model):
           'related_albums': self.related_albums, 
           'related_tracks': self.related_tracks   
         } 
+    
+
+class Users(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.String(512), primary_key = True)
+    username = db.Column(db.String(512), nullable = False)
+    account_created = db.Column(db.String(512), nullable = False)  # TODO: Date field?
+    last_login = db.Column(db.String(512), nullable = False)
+    # TODO I think the following are all going to be connected through bridge tables since they'd be many-to-many relationships?
+    # TODO Do bridge tables need to be part of the model somehow?
+   #  artists_liked = db.Column(db.String(512), nullable = False)
+   #  songs_liked = db.Column(db.String(512), nullable = False)
+   #  albums_liked = db.Column(db.String(512), nullable = False)
+   #  users_followed = db.Column(db.String(512), nullable = False)
+    
+    def serialize(self):
+       """
+       returns a dictionary
+       """
+       return {
+          'id': self.genres_id, 
+          'username': self.genres_name,
+          'genres_info': self.genres_info, 
+          'account_created': self.related_artists,
+          'last_login': self.related_albums, 
+         #  'artists_liked': self.related_tracks,
+         #  'songs_liked': self.related_tracks,
+         #  'albums_liked': self.related_tracks,   
+         #  'users_followed': self.related_tracks   
+        }
+    
+
 
 with app.app_context():
     db.drop_all()

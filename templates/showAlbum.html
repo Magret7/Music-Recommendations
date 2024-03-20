@@ -1,6 +1,4 @@
-<!-- create page with info about genre when clicked on from artist? -->
-
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 
 <head>
@@ -21,24 +19,31 @@
 </head>
 
 <body>
+    {% include 'header.html' %}
     <main>
         <div class="container-fluid p-3">
             <div class="row">
                 {% include 'sidebar.html' %}
                 <div class="col-11">
-                <h1 style="text-align: center;">{{album.name}}</h1>
+                <h1 style="text-align: center;">{{ album.name }}</h1>
                 {% if albums == [] %}
                 <p>This Album does not exist</p>
                 {% else %}
                 <div class="column-RelatedArtists">
                         <table>
                             <tr>
-                                <th>{{ album.name }}</th>
+                                <td>{{ album.image }}</td>
                             </tr>
 
                             <tr>
-                                <th>{{ album.artist }}</th>
-                            </tr>
+                                <td>
+                                    <b>
+                                    {% for artist in album.artist %}
+                                    <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist }}</a>
+                                    {% endfor %}
+                                    </b>
+                                </td>
+                            </tr> 
 
                             <tr>
                                 <td><b>Information: </b>{{ album.info }}</td>
@@ -47,17 +52,8 @@
                             <tr>
                                 <td>
                                     <b>Album Tracks: </b>
-                                    {% for i in album.Tracks %}
-                                    {{ i }}
-                                    {% endfor %}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <b>Album Tracks: </b>
-                                    {% for i in album.Tracks %}
-                                    {{ i }}
+                                    {% for i in album.tracks %}
+                                     {{ i }}
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -65,20 +61,12 @@
                             <tr>
                                 <td>
                                     <b>Album's Genres: </b>
-                                    {% for i in album.Genres %}
-                                    <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ i }}</a>
+                                    {% for genre in album.genres %}
+                                    <a href="{{ url_for('showGenre', genre_name=genre)}}">{{ genre }}</a>
                                     {% endfor %}
                                 </td>
-                            </tr>
+                            </tr> 
 
-                            <tr>
-                                <td>
-                                    <b>Genres of Albums: </b>
-                                    {% for genre in album.Genres %}
-                                    <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
-                                    {% endfor %}
-                                </td>
-                            </tr>  
                         </table>
                 </div>
                 {%endif%}

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Albums</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -37,8 +37,13 @@
                                 </tr>
 
                                 <tr>
-                                    <td><b>Artist: </b><a href="{{ url_for('showArtist', artist_name=artist) }}">{{ album.artist}}</a></td>
-                                </tr>
+                                    <td>
+                                        <b>Artists: </b>
+                                        {% for artist in album.artist %}
+                                        <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist }}</a>
+                                        {% endfor %}
+                                    </td>
+                                </tr> 
 
                                 <tr>
                                     <td><b>Information: </b> {{ album.info}}</td>
@@ -47,8 +52,8 @@
                                 <tr>
                                     <td>
                                         <b>Album Tracks:</b><br>
-                                        {% for i in album.Tracks %}
-                                        {{i}}<br>
+                                        {% for track in album.tracks %}
+                                        {{ track }}<br>
                                         {% endfor %}
                                     </td>
                                 </tr> 
@@ -56,7 +61,7 @@
                                 <tr>
                                     <td>
                                         <b>Genres of Albums: </b>
-                                        {% for genre in album.Genres %}
+                                        {% for genre in album.genres %}
                                         <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
                                         {% endfor %}
                                     </td>

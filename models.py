@@ -1,4 +1,3 @@
-
 # import modules and libraries
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -6,7 +5,6 @@ import os
 
 # initializing Flask app 
 app = Flask(__name__)
-
 
 # Database Info
 app.app_context().push()
@@ -17,8 +15,7 @@ PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"
 
 # Configuration 
-app.config['SQLALCHEMY_DATABASE_URI'] = \ 
-os.environ.get("DB_STRING", f'postgresql://{USER}:{USER}@{PUBLIC_IP_ADDRESS}/{DBNAME}')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_STRING", f'postgresql://{USER}:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
@@ -160,5 +157,36 @@ class Genres(db.Model):
         } 
 
 with app.app_context():
-    db.drop_all()
     db.create_all()
+
+
+# CREATE TABLE Albums (
+#   album_id  SERIAL PRIMARY KEY, 
+#   album_artist VARCHAR (512) UNIQUE NOT NULL, 
+#   album_artist_id VARCHAR (512) NOT NULL, 
+#   album_image VARCHAR (512) NOT NULL, 
+#   album_name VARCHAR (512) NOT NULL, 
+#   album_info VARCHAR (512) NOT NULL,
+#   album_tracks VARCHAR (512) NOT NULL,
+#   album_genres VARCHAR (512) NOT NULL
+# );
+
+# CREATE TABLE Artists (
+#   artist_id  SERIAL PRIMARY KEY, 
+#   artist_name VARCHAR (512) UNIQUE NOT NULL, 
+#   artist_image VARCHAR (512) NOT NULL, 
+#   artist_biography VARCHAR (512) UNIQUE NOT NULL, 
+#   artist_tracks VARCHAR (512) NOT NULL, 
+#   artist_albums VARCHAR (512) NOT NULL,
+#   artist_genres VARCHAR (512) NOT NULL,
+#   related_artists VARCHAR (512) NOT NULL
+# );
+
+# CREATE TABLE Genres (
+#   genres_id  SERIAL PRIMARY KEY, 
+#   genres_name VARCHAR (512) UNIQUE NOT NULL, 
+#   genres_info VARCHAR (512) NOT NULL, 
+#   related_artists VARCHAR (512) NOT NULL, 
+#   related_albums VARCHAR (512) NOT NULL, 
+#   related_tracks VARCHAR (512) NOT NULL,
+# );

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Artist</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -33,24 +33,35 @@
                     {% for artist in artists %}
                         <div class="column">   <!-- TODO: Why does this make it display well? -->
                             <table>
+                                <!-- <tr>
+                                    <td>
+                                       <b> <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist.name }}</a></b> 
+                                    </td>
+                                </tr> -->
+                                
                                 <tr>
-                                    <th>{{ artist.name }}</th>
+                                    <td>
+                                       <b>{{ artist.name }}</b> 
+                                    </td>
                                 </tr>
 
                                 <tr>
-                                    <td><b>Biography: </b> {{ artist.Biography }}</td>
+                                    <td><b>Image: </b> {{ artist.image }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td><b>Songs: </b> {{ artist.Songs | join(', ') }}</td>
+                                    <td><b>Biography: </b> {{ artist.info }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td><b>Songs: </b> {{ artist.tracks | join(', ') }}</td>
                                 </tr>
 
                                 <tr>
                                     <td>
                                         <b>Albums: </b>
-                                        {% for i in artist.Albums %}
-                                        <a href="{{ url_for('showAlbums', albums_name=albums)}}">{{ i }}</a>
-
+                                        {% for album in artist.albums %}
+                                        <a href="{{ url_for('showAlbum', album_name=album)}}">{{ album }}</a>
                                         {% endfor %}
                                     </td>
                                 </tr> 
@@ -58,14 +69,14 @@
                                 <tr>
                                     <td>
                                         <b>Genres: </b>
-                                        {% for genre in artist.Genres %}
-                                        <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
+                                        {% for genre in artist.genres %}
+                                        <a href="{{ url_for('showGenre', genre_name=genre)}}">{{ genre }}</a>
                                         {% endfor %}
                                     </td>
                                 </tr>  
 
                                 <tr>
-                                    <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Related
+                                    <td><a href="{{ url_for('relatedArtists', artist_name=artist.name) }}">Recommended & Related
                                             Artists</a>
                                     </td>
                                 </tr>

@@ -44,8 +44,8 @@
                             <tr>
                                 <td>
                                     <b>Related Artists: </b>
-                                    {% for i in genre.related_Artists %}
-                                    <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ i }}</a>
+                                    {% for artist in genre.artists %}
+                                    <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist }}</a>
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -53,8 +53,8 @@
                             <tr>
                                 <td>
                                     <b>Related Albums: </b>
-                                    {% for i in genre.related_Albums %}
-                                    <a href="{{ url_for('showAlbums', albums_name=albums)}}">{{ i }}</a>
+                                    {% for album in genre.albums %}
+                                    <a href="{{ url_for('showAlbum', album_name=album)}}">{{ album }}</a>
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -62,9 +62,8 @@
                             <tr>
                                 <td>
                                     <b>Related Songs: </b><br>
-                                    {% for i in genre.related_Songs %}
-                                    {{i}} <br>
-                                    <!-- <a href="{{ url_for('relatedArtists', artist_name = genre.related_Artists )}}">{{ i }}</a> -->
+                                    {% for track in genre.tracks %}
+                                    {{ track }} <br>
                                     {% endfor %}
                                 </td>
                             </tr>

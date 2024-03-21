@@ -30,7 +30,7 @@ class Artists(db.Model):
     id
     name
     image
-    biography
+    info
     tracks
     albums
     genres
@@ -42,7 +42,7 @@ class Artists(db.Model):
     artist_id = db.Column(db.String(512), primary_key = True)
     artist_name = db.Column(db.String(512), nullable = False)
     artist_image = db.Column(db.String(512), nullable = False)
-    artist_biography = db.Column(db.String(512), nullable = False)
+    artist_info = db.Column(db.String(512), nullable = False)
     artist_tracks = db.Column(db.String(512), nullable = False)
     artist_albums = db.Column(db.String(512), nullable = False)
     artist_genres = db.Column(db.String(512), nullable = False)
@@ -59,7 +59,7 @@ class Artists(db.Model):
           'artist_id': self.artist_id, 
           'artist_name': self.artist_name,
           'artist_image': self.artist_image, 
-          'artist_biography': self.artist_biography,
+          'artist_info': self.artist_info,
           'artist_tracks': self.artist_tracks, 
           'artist_albums': self.artist_albums,  
           'artist_genres': self.artist_genres, 
@@ -87,10 +87,10 @@ class Albums(db.Model):
     __tablename__ = 'albums'
 
     album_id = db.Column(db.String(512), primary_key = True)
+    album_name = db.Column(db.String(512),  nullable = False)
     album_artist = db.Column(db.String(512), nullable = False)
     album_artist_id = db.Column(db.String(512), nullable = False)
     album_image = db.Column(db.String(512), nullable = False)
-    album_name = db.Column(db.String(512), nullable = False)
     album_info = db.Column(db.String(512), nullable = False)
     album_tracks = db.Column(db.String(512), nullable = False)
     album_genres = db.Column(db.String(512), nullable = False)
@@ -104,10 +104,10 @@ class Albums(db.Model):
        """
        return {
           'album_id': self.album_id, 
+          'album_name': self.album_name,
           'album_artist': self.album_artist,
           'album_artist_id': self.album_artist_id, 
           'album_image': self.album_image,
-          'album_name': self.album_name, 
           'album_info': self.album_info,  
           'album_tracks': self.album_tracks, 
           'album_genres': self.album_genres    
@@ -157,7 +157,8 @@ class Genres(db.Model):
         } 
 
 with app.app_context():
-    db.create_all()
+   db.drop_all()
+   db.create_all()
 
 
 # CREATE TABLE Albums (

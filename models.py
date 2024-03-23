@@ -39,13 +39,13 @@ class Artists(db.Model):
     """
     __tablename__ = 'artists'
 
-    artist_id = db.Column(db.String(512), primary_key = True)
-    artist_name = db.Column(db.String(512), nullable = False)
-    artist_image = db.Column(db.String(512), nullable = False)
-    artist_info = db.Column(db.String(512), nullable = False)
-    artist_tracks = db.Column(db.String(512), nullable = False)
-    artist_albums = db.Column(db.String(512), nullable = False)
-    artist_genres = db.Column(db.String(512), nullable = False)
+    id = db.Column(db.String(512), primary_key = True)
+    name = db.Column(db.String(512), nullable = False)
+    image = db.Column(db.String(512), nullable = False)
+    info = db.Column(db.String(512), nullable = False)
+    tracks = db.Column(db.String(512), nullable = False)
+    albums = db.Column(db.String(512), nullable = False)
+    genres = db.Column(db.String(512), nullable = False)
     related_artists = db.Column(db.String(512), nullable = False)
 
     # ------------
@@ -56,13 +56,13 @@ class Artists(db.Model):
        returns a dictionary
        """
        return {
-          'artist_id': self.artist_id, 
-          'artist_name': self.artist_name,
-          'artist_image': self.artist_image, 
-          'artist_info': self.artist_info,
-          'artist_tracks': self.artist_tracks, 
-          'artist_albums': self.artist_albums,  
-          'artist_genres': self.artist_genres, 
+          'id': self.id, 
+          'name': self.name,
+          'image': self.image, 
+          'info': self.info,
+          'tracks': self.tracks, 
+          'albums': self.albums,  
+          'genres': self.genres, 
           'related_artists': self.related_artists    
         }
 
@@ -75,10 +75,10 @@ class Albums(db.Model):
     Albums class attrbiutes 
 
     id
-    artist
-    artist id
-    image
     name
+    artist
+    artist_id
+    image
     info
     tracks
     genres
@@ -86,14 +86,14 @@ class Albums(db.Model):
     """
     __tablename__ = 'albums'
 
-    album_id = db.Column(db.String(512), primary_key = True)
-    album_name = db.Column(db.String(512),  nullable = False)
-    album_artist = db.Column(db.String(512), nullable = False)
-    album_artist_id = db.Column(db.String(512), nullable = False)
-    album_image = db.Column(db.String(512), nullable = False)
-    album_info = db.Column(db.String(512), nullable = False)
-    album_tracks = db.Column(db.String(512), nullable = False)
-    album_genres = db.Column(db.String(512), nullable = False)
+    id = db.Column(db.String(512), primary_key = True)
+    name = db.Column(db.String(512),  nullable = False)
+    artist = db.Column(db.String(512), nullable = False)
+    artist_id = db.Column(db.String(512), nullable = False)
+    image = db.Column(db.String(512), nullable = False)
+    info = db.Column(db.String(512), nullable = False)
+    tracks = db.Column(db.String(512), nullable = False)
+    genres = db.Column(db.String(512), nullable = False)
 
     # ------------
     # serialize
@@ -103,14 +103,14 @@ class Albums(db.Model):
        returns a dictionary
        """
        return {
-          'album_id': self.album_id, 
-          'album_name': self.album_name,
-          'album_artist': self.album_artist,
-          'album_artist_id': self.album_artist_id, 
-          'album_image': self.album_image,
-          'album_info': self.album_info,  
-          'album_tracks': self.album_tracks, 
-          'album_genres': self.album_genres    
+          'id': self.id, 
+          'name': self.name,
+          'artist': self.artist,
+          'artist_id': self.artist_id, 
+          'image': self.image,
+          'info': self.info,  
+          'tracks': self.tracks, 
+          'genres': self.genres    
         }
 
 
@@ -133,12 +133,12 @@ class Genres(db.Model):
 
     __tablename__ = 'genres'
 
-    genres_id = db.Column(db.String(512), primary_key = True)
-    genres_name = db.Column(db.String(512), nullable = False)
-    genres_info = db.Column(db.String(512), nullable = False)
-    related_artists = db.Column(db.String(512), nullable = False)
-    related_albums = db.Column(db.String(512), nullable = False)
-    related_tracks = db.Column(db.String(512), nullable = False)
+    id = db.Column(db.String(512), primary_key = True)
+    name = db.Column(db.String(512), nullable = False)
+    info = db.Column(db.String(512), nullable = False)
+    artist = db.Column(db.String(512), nullable = False)
+    albums = db.Column(db.String(512), nullable = False)
+    tracks = db.Column(db.String(512), nullable = False)
 
     # ------------
     # serialize
@@ -148,46 +148,14 @@ class Genres(db.Model):
        returns a dictionary
        """
        return {
-          'genres_id': self.genres_id, 
-          'genres_name': self.genres_name,
-          'genres_info': self.genres_info, 
-          'related_artists': self.related_artists,
-          'related_albums': self.related_albums, 
-          'related_tracks': self.related_tracks   
+          'id': self.id, 
+          'name': self.name,
+          'info': self.info, 
+          'artist': self.artist,
+          'albums': self.albums, 
+          'tracks': self.tracks   
         } 
 
 with app.app_context():
    db.drop_all()
    db.create_all()
-
-
-# CREATE TABLE Albums (
-#   album_id  SERIAL PRIMARY KEY, 
-#   album_artist VARCHAR (512) UNIQUE NOT NULL, 
-#   album_artist_id VARCHAR (512) NOT NULL, 
-#   album_image VARCHAR (512) NOT NULL, 
-#   album_name VARCHAR (512) NOT NULL, 
-#   album_info VARCHAR (512) NOT NULL,
-#   album_tracks VARCHAR (512) NOT NULL,
-#   album_genres VARCHAR (512) NOT NULL
-# );
-
-# CREATE TABLE Artists (
-#   artist_id  SERIAL PRIMARY KEY, 
-#   artist_name VARCHAR (512) UNIQUE NOT NULL, 
-#   artist_image VARCHAR (512) NOT NULL, 
-#   artist_biography VARCHAR (512) UNIQUE NOT NULL, 
-#   artist_tracks VARCHAR (512) NOT NULL, 
-#   artist_albums VARCHAR (512) NOT NULL,
-#   artist_genres VARCHAR (512) NOT NULL,
-#   related_artists VARCHAR (512) NOT NULL
-# );
-
-# CREATE TABLE Genres (
-#   genres_id  SERIAL PRIMARY KEY, 
-#   genres_name VARCHAR (512) UNIQUE NOT NULL, 
-#   genres_info VARCHAR (512) NOT NULL, 
-#   related_artists VARCHAR (512) NOT NULL, 
-#   related_albums VARCHAR (512) NOT NULL, 
-#   related_tracks VARCHAR (512) NOT NULL,
-# );

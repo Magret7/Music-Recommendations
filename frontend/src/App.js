@@ -1,7 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import Home from './components/Home'
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+]);
+
 
 function App() {
   return (
@@ -12,7 +23,7 @@ function App() {
           <div class="row">
             <Sidebar />
             <div class="col-11">
-              <h1>Home</h1>
+              <RouterProvider router={router} />
             </div>
           </div>
         </div>

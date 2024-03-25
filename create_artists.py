@@ -1,6 +1,8 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
+import json
+from models import app, db, Artists
 
 #* Set up spotipy variables, tokens, etc.
 cid = 'c6f26740cc0b4cfe9c1217330e528549'
@@ -34,27 +36,38 @@ spotify = spotipy.Spotify(auth=token)
 #6. store info in sql db
 #! note, using spotipy library, dont have to use urls, can use spotipy functions
 
-artist_id = []
-artist_name = []
-artist_image = []
-artist_info = []
-artist_genres = []
-artist_tracks = []
-artist_albums = []
-artist_related = []
-#?think about combining into dictionaries??
 
-for i in range(0,10000, 50):
-    artist_results  = sp.search(q ='year:2018', type='artist', limit = 100, offset = i) ##needs to change q for getting 100 random artists WIP!!
-    for i,t in enumerate(artist_results['artists']['items']):
-        artist_id.append(t['id']) #thoughts on storing id as a variable for easier access on other appends?
-        artist_name.append(t['name'])
-        artist_image.append(t['images'])
-        artist_info.append(t['href']) #may need to look into this to get full info, this is just a link to current info, but could be ok?
-        artist_genres.append(t['genres'])
-        artist_tracks.append(sp.artist_top_tracks(t['id']))
-        artist_albums.append(sp.artist_albums(t['id']))
-        artist_related.append(sp.artist_related_artist(t['id']))
+#* Loading data from Spotify (WIP)
+# artist_id = []
+# artist_name = []
+# artist_image = []
+# artist_info = []
+# artist_genres = []
+# artist_tracks = []
+# artist_albums = []
+# artist_related = []
+
+def create_artist():
+    for i in range(0,10000, 50):
+        artist_results  = sp.search(q ='year:2018', type='artist', limit = 100, offset = i) ##needs to change q for getting 100 random artists WIP!!
+        for i,t in enumerate(artist_results['artists']['items']):
+            id=(t['id']) #thoughts on storing id as a variable for easier access on other appends?
+            name=(t['name'])
+            image=(t['images'])
+            info=(t['href']) #may need to look into this to get full info, this is just a link to current info, but could be ok?
+            genres=(t['genres'])
+            tracks=(sp.artist_top_tracks(t['id']))
+            albums=(sp.artist_albums(t['id']))
+            related_artists=(sp.artist_related_artist(t['id']))
+
+            newArtist = Artists(id = id, name = name, image = image, info = info, tracks = tracks, albums = albums, genres = genres, related_artists = related_artists)
+            db.session.add(newArtist)
+            db.session.commit
+
+db.drop_all()
+db.create_all()
+
+create_artist()
 
 
 

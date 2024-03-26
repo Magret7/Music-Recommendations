@@ -137,7 +137,9 @@ class Genres(db.Model):
     name = db.Column(db.String(512), nullable = False)
     info = db.Column(db.String(512), nullable = False)
     artist = db.Column(db.String(512), nullable = False)
+    artist_id = db.Column(db.String(512), nullable = False)
     albums = db.Column(db.String(512), nullable = False)
+    albums_id = db.Column(db.String(512), nullable=False)
     tracks = db.Column(db.String(512), nullable = False)
 
     # ------------
@@ -152,8 +154,10 @@ class Genres(db.Model):
           'name': self.name,
           'info': self.info, 
           'artist': self.artist,
-          'albums': self.albums, 
-          'tracks': self.tracks   
+          'artist_id': self.artist_id,
+          'albums': self.albums,
+          'albums_id': self.albums_id,
+          'tracks': self.tracks
         } 
 
 with app.app_context():

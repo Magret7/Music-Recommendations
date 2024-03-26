@@ -19,7 +19,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 #3. use artist tracks url, get tracks
 #4. use artist albums url, get all albums
 #5. use related artists url, get related artists
-#6. get album ids?
+#6. get album ids by looping through retrieved album items and pulling ids
 #7. store info in models db
 #! note, using spotipy library, dont have to use urls, can use spotipy functions
 
@@ -69,5 +69,33 @@ def create_artist():
 # create_artist()
 
 
+##!! Other way to access spotfiy api with spotipy:
+# # importing the necessary packages
+# import spotipy 
+# sp = spotipy.Spotify() 
+# from spotipy.oauth2 import SpotifyClientCredentials 
+# import spotipy.util as util
+# # setting up authorization
+# cid ="your_client_id" 
+# secret = "your_client_secret"
+# # saving the info you're going to need
+# username = 'your_account_number'
+# scope = 'user-library-read' #check the documentation
+# authorization_url = 'https://accounts.spotify.com/authorize'
+# token_url = 'https://accounts.spotify.com/api/token'
+# redirect_uri ='https://localhost.com/callback/'
 
+# token = util.prompt_for_user_token(username,scope,client_id='client_id_number',client_secret='client_secret',redirect_uri='https://localhost.com/callback/')
+# client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
+# sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
+# # retrieving you access token
+# auth = SpotifyClientCredentials(
+# client_id=cid,
+# client_secret=secret)
+# # save your token
+# token = auth.get_access_token()
+# spotify = spotipy.Spotify(auth=token)
+# # check if everything is in order
+# print(token)
+# print(spotify)

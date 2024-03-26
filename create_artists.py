@@ -26,7 +26,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 album_ids = []
 def create_artist():
     for i in range(0,10000, 50):
-        artist_results  = sp.search(q = 'year:1700-2024', type='artist', limit = 50, offset = i) ##needs to change q for getting 100 random artists WIP!!
+        artist_results  = sp.search(q = 'year:1700-2024', type='artist', limit = 50, offset = i) #search is limited to max 50 
         for i,t in enumerate(artist_results['artists']['items']):
             id=(t['id'])
             name=(t['name'])
@@ -45,7 +45,7 @@ def create_artist():
             db.session.commit
 
     for i in range(10000,20000, 50):
-        artist_results  = sp.search(q = 'year:1700-2024', type='artist', limit = 50, offset = i) ##needs to change q for getting 100 random artists WIP!!
+        artist_results  = sp.search(q = 'year:1700-2024', type='artist', limit = 50, offset = i) #duplicated with diff offset so that can get another 50 diff artists
         for i,t in enumerate(artist_results['artists']['items']):
             id=(t['id'])
             name=(t['name'])
@@ -63,10 +63,10 @@ def create_artist():
             db.session.add(newArtist)
             db.session.commit
 
-# db.drop_all()
-# db.create_all()
+db.drop_all()
+db.create_all()
 
-# create_artist()
+create_artist()
 
 
 ##!! Other way to access spotfiy api with spotipy:

@@ -1,31 +1,23 @@
+import { Outlet, Link } from "react-router-dom";
+
 export default function Sidebar() {
     return (
         <div className="col-1 p-3 border-end">
             <ul className="nav nav-pills flex-column mb-auto">
                 <li className="nav-item">
-                    <a href="#" className="nav-link link-dark" aria-current="page">
-                        Home(TBD)
-                    </a>
+                    <Link to={`/`} className="nav-link link-dark" aria-current="page">Home</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="/artists}" className="nav-link link-dark">
-                        Artists
-                    </a>
+                    <Link to={`artists`} className="nav-link link-dark" aria-current="page">Artists</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="{{url_for('showGenres')}}" className="nav-link link-dark">
-                        Genres
-                    </a>
+                    <Link to={`genres`} className="nav-link link-dark" aria-current="page">Genres</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="{{url_for('showAlbums')}}" className="nav-link link-dark">
-                        Albums
-                    </a>
+                    <Link to={`albums`} className="nav-link link-dark" aria-current="page">Albums</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="{{url_for('about')}}" className="nav-link link-dark">
-                        About Us
-                    </a>
+                    <Link to={`about`} className="nav-link link-dark" aria-current="page">About Us</Link>
                 </li>
             </ul>
         </div>

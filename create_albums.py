@@ -15,14 +15,15 @@ auth = SpotifyClientCredentials(client_id=cid,client_secret=secret)
 token = auth.get_access_token()
 spotify = spotipy.Spotify(auth=token)
 
+#TODO
+#GET FULL ARTIST LIST WE'RE USING
+
 
 #INTENTION - get all the albums released by ALL the artists we have
 
 #global variables
-artist_names = [artist['name'] for artist in related_artists]
-artist_ids = [artist['id'] for artist in related_artists]
-tracks = sp.search(q='genre:' + genre, type='track', limit=5)['tracks']['items']
-track_names = [track['name'] for track in tracks]
+artist_names = [artist['name'] for artist in FULL_ARTIST_LIST]
+artist_ids = [artist['id'] for artist in FULL_ARTIST_LIST]
 
 #Method Definition
 def create_album():
@@ -96,4 +97,4 @@ Parameters:
 db.drop_all()
 db.create_all()
 
-create_genre()
+create_album()

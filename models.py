@@ -60,11 +60,12 @@ class Artists(db.Model):
           'id': self.id, 
           'name': self.name,
           'image': self.image, 
-          'info': self.info,
+          'info': self.popularity,
           'tracks': self.tracks, 
           'albums': self.albums,  
           'genres': self.genres, 
-          'related_artists': self.related_artists    
+          'related_artists': self.related_artists,    
+          'albums_id': self.albums_id
         }
 
 

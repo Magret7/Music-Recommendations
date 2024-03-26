@@ -1,7 +1,6 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
-import json
 from models import app, db, Albums
 
 
@@ -16,43 +15,71 @@ token = auth.get_access_token()
 spotify = spotipy.Spotify(auth=token)
 
 #TODO
-#GET FULL ARTIST LIST WE'RE USING
-
-
-#INTENTION - get all the albums released by ALL the artists we have
-
-#global variables
-artist_names = [artist['name'] for artist in FULL_ARTIST_LIST]
-artist_ids = [artist['id'] for artist in FULL_ARTIST_LIST]
+#GET FULL ARTIST LIST WE'RE USING - just the names used in the ie Radiohead - check JACKTEST for example
+#OR id's could be fetched if given - take out internal artist id fetching in show_artist_albums
+artist_names = ARTIST_LIST #ERROR RIGHT NOW
 
 #Method Definition
 def create_album():
     '''
-    list the names of all the albums released by the artist (var artist)
+    get and add first album released by the artist (var artist) for every artist in the list artist_names (GLOBAL VAR)
     '''
     for artist in artist_names:
         show_artist_albums(artist) #call method to show every album released by that artist
             
 
+"""SHOWS ARTIST ALBUMS AND ADDS TO DB"""
 def show_artist_albums(artist):
-    albums = []
-    results = sp.artist_albums(artist['id'], album_type='album')
-    albums.extend(results['items'])
-    while results['next']:
-        results = sp.next(results)
-        albums.extend(results['items'])
-    seen = set()  # to avoid dupes
-    albums.sort(key=lambda album: album['name'].lower())
-    for album in albums:
-        name = album['name']
-        if name not in seen:
-            seen.add(name)
+    #call spotify to fetch albums by artist's id (input param) - only albums should be fetched
+    #LIMIT set to 1 to just get 1 album for speed and simplicity
 
-            #ADD THE ALBUM to DB
-            newAlbum = Albums(name = name, artist = artist_names, artist_id = artist_ids, tracks = track_names)
+    # Search for the artist by name to get their Spotify ID
+    search_results = sp.search(q='artist:' + artist_name, type='artist', limit=1)
+    if not search_results['artists']['items']:
+        print(f"Artist {artist_name} not found.")
+        return None
+    artist_id = search_results['artists']['items'][0]['id']
 
-            db.session.add(newAlbum)
-            db.session.commit()
+    # Call Spotify to fetch albums by the artist's ID, but only fetch the first one
+    results = sp.artist_albums(artist_id, album_type='album', limit=1)
+    if not results['items']:
+        print(f"No albums found for {artist_name}.")
+        return None
+
+    """
+    FETCHING STEP
+    GET INFORMATION FOR DB FOR THESE PARAMETERS:
+        id
+        name
+        artist
+        artist_id
+        image
+        info
+        tracks
+        genres
+    """
+    # Directly access the first album from the fetched results
+    first_album = results['items'][0]
+    # Fetch detailed album information using the album ID
+    album_details = sp.album(first_album['id'])
+    # Extract tracks, artists, and image from the album details
+    track_names = [track['name'] for track in album_details['tracks']['items']]
+    artist_names = [artist['name'] for artist in album_details['artists']]
+    artist_ids = [artist['id'] for artist in album_details['artists']]
+    album_image = album_details['images'][0]['url'] if album_details['images'] else None
+    # Additional album information and genres
+    album_info = {
+        'release_date': album_details.get('release_date', 'Unknown release date'),
+        'total_tracks': album_details.get('total_tracks', 0)
+    }
+    artist_info = sp.artist(artist_ids[0])  # Assuming genres are fetched from the first artist
+    genres = artist_info.get('genres', [])
+
+
+    """DATABASE ADDITION: add album to db"""
+    newAlbum = Albums(id=first_album['id'], name=first_album['name'], artist=artist_names, artist_id=artist_ids, image=album_image, info=album_info, tracks=track_names, genres=genres)
+    db.session.add(newAlbum)
+    db.session.commit()
 
 
 #OTHER RELEVANT METHODS

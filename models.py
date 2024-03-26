@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = ""
+PASSWORD = "Iamthesqlmaster92?!"
 PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"
 
@@ -133,11 +133,11 @@ class Genres(db.Model):
 
     __tablename__ = 'genres'
 
-    name = db.Column(db.String(512), nullable = False)
+    name = db.Column(db.String(512), primary_key = True)
     artist = db.Column(db.String(512), nullable = False)
     artist_id = db.Column(db.String(512), nullable = False)
-    albums = db.Column(db.String(512), nullable = False)
-    albums_id = db.Column(db.String(512), nullable = False)
+   #  albums = db.Column(db.String(512), nullable = False)
+   #  albums_id = db.Column(db.String(512), nullable = False)
     tracks = db.Column(db.String(512), nullable = False)
 
     # ------------
@@ -148,13 +148,11 @@ class Genres(db.Model):
        returns a dictionary
        """
        return {
-          'id': self.id, 
           'name': self.name,
-          'info': self.info, 
           'artist': self.artist,
           'artist_id': self.artist_id,
-          'albums': self.albums,
-          'albums_id': self.albums_id,
+         #  'albums': self.albums,
+         #  'albums_id': self.albums_id,
           'tracks': self.tracks
         } 
 

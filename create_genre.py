@@ -1,4 +1,4 @@
-import spotipy as sp
+import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
 import json
@@ -12,9 +12,12 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 auth = SpotifyClientCredentials(client_id=cid,client_secret=secret)
 token = auth.get_access_token()
-spotify = sp.Spotify(auth=token)
+spotify = spotipy.Spotify(auth=token)
 
 def create_genre():
+    '''
+    gets artists and tracks for 100 genres
+    '''
     genres_list = sp.recommendation_genre_seeds()['genres'][:100]
     for genre in genres_list:
         name = genre
@@ -23,16 +26,17 @@ def create_genre():
         artist_names = [artist['name'] for artist in related_artists]
         artist_ids = [artist['id'] for artist in related_artists]
 
-        albums = sp.search(q='genre:' + genre, type='album', limit=5)['albums']['items']
-        album_names = [album['name'] for album in albums]
-        album_ids = [album['id'] for album in albums]
+        # album queries work weirdly with spotify's API, so i'm just leaving it our for now
+        # albums = sp.search(q='genre:' + genre, type='album', limit=5)['albums']['items']
+        # album_names = [album['name'] for album in albums]
+        # album_ids = [album['id'] for album in albums]
 
         tracks = sp.search(q='genre:' + genre, type='track', limit=5)['tracks']['items']
         track_names = [track['name'] for track in tracks]
 
-        newGenre = Genres(name = name, artist = artist_names, artist_id = artist_ids, albums = album_names, albums_id = album_ids, tracks = track_names)
+        newGenre = Genres(name = name, artist = artist_names, artist_id = artist_ids, tracks = track_names)
         db.session.add(newGenre)
-        db.session.commit
+        db.session.commit()
 
 db.drop_all()
 db.create_all()

@@ -19,7 +19,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // TODO: Figure out how "children" URLs work
     children: [
       {
         path: "/",
@@ -55,20 +54,13 @@ const router = createBrowserRouter([
       },
 
     ],
-  },
-  // {
-  //   path: "/artists",
-  //   element: <Artists />
-  // },
-
-
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
      <RouterProvider router={router} />
-    {/* <App /> */}
   </React.StrictMode>
 );
 

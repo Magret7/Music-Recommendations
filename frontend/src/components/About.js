@@ -103,6 +103,7 @@ export default function About() {
 								Python,
 								utilized for paginating site)</a><br/>
 
+                            {/* TODO: Remove? */}
 							{/* <!-- <a href="https://jupyter.org/">Jupyter Notebook (Used in scraping Spotify API)</a><br> -->
 							<!-- <a href="https://pandas.pydata.org/">Pandas (used in Jupyter Notebook, helped in scraping Spotify API)</a><br><br> --> */}
 

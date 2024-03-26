@@ -2,6 +2,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+from sqlalchemy.dialects.postgresql import JSON
 
 # initializing Flask app 
 app = Flask(__name__)
@@ -41,8 +42,8 @@ class Artists(db.Model):
 
     id = db.Column(db.String(512), primary_key = True)
     name = db.Column(db.String(512), nullable = False)
-    image = db.Column(db.String(512), nullable = False)
-    popularity = db.Column(db.String(512), nullable = False)
+    image = db.Column(JSON, nullable = False)
+    popularity = db.Column(db.Integer, nullable = False)
     tracks = db.Column(db.String(512), nullable = False)
     albums = db.Column(db.String(512), nullable = False)
     genres = db.Column(db.String(512), nullable = False)

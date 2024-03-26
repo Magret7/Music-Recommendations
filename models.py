@@ -122,24 +122,22 @@ class Genres(db.Model):
     """
     Genres class attrbiutes 
 
-    id
     name
-    info
     artist
+    artist_id
     albums
+    albums_id
     tracks
 
     """
 
     __tablename__ = 'genres'
 
-    id = db.Column(db.String(512), primary_key = True)
     name = db.Column(db.String(512), nullable = False)
-    info = db.Column(db.String(512), nullable = False)
     artist = db.Column(db.String(512), nullable = False)
     artist_id = db.Column(db.String(512), nullable = False)
     albums = db.Column(db.String(512), nullable = False)
-    albums_id = db.Column(db.String(512), nullable=False)
+    albums_id = db.Column(db.String(512), nullable = False)
     tracks = db.Column(db.String(512), nullable = False)
 
     # ------------

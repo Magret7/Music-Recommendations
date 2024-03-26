@@ -1,29 +1,29 @@
 export default function Sidebar() {
     return (
-        <div class="col-1 p-3 border-end">
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-dark" aria-current="page">
+        <div className="col-1 p-3 border-end">
+            <ul className="nav nav-pills flex-column mb-auto">
+                <li className="nav-item">
+                    <a href="#" className="nav-link link-dark" aria-current="page">
                         Home(TBD)
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{url_for('showArtists')}}" class="nav-link link-dark">
+                <li className="nav-item">
+                    <a href="/artists}" className="nav-link link-dark">
                         Artists
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{url_for('showGenres')}}" class="nav-link link-dark">
+                <li className="nav-item">
+                    <a href="{{url_for('showGenres')}}" className="nav-link link-dark">
                         Genres
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{url_for('showAlbums')}}" class="nav-link link-dark">
+                <li className="nav-item">
+                    <a href="{{url_for('showAlbums')}}" className="nav-link link-dark">
                         Albums
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{url_for('about')}}" class="nav-link link-dark">
+                <li className="nav-item">
+                    <a href="{{url_for('about')}}" className="nav-link link-dark">
                         About Us
                     </a>
                 </li>

@@ -7,7 +7,7 @@ export default function Albums() {
     const albumsMap = albums.map(album => {
         return (
             <>
-                <div class="column">
+                <div className="column">
                     <table>
                         <tr>
                             <th>{album.name}</th>

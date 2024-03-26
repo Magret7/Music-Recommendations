@@ -30,10 +30,10 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <div class="container-fluid p-3">
-          <div class="row">
+        <div className="container-fluid p-3">
+          <div className="row">
             <Sidebar />
-            <div class="col-11">
+            <div className="col-11">
               <RouterProvider router={router} />
             </div>
           </div>

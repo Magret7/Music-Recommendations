@@ -5,3 +5,4 @@ __pycache__
 *.pyc
 *.tmp
 venv
+node_modules

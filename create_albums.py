@@ -2,7 +2,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
 from models import app, db, Albums, Artists
-#from create_artists import create_artist
 
 
 cid = '518bb56f9b9f489db20b12846ba33dfb'
@@ -33,7 +32,7 @@ def query_artist_ids():
     return [name[0] for name in artist_names]
 
 
-"""FOR DEBUGGING ONLY"""
+"""FOR DEBUGGING ONLY
 #Test function with random artist id's generated
 def get_artist_ids(sp, num_artists=50):
     unique_artist_ids = set()
@@ -57,19 +56,20 @@ def get_artist_ids(sp, num_artists=50):
                     print(f"Error processing playlist {playlist['id']}: {e}")
 
     return list(unique_artist_ids)
-
+"""
 
 
 #get and add first album released by artist for every artist in [artist_names]
 def create_album():
-    #artist_ids = query_artist_names() 
-    
-    """For debugging only"""
+    artist_ids = query_artist_ids() 
+    print(artist_ids)
+    """For debugging only
     try:
         artist_ids = get_artist_ids(sp, num_artists=50) # Get unique artist IDs
     except Exception as e:
         print(f"An error occurred: {e}")
-    
+    """
+
     for artist_id in artist_ids:
         show_artist_albums(artist_id) #call method to show every album released by that artist
             

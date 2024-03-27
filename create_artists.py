@@ -5,8 +5,8 @@ import json
 from models import app, db, Artists
 
 #* Set up spotipy variables, tokens, etc.
-cid = '518bb56f9b9f489db20b12846ba33dfb'
-secret = 'bd119741e86445aba2cf1306730b09a4'
+cid = 'c6f26740cc0b4cfe9c1217330e528549'
+secret = '1a822f3c7e084c85b5b6e2b933d46531'
 auth_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
@@ -38,16 +38,15 @@ def create_artist():
         for artist in artist_results:
             id = artist['id']
             name = artist['name']
-            image = artist['images']
+            image = json.dumps(artist['images'])
             popularity = artist['popularity']
-            genres = artist['genres']
+            genres = json.dumps(artist['genres'])
             track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
-            tracks = [track['name'] for track in track_search]
+            tracks = json.dumps([track['name'] for track in track_search])
             album_search = sp.search(q='artist:' + name, type='album')['albums']['items']
-            albums = [album['name'] for album in album_search]
-            album_ids = [album['id'] for album in album_search]
-            related_artists = sp.artist_related_artists(artist['id'])
-            print(related_artists)
+            albums = json.dumps([album['name'] for album in album_search])
+            album_ids = json.dumps([album['id'] for album in album_search])
+            related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
             new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
             db.session.add(new_artist)
@@ -55,32 +54,31 @@ def create_artist():
         db.session.commit()
         print("Batch 1 of artists added")
 
-    # for offset in range(50, 100, 50):
-    #     artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items']
-    #     print("Number of artists processed (Batch 2):", len(artist_results))
-    #     print("Sample artist data (Batch 2):", artist_results[0])
+    for offset in range(50, 100, 50):
+        artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items']
+        print("Number of artists processed (Batch 2):", len(artist_results))
+        print("Sample artist data (Batch 2):", artist_results[0])
         
-    #     album_ids = []  # Separate list for album IDs
+        album_ids = []  # Separate list for album IDs
         
-    #     for artist in artist_results:
-    #         id = artist['id']
-    #         name = artist['name']
-    #         image = artist['images']
-    #         popularity = artist['popularity']
-    #         genres = artist['genres']
-    #         tracks = sp.artist_top_tracks(id)
-    #         albums = sp.artist_albums(id)
-    #         related_artists = sp.artist_related_artists(id)
-            
-    #         for album in albums['items']:
-    #             album_ids.append(album['id'])
-
-    #         new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
-    #                              tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
-    #         db.session.add(new_artist)
+        for artist in artist_results:
+            id = artist['id']
+            name = artist['name']
+            image = json.dumps(artist['images'])
+            popularity = artist['popularity']
+            genres = json.dumps(artist['genres'])
+            track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
+            tracks = json.dumps([track['name'] for track in track_search])
+            album_search = sp.search(q='artist:' + name, type='album')['albums']['items']
+            albums = json.dumps([album['name'] for album in album_search])
+            album_ids = json.dumps([album['id'] for album in album_search])
+            related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
+            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
+                                 tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
+            db.session.add(new_artist)
         
-    #     db.session.commit()
-    #     print("Batch 2 of artists added")
+        db.session.commit()
+        print("Batch 2 of artists added")
 
 db.drop_all()
 db.create_all()

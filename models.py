@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = ""
+PASSWORD = "customary1"
 PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"
 
@@ -91,8 +91,8 @@ class Albums(db.Model):
     artist = db.Column(db.String(512), nullable = False)
     artist_id = db.Column(db.String(512), nullable = False)
     image = db.Column(db.String(512), nullable = False)
-    info = db.Column(db.String(512), nullable = False)
-    tracks = db.Column(db.String(512), nullable = False)
+    info = db.Column(db.JSON, nullable=False)
+    tracks = db.Column(db.Text, nullable=False)
     genres = db.Column(db.String(512), nullable = False)
 
     # ------------
@@ -112,7 +112,6 @@ class Albums(db.Model):
           'tracks': self.tracks, 
           'genres': self.genres    
         }
-
 
 
 # ------------

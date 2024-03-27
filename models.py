@@ -40,15 +40,15 @@ class Artists(db.Model):
     """
     __tablename__ = 'artists'
 
-    id = db.Column(db.String(512), primary_key = True)
-    name = db.Column(db.String(512), nullable = False)
-    image = db.Column(JSON, nullable = False)
+    id = db.Column(db.String(1024), primary_key = True)
+    name = db.Column(db.String(1024), nullable = False)
+    image = db.Column(db.Text, nullable = False)
     popularity = db.Column(db.Integer, nullable = False)
-    tracks = db.Column(db.String(512), nullable = False)
-    albums = db.Column(db.String(512), nullable = False)
-    genres = db.Column(db.String(512), nullable = False)
-    related_artists = db.Column(db.String(512), nullable = False)
-    albums_id = db.Column(db.String(512), nullable = False) 
+    tracks = db.Column(db.Text, nullable = False)
+    albums = db.Column(db.Text, nullable = False)
+    genres = db.Column(db.Text, nullable = False)
+    related_artists = db.Column(db.Text, nullable = False)
+    albums_id = db.Column(db.Text, nullable = False) 
 
     # ------------
     # serialize

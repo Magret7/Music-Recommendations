@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = ""
+PASSWORD = "Iamthesqlmaster92?!"
 PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"
 
@@ -39,14 +39,15 @@ class Artists(db.Model):
     """
     __tablename__ = 'artists'
 
-    id = db.Column(db.String(512), primary_key = True)
-    name = db.Column(db.String(512), nullable = False)
-    image = db.Column(db.String(512), nullable = False)
-    info = db.Column(db.String(512), nullable = False)
-    tracks = db.Column(db.String(512), nullable = False)
-    albums = db.Column(db.String(512), nullable = False)
-    genres = db.Column(db.String(512), nullable = False)
-    related_artists = db.Column(db.String(512), nullable = False)
+    id = db.Column(db.String(1024), primary_key = True)
+    name = db.Column(db.String(1024), nullable = False)
+    image = db.Column(db.Text, nullable = False)
+    popularity = db.Column(db.Integer, nullable = False)
+    tracks = db.Column(db.Text, nullable = False)
+    albums = db.Column(db.Text, nullable = False)
+    genres = db.Column(db.Text, nullable = False)
+    related_artists = db.Column(db.Text, nullable = False)
+    albums_id = db.Column(db.Text, nullable = False) 
 
     # ------------
     # serialize
@@ -59,12 +60,15 @@ class Artists(db.Model):
           'id': self.id, 
           'name': self.name,
           'image': self.image, 
-          'info': self.info,
+          'info': self.popularity,
           'tracks': self.tracks, 
           'albums': self.albums,  
           'genres': self.genres, 
-          'related_artists': self.related_artists    
+          'related_artists': self.related_artists,    
+          'albums_id': self.albums_id
         }
+
+
 
 
 # ------------
@@ -91,8 +95,8 @@ class Albums(db.Model):
     artist = db.Column(db.String(512), nullable = False)
     artist_id = db.Column(db.String(512), nullable = False)
     image = db.Column(db.String(512), nullable = False)
-    info = db.Column(db.String(512), nullable = False)
-    tracks = db.Column(db.String(512), nullable = False)
+    info = db.Column(db.JSON, nullable=False)
+    tracks = db.Column(db.Text, nullable=False)
     genres = db.Column(db.String(512), nullable = False)
 
     # ------------
@@ -114,31 +118,32 @@ class Albums(db.Model):
         }
 
 
-
 # ------------
 # Genres
 # ------------
+    
 class Genres(db.Model):
     """
     Genres class attrbiutes 
 
-    id
     name
-    info
     artist
+    artist_id
     albums
+    albums_id
     tracks
-
+    popularity
     """
 
     __tablename__ = 'genres'
 
-    id = db.Column(db.String(512), primary_key = True)
-    name = db.Column(db.String(512), nullable = False)
-    info = db.Column(db.String(512), nullable = False)
-    artist = db.Column(db.String(512), nullable = False)
+    name = db.Column(db.String(512), primary_key = True)
+    artists = db.Column(db.String(512), nullable = False)
+    artist_ids = db.Column(db.String(512), nullable = False)
     albums = db.Column(db.String(512), nullable = False)
+    album_ids = db.Column(db.String(512), nullable = False)
     tracks = db.Column(db.String(512), nullable = False)
+    popularity = db.Column(db.Integer, nullable = False)
 
     # ------------
     # serialize
@@ -148,13 +153,15 @@ class Genres(db.Model):
        returns a dictionary
        """
        return {
-          'id': self.id, 
           'name': self.name,
-          'info': self.info, 
           'artist': self.artist,
-          'albums': self.albums, 
-          'tracks': self.tracks   
+          'artist_id': self.artist_id,
+          'albums': self.albums,
+          'albums_id': self.albums_id,
+          'tracks': self.tracks,
+          'popularity': self.popularity
         } 
+
 
 with app.app_context():
    db.drop_all()

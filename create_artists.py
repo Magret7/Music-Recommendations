@@ -28,8 +28,8 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 #! note, using spotipy library, dont have to use urls, can use spotipy functions
 
 def create_artist():
-    for offset in range(0, 50, 50):
-        artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items']
+    for offset in range(0, 50, 50): 
+        artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items'] #spotify limits to 50 for a single search
         print("Number of artists processed (Batch 1):", len(artist_results))
         print("Sample artist data (Batch 1):", artist_results[0])
         
@@ -41,12 +41,16 @@ def create_artist():
             image = json.dumps(artist['images'])
             popularity = artist['popularity']
             genres = json.dumps(artist['genres'])
+
             track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
             tracks = json.dumps([track['name'] for track in track_search])
+
             album_search = sp.search(q='artist:' + name, type='album')['albums']['items']
             albums = json.dumps([album['name'] for album in album_search])
             album_ids = json.dumps([album['id'] for album in album_search])
+
             related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
+            
             new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
             db.session.add(new_artist)
@@ -54,7 +58,7 @@ def create_artist():
         db.session.commit()
         print("Batch 1 of artists added")
 
-    for offset in range(50, 100, 50):
+    for offset in range(50, 100, 50): #for second batch of artists to get 100; can keep repeating for x artists
         artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items']
         print("Number of artists processed (Batch 2):", len(artist_results))
         print("Sample artist data (Batch 2):", artist_results[0])
@@ -67,12 +71,16 @@ def create_artist():
             image = json.dumps(artist['images'])
             popularity = artist['popularity']
             genres = json.dumps(artist['genres'])
+
             track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
             tracks = json.dumps([track['name'] for track in track_search])
+
             album_search = sp.search(q='artist:' + name, type='album')['albums']['items']
             albums = json.dumps([album['name'] for album in album_search])
             album_ids = json.dumps([album['id'] for album in album_search])
+
             related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
+            
             new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
             db.session.add(new_artist)

@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = "Iamthesqlmaster92?!"
+PASSWORD = ""
 PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"
 

@@ -150,3 +150,9 @@ tr:nth-child(even) {
 .albumCard--artists {
   display: flex;
 }
+
+/* TODO: Make more DRY with the album/artist card images.  Also think of better class name */
+.artistOrAlbum--img {
+  width: 100%;
+  border-radius: 9px;
+}

@@ -1,9 +1,9 @@
 import { useParams, Outlet, Link } from "react-router-dom";
 
 export default function DisplayArtist() {
-    const artists = [{ 'name': 'SZA', 'image': 'Place Image Here', 'info': 'Solána Imani Rowe, known professionally as SZA, is an American singer-songwriter. She first gained recognition through her self-released extended plays, See.SZA.Run and S, which helped her become the first female artist to sign with Top Dawg Entertainment.', 'tracks': ['Kill Bill', 'All the Stars', 'Snooze', 'Broken Clocks'], 'albums': ['Ctrl'], 'genres': ['R&B', 'Pop', 'Hip Hop', 'Neo Soul'], 'RelatedArtists': ['H.E.R', 'Ella Mai', 'Franck Ocean', 'Miguel', 'Jhené Aiko'] },
-    { 'name': 'J. Cole', 'image': 'Place Image Here', 'info': 'Jermaine Lamarr Cole is an American rapper and record producer. Born on a military base in Germany and raised in Fayetteville, North Carolina, Cole initially gained attention as a rapper following the release of his debut mixtape, The Come Up, in early 2007. ', 'tracks': ['She Knows', 'Power Trip', 'No Role Modelz', 'Work Out', 'Under the Sun'], 'albums': ['2014 Forest Hills Drive'], 'genres': ['Hip Hop', 'Rap'], 'RelatedArtists': ['Bas', 'Cozz', 'JID', 'Joey Badsa$$', 'Kendrick Lamar', 'JAY-Z'] },
-    { 'name': 'Ariana Grande', 'image': 'Place Image Here', 'info': 'Ariana Grande-Butera is an American singer, songwriter, and actress. Regarded as a pop culture icon, she is noted as an influential figure in popular music and as one of the most prominent vocalists of her generation, for her four-octave vocal range and signature whistle register.', 'tracks': ['7 Rings', 'Side to Side', 'thank u, next', '34+35', 'The Way'], 'albums': ['Sweetener'], 'genres': ['Pop', 'Contemporary R&B'], 'RelatedArtists': ['Doja Cat', 'SZA', 'Sabrina Carpenter', 'Victoria Monét', 'Olivia Rodrigo'] },
+    const artists = [{ 'name': 'SZA', 'image': "https://i.scdn.co/image/ab6761610000e5eb0895066d172e1f51f520bc65", 'info': 'Solána Imani Rowe, known professionally as SZA, is an American singer-songwriter. She first gained recognition through her self-released extended plays, See.SZA.Run and S, which helped her become the first female artist to sign with Top Dawg Entertainment.', 'tracks': ['Kill Bill', 'All the Stars', 'Snooze', 'Broken Clocks'], 'albums': ['Ctrl'], 'genres': ['R&B', 'Pop', 'Hip Hop', 'Neo Soul'], 'RelatedArtists': ['H.E.R', 'Ella Mai', 'Franck Ocean', 'Miguel', 'Jhené Aiko'] },
+    { 'name': 'J. Cole', 'image': "https://i.scdn.co/image/ab6761610000e5ebadd503b411a712e277895c8a", 'info': 'Jermaine Lamarr Cole is an American rapper and record producer. Born on a military base in Germany and raised in Fayetteville, North Carolina, Cole initially gained attention as a rapper following the release of his debut mixtape, The Come Up, in early 2007. ', 'tracks': ['She Knows', 'Power Trip', 'No Role Modelz', 'Work Out', 'Under the Sun'], 'albums': ['2014 Forest Hills Drive'], 'genres': ['Hip Hop', 'Rap'], 'RelatedArtists': ['Bas', 'Cozz', 'JID', 'Joey Badsa$$', 'Kendrick Lamar', 'JAY-Z'] },
+    { 'name': 'Ariana Grande', 'image': "https://i.scdn.co/image/ab6761610000e5eb40b5c07ab77b6b1a9075fdc0", 'info': 'Ariana Grande-Butera is an American singer, songwriter, and actress. Regarded as a pop culture icon, she is noted as an influential figure in popular music and as one of the most prominent vocalists of her generation, for her four-octave vocal range and signature whistle register.', 'tracks': ['7 Rings', 'Side to Side', 'thank u, next', '34+35', 'The Way'], 'albums': ['Sweetener'], 'genres': ['Pop', 'Contemporary R&B'], 'RelatedArtists': ['Doja Cat', 'SZA', 'Sabrina Carpenter', 'Victoria Monét', 'Olivia Rodrigo'] },
     ]
 
     // TODO: Is this the right way to get the URL parameters?  Refer to React Router tutorial
@@ -17,6 +17,9 @@ export default function DisplayArtist() {
                     <h1 style={{ textAlign: "center" }}>{artist.name}</h1>
                     <div className="column-RelatedArtists">
                         <table>
+                            <tr>
+                                <td><img src={artist.image} alt={artist.name} className="artistOrAlbum--img" /></td>
+                            </tr>
                             <tr>
                                 <td><b>Biography: </b> {artist.info}</td>
                             </tr>

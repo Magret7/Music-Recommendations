@@ -18,23 +18,28 @@ def create_genre():
     '''
     gets artists and tracks for 100 genres
     '''
+    # get list of genres 
     genres_list = sp.recommendation_genre_seeds()['genres'][:100]
     for genre in genres_list:
+        # name
         name = genre
 
+        # artists
         related_artists = sp.search(q='genre:' + genre, type='artist', limit=5)['artists']['items']
-        artist_names = [artist['name'] for artist in related_artists]
+        artists = [artist['name'] for artist in related_artists]
         artist_ids = [artist['id'] for artist in related_artists]
 
-        # album queries work weirdly with spotify's API, so i'm just leaving it our for now
-        # albums = sp.search(q='genre:' + genre, type='album', limit=5)['albums']['items']
-        # album_names = [album['name'] for album in albums]
-        # album_ids = [album['id'] for album in albums]
+        # albums
+        related_albums = [sp.search(q='artist:' + artist['name'], type='album')['albums']['items'][0] for artist in related_artists]
+        albums = [album['name'] for album in related_albums]
+        album_ids = [album['id'] for album in related_albums]
 
+        # tracks
         tracks = sp.search(q='genre:' + genre, type='track', limit=5)['tracks']['items']
         track_names = [track['name'] for track in tracks]
 
-        newGenre = Genres(name = name, artist = artist_names, artist_id = artist_ids, tracks = track_names)
+        # create genre instance and add to db
+        newGenre = Genres(name = name, artists = artists, artist_ids = artist_ids, albums = albums, album_ids = album_ids, tracks = track_names)
         db.session.add(newGenre)
         db.session.commit()
 

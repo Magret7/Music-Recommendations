@@ -13,10 +13,11 @@ auth = SpotifyClientCredentials(client_id=cid,client_secret=secret)
 token = auth.get_access_token()
 spotify = spotipy.Spotify(auth=token)
 
-def create_genre():
+def create_genre(sp):
     '''
     gets artists and tracks for 100 genres
     '''
+    print('Creating genres...')
     # get list of genres 
     genres_list = sp.recommendation_genre_seeds()['genres'][:100]
     for genre in genres_list:
@@ -48,7 +49,7 @@ def create_genre():
         db.session.add(newGenre)
         db.session.commit()
 
-db.drop_all()
-db.create_all()
+# db.drop_all()
+# db.create_all()
 
-create_genre()
+# create_genre(sp)

@@ -121,24 +121,27 @@ class Albums(db.Model):
 # ------------
 # Genres
 # ------------
+    
 class Genres(db.Model):
     """
     Genres class attrbiutes 
 
-    name PK
+    name
     artist
+    artist_id
     albums
+    albums_id
     tracks
 
     """
 
     __tablename__ = 'genres'
 
-    id = db.Column(db.String(512), primary_key = True)
-    name = db.Column(db.String(512), nullable = False)
-    info = db.Column(db.String(512), nullable = False)
-    artist = db.Column(db.String(512), nullable = False)
+    name = db.Column(db.String(512), primary_key = True)
+    artists = db.Column(db.String(512), nullable = False)
+    artist_ids = db.Column(db.String(512), nullable = False)
     albums = db.Column(db.String(512), nullable = False)
+    album_ids = db.Column(db.String(512), nullable = False)
     tracks = db.Column(db.String(512), nullable = False)
 
     # ------------
@@ -149,13 +152,14 @@ class Genres(db.Model):
        returns a dictionary
        """
        return {
-          'id': self.id, 
           'name': self.name,
-          'info': self.info, 
           'artist': self.artist,
-          'albums': self.albums, 
-          'tracks': self.tracks   
+          'artist_id': self.artist_id,
+          'albums': self.albums,
+          'albums_id': self.albums_id,
+          'tracks': self.tracks
         } 
+
 
 with app.app_context():
    db.drop_all()

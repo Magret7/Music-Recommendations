@@ -2,7 +2,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
 from models import app, db, Albums, Artists
-
+import json
 
 cid = '518bb56f9b9f489db20b12846ba33dfb'
 secret = 'bd119741e86445aba2cf1306730b09a4'
@@ -28,8 +28,8 @@ spotify = spotipy.Spotify(auth=token)
 
 #query list of artist ids from the database and store in variable
 def query_artist_ids():
-    artist_names = Artists.query.with_entities(Artists.name).all()
-    return [name[0] for name in artist_names]
+    artist_ids = Artists.query.with_entities(Artists.id).all()
+    return [id[0] for id in artist_ids]
 
 
 """FOR DEBUGGING ONLY
@@ -60,7 +60,7 @@ def get_artist_ids(sp, num_artists=50):
 
 
 #get and add first album released by artist for every artist in [artist_names]
-def create_album():
+def create_album(sp):
     artist_ids = query_artist_ids() 
     print(artist_ids)
     """For debugging only
@@ -71,7 +71,7 @@ def create_album():
     """
 
     for artist_id in artist_ids:
-        show_artist_albums(artist_id) #call method to show every album released by that artist
+        show_artist_albums(sp, artist_id) #call method to show every album released by that artist
             
 
 """
@@ -79,46 +79,48 @@ SHOWS ARTIST ALBUMS AND ADDS TO DB
 #call spotify to fetch albums by artist's id (input param) - only albums should be fetched
 #LIMIT set to 1 to just get 1 album for speed and simplicity
 """
-def show_artist_albums(artist_id):
-    # fetch first album only - Call Spotify to fetch albums by the artist's ID, but only fetch the first one
-    results = sp.artist_albums(artist_id, album_type='album', limit=1)
-    if not results['items']:
-        print(f"No albums found for artist with ID {artist_id}.")
-        return None
+def show_artist_albums(sp, artist_id):
+    try:
+        results = sp.artist_albums(artist_id, album_type='album', limit=1)
+        if not results['items']:
+            print(f"No albums found for artist with ID {artist_id}.")
+            return None
+        
+        first_album = results['items'][0]
+        album_details = sp.album(first_album['id'])
 
-    first_album = results['items'][0]  # first album from fetched results
-    album_details = sp.album(first_album['id'])  # Fetch detailed album information using the album ID
+        track_names = [track['name'] for track in album_details['tracks']['items']]
+        album_image = album_details['images'][0]['url'] if album_details['images'] else None
+        album_info = {
+            'release_date': album_details.get('release_date', 'Unknown release date'),
+            'total_tracks': album_details.get('total_tracks', 0)
+        }
+        artist_info = sp.artist(artist_id)
+        genres = artist_info.get('genres', [])
 
-    # use detailed album information and extract track name, artist name, artist id
-    track_names = [track['name'] for track in album_details['tracks']['items']]  # get every track
-    album_image = album_details['images'][0]['url'] if album_details['images'] else None  # get album image if exists
+        # Check if the album is already in the database
+        if not Albums.query.get(first_album['id']):
+            newAlbum = Albums(
+                id=first_album['id'],
+                name=first_album['name'],
+                artist=json.dumps([artist_info['name']]),
+                artist_id=json.dumps([artist_id]),
+                image=album_image,
+                info=json.dumps(album_info),
+                tracks=json.dumps(track_names),
+                genres=json.dumps(genres)
+            )
+            db.session.add(newAlbum)
+            db.session.commit()
+        else:
+            print(f"Album {first_album['id']} already exists in the database.")
 
-    album_info = {
-        'release_date': album_details.get('release_date', 'Unknown release date'),
-        'total_tracks': album_details.get('total_tracks', 0)
-    }
-
-    # get the album's genre
-    artist_info = sp.artist(artist_id)  # genres are fetched from the artist
-    genres = artist_info.get('genres', [])
-
-    """DATABASE ADDITION: add album to db"""
-    newAlbum = Albums(
-        id=first_album['id'], 
-        name=first_album['name'], 
-        artist=[artist_info['name']],  # Artist name from artist_info
-        artist_id=[artist_id],  # Single artist ID in a list
-        image=album_image, 
-        info=album_info, 
-        tracks=track_names, 
-        genres=genres
-    )
-    db.session.add(newAlbum)
-    db.session.commit()
+    except spotipy.SpotifyException as e:
+        print(f"Failed to fetch albums for artist ID {artist_id}: {e}")
+        db.session.rollback()
 
 
+#db.drop_all()
+#db.create_all()
 
-db.drop_all()
-db.create_all()
-
-create_album()
+create_album(sp)

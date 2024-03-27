@@ -5,8 +5,8 @@ import json
 from models import app, db, Artists
 
 #* Set up spotipy variables, tokens, etc.
-cid = 'c6f26740cc0b4cfe9c1217330e528549'
-secret = '1a822f3c7e084c85b5b6e2b933d46531'
+cid = '518bb56f9b9f489db20b12846ba33dfb'
+secret = 'bd119741e86445aba2cf1306730b09a4'
 auth_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
@@ -27,7 +27,7 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 #7. store info in models.py db file
 #! note, using spotipy library, dont have to use urls, can use spotipy functions
 
-def create_artist():
+def create_artist(sp):
     for offset in range(0, 50, 50):
         artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items']
         print("Number of artists processed (Batch 1):", len(artist_results))
@@ -83,4 +83,4 @@ def create_artist():
 db.drop_all()
 db.create_all()
 
-create_artist()
+create_artist(sp)

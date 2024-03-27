@@ -88,45 +88,45 @@ export default function About() {
             {developersMap}
 
             <section>
-						<h2 className="display-3 text-center">Tools Used</h2>
-						<div className="h3 text-center">
-							<a href="https://www.discord.com">Discord (Team Communication)</a><br/>
-							<a href="https://cloud.google.com/">Google Cloud Platform (Website Hosting)</a><br/>
-							<a href="https://about.gitlab.com/">GitLab (Git Repository Hosting)</a><br/>
-							<a href="https://flask.palletsprojects.com/en/2.1.x/">Flask (Framework for Backend)</a><br/>
-							<a href="https://getbootstrap.com/">Bootstrap (Frontend Formatting)</a><br/>
-							<a href="https://spotipy.readthedocs.io/en/2.22.1/">Spotipy (Library to access Spotify
-								API)</a><br/>
-							<a href="https://www.postgresql.org/docs/current/app-psql.html">psql (Frontend for
-								PostgreSQL)</a><br/>
-							<a href="https://github.com/lixxu/flask-paginate">Flask Paginate (Pagination Library for
-								Python,
-								utilized for paginating site)</a><br/>
+                <h2 className="display-3 text-center">Tools Used</h2>
+                <div className="h3 text-center">
+                    <a href="https://www.discord.com">Discord (Team Communication)</a><br />
+                    <a href="https://cloud.google.com/">Google Cloud Platform (Website Hosting)</a><br />
+                    <a href="https://about.gitlab.com/">GitLab (Git Repository Hosting)</a><br />
+                    <a href="https://flask.palletsprojects.com/en/2.1.x/">Flask (Framework for Backend)</a><br />
+                    <a href="https://getbootstrap.com/">Bootstrap (Frontend Formatting)</a><br />
+                    <a href="https://spotipy.readthedocs.io/en/2.22.1/">Spotipy (Library to access Spotify
+                        API)</a><br />
+                    <a href="https://www.postgresql.org/docs/current/app-psql.html">psql (Frontend for
+                        PostgreSQL)</a><br />
+                    <a href="https://github.com/lixxu/flask-paginate">Flask Paginate (Pagination Library for
+                        Python,
+                        utilized for paginating site)</a><br />
 
-                            {/* TODO: Remove? */}
-							{/* <!-- <a href="https://jupyter.org/">Jupyter Notebook (Used in scraping Spotify API)</a><br> -->
+                    {/* TODO: Remove? */}
+                    {/* <!-- <a href="https://jupyter.org/">Jupyter Notebook (Used in scraping Spotify API)</a><br> -->
 							<!-- <a href="https://pandas.pydata.org/">Pandas (used in Jupyter Notebook, helped in scraping Spotify API)</a><br><br> --> */}
 
-							<h2>APIs Used</h2>
-							<a href="https://developer.spotify.com/documentation/web-api/">Spotify Web API</a><br/>
+                    <h2>APIs Used</h2>
+                    <a href="https://developer.spotify.com/documentation/web-api/">Spotify Web API</a><br />
 
-						</div>
-					</section>
+                </div>
+            </section>
 
-					<section>
-						<h2 className="display-3 text-center">GitLab Stats</h2>
-						<div className="h3 text-center">
-							<p>Total Commits: </p>
-							<p>Total Issues: </p>
-							<p>Total Unit Tests: </p>
-							<a href="https://gitlab.com/magretadekunle/cs331e-idb">GitLab Repository</a><br/>
-							<a href="">GitLab Database Repo</a><br/>
-							<a href="https://gitlab.com/magretadekunle/cs331e-idb/-/issues">GitLab Issue Tracker</a><br/>
-							<a href="https://gitlab.com/magretadekunle/cs331e-idb/-/wikis/home">GitLab Wiki</a><br/>
-							<a href="https://music-recommendation.postman.co/workspace/Team-Workspace~17d1e66a-099f-4ea0-833c-8973e17965de/collection/33692671-6403f3c6-d92b-49af-b5e0-21fc9aa5292a?tab=variables">Postman API Collection</a><br/>
-							<a href="">Presentation Slides </a>
-						</div>
-					</section>
+            <section>
+                <h2 className="display-3 text-center">GitLab Stats</h2>
+                <div className="h3 text-center">
+                    <p>Total Commits: </p>
+                    <p>Total Issues: </p>
+                    <p>Total Unit Tests: </p>
+                    <a href="https://gitlab.com/magretadekunle/cs331e-idb">GitLab Repository</a><br />
+                    <a href="">GitLab Database Repo</a><br />
+                    <a href="https://gitlab.com/magretadekunle/cs331e-idb/-/issues">GitLab Issue Tracker</a><br />
+                    <a href="https://gitlab.com/magretadekunle/cs331e-idb/-/wikis/home">GitLab Wiki</a><br />
+                    <a href="https://music-recommendation.postman.co/workspace/Team-Workspace~17d1e66a-099f-4ea0-833c-8973e17965de/collection/33692671-6403f3c6-d92b-49af-b5e0-21fc9aa5292a?tab=variables">Postman API Collection</a><br />
+                    <a href="">Presentation Slides </a>
+                </div>
+            </section>
         </div>
     )
 }

@@ -1,3 +1,5 @@
+import { Outlet, Link } from "react-router-dom";
+
 export default function Albums() {
     const albums = [{ 'name': 'Ctrl', 'image': 'Place Image Here', 'artist': ['SZA'], 'info': 'Ctrl (pronounced "control") is the debut studio album by American singer SZA. It was released through Top Dawg Entertainment and RCA Records on June 9, 2017', 'tracks': ['Supermodle', 'Drew Barrymore', 'Go Gina', 'Anything', 'Pretty Little Bird', '...'], 'genres': ['R&B', 'Pop', 'Hip Hop', 'Neo Soul'] },
     { 'name': '2014 Forest Hills Drive', 'image': 'Place Image Here', 'artist': ['J. Cole'], 'info': '2014 Forest Hills Drive is the third studio album by American rapper J. Cole. It was released on December 9, 2014, by ByStorm Entertainment', 'tracks': ['Intro', 'January 28th', 'Wet Dreamz', '03\' Adolescence', 'A Tale od 2 Citiez', 'Fire Sqaud', '...'], 'genres': ['Hip Hop', 'Rap'] },
@@ -16,9 +18,7 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Artists: </b>
-                                {/* {% for artist in album.artist %}
-                                <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist }}</a>
-                                {% endfor %} */}
+                                {album.artist.map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
                             </td>
                         </tr>
 

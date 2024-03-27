@@ -9,49 +9,49 @@ export default function DisplayAlbum() {
 
     // TODO: Is this the right way to get the URL parameters?  Refer to React Router tutorial
     let albumParam = useParams();
-    console.log(albumParam.albumName)
     const album = albums.find((album) => albumParam.albumName === album.name)
-    console.log(album)
 
     return (
         <>
-            <h1 style={{textAlign: "center"}}>{ album.name }</h1>
-            {/* TODO: Implement logic to conditionally render below message */}
-            {/* <p>This Album does not exist</p> */}
-            <div class="column-RelatedArtists">
-                <table>
-                    <tr>
-                        <td>{ album.image }</td>
-                    </tr>
+            {album ? (
+                <>
+                    <h1 style={{ textAlign: "center" }}>{album.name}</h1>
+                    <div class="column-RelatedArtists">
+                        <table>
+                            <tr>
+                                <td>{album.image}</td>
+                            </tr>
 
-                    <tr>
-                        <td>
-                            <b>
-                                {album.artist.map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
-                            </b>
-                        </td>
-                    </tr>
+                            <tr>
+                                <td>
+                                    <b>
+                                        {album.artist.map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
+                                    </b>
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td><b>Information: </b>{ album.info }</td>
-                    </tr>
+                            <tr>
+                                <td><b>Information: </b>{album.info}</td>
+                            </tr>
 
-                    <tr>
-                        <td>
-                            <b>Album Tracks: </b><br/>
-                            {album.tracks.map(track => <>{track}<br/></>)}
-                        </td>
-                    </tr>
+                            <tr>
+                                <td>
+                                    <b>Album Tracks: </b><br />
+                                    {album.tracks.map(track => <>{track}<br /></>)}
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td>
-                            <b>Album's Genres: </b>
-                            {album.genres.map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
-                        </td>
-                    </tr>
+                            <tr>
+                                <td>
+                                    <b>Album's Genres: </b>
+                                    {album.genres.map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
+                                </td>
+                            </tr>
 
-                </table>
-            </div>
+                        </table>
+                    </div>
+                </>
+            ) : <p>Album "{albumParam.albumName}" not found</p>}
         </>
     )
 }

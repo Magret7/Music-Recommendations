@@ -243,7 +243,7 @@ class DBTestCases(unittest.TestCase):
         db.session.commit()
         
         # check if test genre is updated
-        updated_genre = Genres.query.filter_by(name=genre_name).first()
+        updated_genre = Genres.query.filter_by(name=queried_genre.name).first()
         self.assertEqual(updated_genre.name, "Genre After Update")
 
         # delete test genre to clean up

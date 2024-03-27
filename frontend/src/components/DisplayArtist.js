@@ -1,5 +1,4 @@
-import { useParams } from 'react-router-dom'
-import { Outlet, Link } from "react-router-dom";
+import { useParams, Outlet, Link } from "react-router-dom";
 
 export default function DisplayArtist() {
     const artists = [{ 'name': 'SZA', 'image': 'Place Image Here', 'info': 'Solána Imani Rowe, known professionally as SZA, is an American singer-songwriter. She first gained recognition through her self-released extended plays, See.SZA.Run and S, which helped her become the first female artist to sign with Top Dawg Entertainment.', 'tracks': ['Kill Bill', 'All the Stars', 'Snooze', 'Broken Clocks'], 'albums': ['Ctrl'], 'genres': ['R&B', 'Pop', 'Hip Hop', 'Neo Soul'], 'RelatedArtists': ['H.E.R', 'Ella Mai', 'Franck Ocean', 'Miguel', 'Jhené Aiko'] },
@@ -10,7 +9,6 @@ export default function DisplayArtist() {
     // TODO: Is this the right way to get the URL parameters?  Refer to React Router tutorial
     let artistParam = useParams();
     const artist = artists.find((artist) => artistParam.artistName === artist.name)
-    console.log(artist)
 
     return (
         <>
@@ -43,7 +41,7 @@ export default function DisplayArtist() {
 
                             <tr>
                                 <td>
-                                    Recommended & Related Artists <br />
+                                    <b>Recommended & Related Artists</b> <br />
                                     {artist.RelatedArtists.map(relatedArtist => <Link to={`/artist/${relatedArtist}`} style={{ marginRight: 10 }}>{relatedArtist}</Link>)}
                                 </td>
                             </tr>

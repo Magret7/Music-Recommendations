@@ -36,9 +36,7 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Genres of Albums: </b>
-                                {/* {% for genre in album.genres %}
-                                        <a href="{{ url_for('showGenre', genre_name=genre) }}">{{ genre }}</a>
-                                        {% endfor %} */}
+                                {album.genres.map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
                             </td>
                         </tr>
                     </table>

@@ -9,7 +9,6 @@ secret = '4eb091f3739444ae9be89cf86154eb58'
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-
 auth = SpotifyClientCredentials(client_id=cid,client_secret=secret)
 token = auth.get_access_token()
 spotify = spotipy.Spotify(auth=token)
@@ -29,6 +28,12 @@ def create_genre():
         artists = [artist['name'] for artist in related_artists]
         artist_ids = [artist['id'] for artist in related_artists]
 
+        # average popularity
+        if related_artists:
+            popularity = sum([artist['popularity'] for artist in related_artists]) / len(related_artists)
+        else:
+            popularity = 0
+
         # albums
         related_albums = [sp.search(q='artist:' + artist['name'], type='album')['albums']['items'][0] for artist in related_artists]
         albums = [album['name'] for album in related_albums]
@@ -39,7 +44,7 @@ def create_genre():
         track_names = [track['name'] for track in tracks]
 
         # create genre instance and add to db
-        newGenre = Genres(name = name, artists = artists, artist_ids = artist_ids, albums = albums, album_ids = album_ids, tracks = track_names)
+        newGenre = Genres(name = name, artists = artists, artist_ids = artist_ids, albums = albums, album_ids = album_ids, tracks = track_names, popularity = popularity)
         db.session.add(newGenre)
         db.session.commit()
 

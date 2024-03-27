@@ -16,7 +16,7 @@ export default function DisplayAlbum() {
             {album ? (
                 <>
                     <h1 style={{ textAlign: "center" }}>{album.name}</h1>
-                    <div class="column-RelatedArtists">
+                    <div className="column-RelatedArtists">
                         <table>
                             <tr>
                                 <td>{album.image}</td>

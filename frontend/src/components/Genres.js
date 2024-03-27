@@ -11,7 +11,7 @@ export default function Genres() {
 
     const genreMap = genres.map(genre => {
         return (
-            <div class="column">   {/* <!-- TODO: Why does this make it display well? --> */}
+            <div className="column">   {/* <!-- TODO: Why does this make it display well? --> */}
                 <table>
                     <tr>
                         <th>{genre.name}</th>

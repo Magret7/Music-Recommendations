@@ -1,5 +1,4 @@
-style for the table
-* {
+style for the table * {
   box-sizing: border-box;
 }
 
@@ -54,11 +53,11 @@ tr:nth-child(even) {
 } */
 
 .card-space {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 #music-icon {
-  max-height: 50px; 
+  max-height: 50px;
   max-width: 50px;
 }
 
@@ -70,15 +69,84 @@ tr:nth-child(even) {
         flex-basis: calc(50% - 30px);
       }
     }
-    
+
     &.three-col {
       .card {
         flex-basis: calc(33.33% - 30px);
       }
     }
   }
-  
+
   .card {
     flex-basis: 100%;
   }
+}
+
+.artistCards--list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  justify-content: center;
+}
+
+.artistCard {
+  width: 320px;
+  font-size: 16px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TODO: Adjust box shadow for this and albumCard--img */
+.artistCard--img {
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
+}
+
+.artistCard--name {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.artistCard--followers {
+  font-size: 14px;
+  text-align: left;
+}
+
+.albumCard {
+  width: 320px;
+  font-size: 16px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.albumCard--img {
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
+}
+
+.albumCard--name {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.albumCard--info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.albumCard--artists {
+  display: flex;
 }

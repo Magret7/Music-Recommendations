@@ -15,7 +15,7 @@ export default function DisplayArtist() {
             {artist ? (
                 <>
                     <h1 style={{ textAlign: "center" }}>{artist.name}</h1>
-                    <div class="column-RelatedArtists">
+                    <div className="column-RelatedArtists">
                         <table>
                             <tr>
                                 <td><b>Biography: </b> {artist.info}</td>

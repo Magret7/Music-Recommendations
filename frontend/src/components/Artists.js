@@ -18,14 +18,15 @@ export default function Artists() {
                                 </td>
                             </tr> --> */}
 
+
+                        <tr>
+                            <td><img src={artist.image} alt={artist.name} className="artistOrAlbum--img" /></td>
+                        </tr>
+
                         <tr>
                             <td>
                                 <b>{artist.name}</b>
                             </td>
-                        </tr>
-
-                        <tr>
-                            <td><img src={artist.image} alt={artist.name} className="artists--img" /></td>
                         </tr>
 
                         <tr>

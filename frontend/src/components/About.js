@@ -60,20 +60,18 @@ export default function About() {
     const developersMap = developers.map((developer) => {
         return (
             <>
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5">
-                    <div className="col">
-                        <div className="card h-100">
-                            <img src={developer.img} className="card-img-top"
-                                alt={`${developer.firstName} ${developer.lastName}`} />
-                            <div className="card-body">
-                                <h4 className="card-title">{developer.firstName} {developer.lastName}</h4>
-                                <p className="card-text"><b>Bio:</b> {developer.bio}</p>
-                                <p className="card-text"><b>Main role: </b> {developer.role} </p>
-                                <p className="card-text"><b>Commits by Magret: </b>{developer.commits}</p>
-                                <p className="card-text"><b>Issues Created: </b>{developer.issues}</p>
-                                <p className="card-text"><b>Unit Tests: </b>{developer.unitTests}</p>
-                                <a href={developer.gitlabProfile} target="_blank" rel="noopener noreferrer" className="btn btn-primary">{developer.firstName}'s Profile</a>
-                            </div>
+                <div className="col">
+                    <div className="card h-100">
+                        <img src={developer.img} className="card-img-top"
+                            alt={`${developer.firstName} ${developer.lastName}`} />
+                        <div className="card-body">
+                            <h4 className="card-title">{developer.firstName} {developer.lastName}</h4>
+                            <p className="card-text"><b>Bio:</b> {developer.bio}</p>
+                            <p className="card-text"><b>Main role: </b> {developer.role} </p>
+                            <p className="card-text"><b>Commits by Magret: </b>{developer.commits}</p>
+                            <p className="card-text"><b>Issues Created: </b>{developer.issues}</p>
+                            <p className="card-text"><b>Unit Tests: </b>{developer.unitTests}</p>
+                            <a href={developer.gitlabProfile} target="_blank" rel="noopener noreferrer" className="btn btn-primary">{developer.firstName}'s Profile</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +83,10 @@ export default function About() {
     return (
         <div className="row">
             <h1 style={{ textAlign: "center" }}>About Page</h1>
-            {developersMap}
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5">
+
+                {developersMap}
+            </div>
 
             <section>
                 <h2 className="display-3 text-center">Tools Used</h2>

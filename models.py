@@ -158,7 +158,8 @@ class Genres(db.Model):
           'artist_id': self.artist_id,
           'albums': self.albums,
           'albums_id': self.albums_id,
-          'tracks': self.tracks
+          'tracks': self.tracks,
+          'popularity': self.popularity
         } 
 
 

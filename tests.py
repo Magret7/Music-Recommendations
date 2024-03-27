@@ -251,7 +251,7 @@ class DBTestCases(unittest.TestCase):
         db.session.commit()
     
 
-    def test_delete_album(self):
+    def test_delete_genre(self):
         # create test genre to insert
         genre_name = "genre1"
         genre = Genres(

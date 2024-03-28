@@ -11,10 +11,10 @@ export default function Sidebar() {
                     <Link to={`artists`} className="nav-link link-dark" aria-current="page">Artists</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to={`genres`} className="nav-link link-dark" aria-current="page">Genres</Link>
+                    <Link to={`albums`} className="nav-link link-dark" aria-current="page">Albums</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to={`albums`} className="nav-link link-dark" aria-current="page">Albums</Link>
+                    <Link to={`genres`} className="nav-link link-dark" aria-current="page">Genres</Link>
                 </li>
                 <li className="nav-item">
                     <Link to={`about`} className="nav-link link-dark" aria-current="page">About Us</Link>

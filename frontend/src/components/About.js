@@ -8,7 +8,7 @@ export default function About() {
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp",
             commits: 33,
             issues: 18,
-            tests: 0,
+            unitTests: 0,
             gitlabProfile: 'https://gitlab.com/magretadekunle'
         },
         {
@@ -19,7 +19,7 @@ export default function About() {
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp",
             commits: 20,
             issues: 0,
-            tests: 6,
+            unitTests: 6,
             gitlabProfile: 'https://gitlab.com/georgegmathew12'
         },
         {
@@ -30,7 +30,7 @@ export default function About() {
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp",
             commits: 24,
             issues: 0,
-            tests: 0,
+            unitTests: 0,
             gitlabProfile: 'https://gitlab.com/hollyrl108'
         },
         {
@@ -41,7 +41,7 @@ export default function About() {
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp",
             commits: 30,
             issues: 11,
-            tests: 0,
+            unitTests: 0,
             gitlabProfile: 'https://gitlab.com/rwmullowney'
         },
         {

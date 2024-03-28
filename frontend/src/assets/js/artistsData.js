@@ -1,3 +1,4 @@
+// Consider using higher-quality image assets
 const artists = [
     {
         'name': 'SZA',

@@ -1,3 +1,4 @@
+// Consider using higher-quality image assets
 const albums = [
     {
         'name': 'Ctrl',

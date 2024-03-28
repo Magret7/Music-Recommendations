@@ -84,7 +84,6 @@ export default function About() {
         <div className="row">
             <h1 style={{ textAlign: "center" }}>About Page</h1>
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5">
-
                 {developersMap}
             </div>
 

@@ -59,7 +59,7 @@ const artists = [
         'info': "Benito Antonio Martínez Ocasio, known professionally as Bad Bunny, is a Puerto Rican rapper, singer, and record producer. He is known as the ''King of Latin Trap'. Bad Bunny is the first non-English-language act to become Spotify's most streamed artist of the year (he led Spotify's list from 2020 to 2022).",
         'tracks': ['PERRO NEGRO', 'MONACO', 'Me Porto Bonito'],
         'albums': ['YHLQMDLG'],
-        'genres': ['Latin hip hop', 'Latin trap'],
+        'genres': ['Hip Hop', 'Latin trap'],
         'RelatedArtists': ["Rauw Alejandro", "Feid", "Anuel AA"]
     },
     {
@@ -68,7 +68,7 @@ const artists = [
         'info': 'Aubrey Drake Graham is a Canadian rapper and singer. An influential figure in contemporary popular music, he has been credited with popularizing R&B sensibilities in modern hip hop.',
         'tracks': ['One Dance', 'Rich Baby Daddy', 'IDGAF'],
         'albums': ['Views'],
-        'genres': ['Hip hop', 'R&B', 'Pop'],
+        'genres': ['Hip Hop', 'R&B', 'Pop'],
         'RelatedArtists': ["J. Cole", "21 Savage", "Future"]
     },
     

@@ -54,7 +54,7 @@ const albums = [
         'artist': ['Bad Bunny'],
         'info': 'YHLQMDLG (acronym for "Yo Hago Lo Que Me Da La Gana", Spanish for "I Do Whatever I Want") is the second solo studio album and third overall by Puerto Rican rapper and singer Bad Bunny. It was released on February 29, 2020, by Rimas Entertainment.',
         'tracks': ["Si Veo a Tu Mamá", "La Difícil", "Pero Ya No", "La Santa"],
-        'genres': ["Latin hip hop", "Latin trap"]
+        'genres': ["Hip Hop", "Latin trap"]
     },
     {
         'name': 'Views',
@@ -62,7 +62,7 @@ const albums = [
         'artist': ['Drake'],
         'info': 'Views is the fourth studio album by Canadian rapper and singer Drake. It was released on April 29, 2016, by Cash Money Records, Republic Records, and Young Money Entertainment.',
         'tracks': ["Keep The Family Close", "9", "U With Me?", "Feel No Ways", "Hype"],
-        'genres': ["Hip hop", "R&B", "Pop"]
+        'genres': ["Hip Hop", "R&B", "Pop"]
     },
 ]
 

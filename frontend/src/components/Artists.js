@@ -1,9 +1,23 @@
-import { Outlet, Link } from "react-router-dom";
+import { useParams, Outlet, Link } from "react-router-dom";
 import artists from "../assets/js/artistsData";
 
-export default function Artists() {
 
-    const artistsMap = artists.map((artist) => {
+export default function Artists() {
+    let pageNum = useParams();
+    pageNum = pageNum.pageNum
+    console.log(pageNum)
+
+    // TODO: Is there a cleaner way to implement this?
+    let sliceLowerRange = 0
+    let sliceUpperRange = 4
+    
+    if (pageNum) {
+        sliceUpperRange = pageNum * 4
+        sliceLowerRange = sliceUpperRange - 4
+    }
+    const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
+    
+    const artistsMap = artistsSlice.map((artist) => {
         return (
             <>
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}

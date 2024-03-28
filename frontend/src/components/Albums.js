@@ -1,9 +1,22 @@
-import { Outlet, Link } from "react-router-dom";
+import { useParams, Outlet, Link } from "react-router-dom";
 import albums from "../assets/js/albumsData";
 
 export default function Albums() {
+    let pageNum = useParams();
+    pageNum = pageNum.pageNum
+    console.log(pageNum)
 
-    const albumsMap = albums.map(album => {
+    // TODO: Is there a cleaner way to implement this?
+    let sliceLowerRange = 0
+    let sliceUpperRange = 4
+    
+    if (pageNum) {
+        sliceUpperRange = pageNum * 4
+        sliceLowerRange = sliceUpperRange - 4
+    }
+    const albumsSlice = albums.slice(sliceLowerRange, sliceUpperRange)
+
+    const albumsMap = albumsSlice.map(album => {
         return (
             <>
                 <div className="column">

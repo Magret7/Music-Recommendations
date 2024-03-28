@@ -27,6 +27,12 @@ const router = createBrowserRouter([
       {
         path: "artists",
         element: <Artists />,
+        children: [
+          {
+            path:"page/:pageNum",
+            element: <Artists />
+          }
+        ]
       },
       {
         path: "artist/:artistName",  // TODO: convert to use artist ID
@@ -34,7 +40,13 @@ const router = createBrowserRouter([
       },
       {
         path: "albums",
-        element: <Albums />
+        element: <Albums />,
+        children: [
+          {
+            path:"page/:pageNum",
+            element: <Albums />
+          }
+        ]
       },
       {
         path: "album/:albumName",  // TODO: convert to use album ID

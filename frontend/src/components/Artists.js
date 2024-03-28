@@ -1,5 +1,6 @@
 import { useParams, Outlet, Link } from "react-router-dom";
 import artists from "../assets/js/artistsData";
+import Pagination from "./Pagination";
 
 
 export default function Artists() {
@@ -10,18 +11,18 @@ export default function Artists() {
     // TODO: Is there a cleaner way to implement this?
     let sliceLowerRange = 0
     let sliceUpperRange = 4
-    
+
     if (pageNum) {
         sliceUpperRange = pageNum * 4
         sliceLowerRange = sliceUpperRange - 4
     }
     const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
-    
+
     const artistsMap = artistsSlice.map((artist) => {
         return (
             <>
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
-                <div className="column">   {/* TODO: Why does this make it display well? */}
+                <div className="col">   {/* TODO: Why does this make it display well? */}
                     <table>
                         {/* <!-- <tr>
                                 <td>
@@ -81,7 +82,14 @@ export default function Artists() {
         <>
             <h1 style={{ textAlign: "center" }}>My Artists</h1>
             {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
-            {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
+            <section className="row">
+                {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
+                {/* TODO: Make the CSS for rendering these work better */}
+                {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
+                {/* </div> */}
+            </section >
+
+            <Pagination pageNum={pageNum} arrayLength={artists.length} />
         </>
     )
 }

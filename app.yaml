@@ -11,7 +11,8 @@ env_variables:
     # Replace user, password, database, and instance connection name with the values obtained
     # when configuring your Cloud SQL instance.
     DB_STRING: >-
-      postgresql+psycopg2://USER:PASSWORD@/DATABASE?host=/cloudsql/Ics331e-idb-415102:us-central1:musicdb
+      postgresql+psycopg2://postgres:Varqac-6xursy-ritnop@/postgres?host=/cloudsql/cs331e-idb-415102:us-central1:musicdb/
+
 
 
 

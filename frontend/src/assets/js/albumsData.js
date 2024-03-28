@@ -13,7 +13,7 @@ const albums = [
         'image': "https://i.scdn.co/image/ab67616d00001e02c6e0948bbb0681ff29cdbae8",
         'artist': ['J. Cole'],
         'info': '2014 Forest Hills Drive is the third studio album by American rapper J. Cole. It was released on December 9, 2014, by ByStorm Entertainment',
-        'tracks': ['Intro', 'January 28th', 'Wet Dreamz', '03\' Adolescence', 'A Tale od 2 Citiez', 'Fire Sqaud', '...'],
+        'tracks': ['Intro', 'January 28th', 'Wet Dreamz', '03\' Adolescence', 'A Tale of 2 Citiez', 'Fire Sqaud', '...'],
         'genres': ['Hip Hop', 'Rap']
     },
     {
@@ -29,7 +29,7 @@ const albums = [
         'image': "https://i.scdn.co/image/ab67616d00001e02bb54dde68cd23e2a268ae0f5",
         'artist': ['Taylor Swift'],
         'info': "Midnights is the tenth studio album by the American singer-songwriter Taylor Swift, released on October 21, 2022, by Republic Records.",
-        'tracks': ["Lavender Haze", "Maroon", "Anti-Hero", "Snow on the Beach", "You're on Your Own, Kis"],
+        'tracks': ["Lavender Haze", "Maroon", "Anti-Hero", "Snow on the Beach", "You're on Your Own, Kids"],
         'genres': ['Pop', 'Country', 'Folk']
     },
     {

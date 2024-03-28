@@ -6,8 +6,8 @@ export default function About() {
             bio: "Magret is a senior at UT Austin majoring in Math and African & American Diaspora Studies.",
             role: "Group Leader: FullStack development with Flask, Python, Bootstrap, & etc.",
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp",
-            commits: 17,
-            issues: 12,
+            commits: 33,
+            issues: 18,
             tests: 0,
             gitlabProfile: 'https://gitlab.com/magretadekunle'
         },
@@ -17,9 +17,9 @@ export default function About() {
             bio: "George is a senior at UT Austin studying Biomedical Engineering and pursuing a Master's in Data Science after his graduation.",
             role: "Backend development with Flask and Python.",
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp",
-            commits: 4,
+            commits: 20,
             issues: 0,
-            tests: 0,
+            tests: 6,
             gitlabProfile: 'https://gitlab.com/georgegmathew12'
         },
         {
@@ -28,7 +28,7 @@ export default function About() {
             bio: "Holly is a junior at UT Austin studying Mathematics and pursuing certificates in German, Elements of Computing and Science Communication.",
             role: "Backend and Frontend development (tbd)",
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp",
-            commits: 13,
+            commits: 24,
             issues: 0,
             tests: 0,
             gitlabProfile: 'https://gitlab.com/hollyrl108'
@@ -39,8 +39,8 @@ export default function About() {
             bio: "Ryan is a software developer for UT's fundraising department, and enrolls in CS courses to broaden his skillset and fill in gaps in knowledge. He has a Bachelor's in History & Philosophy.",
             role: "Front-end development with HTML, Bootstrap, and React",
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp",
-            commits: 7,
-            issues: 3,
+            commits: 30,
+            issues: 11,
             tests: 0,
             gitlabProfile: 'https://gitlab.com/rwmullowney'
         },
@@ -50,9 +50,9 @@ export default function About() {
             bio: "Jack is a senior at UT Austin studying Biomedical Engineering pursuing the Elements of Computing Certificate.",
             role: "Backend and Frontend Development (TBD)",
             img: "https://mdbcdn.b-cdn.net/img/new/standard/city/046.webp",
-            commits: 2,
+            commits: 11,
             issues: 0,
-            unitTests: 0,
+            unitTests: 3,
             gitlabProfile: 'https://gitlab.com/jackyeung1'
         },
     ]

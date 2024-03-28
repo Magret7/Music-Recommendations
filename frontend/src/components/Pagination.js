@@ -30,7 +30,12 @@ export default function Pagination(props) {
                     {/* Only show next button if not on last page */}
                     {pageNumInt === numPages ? <></> : (
                         <li className="page-item">
-                            <Link to={`page/${pageNumInt + 1}`} className="page-link" aria-label="Next">
+                            <Link
+                            // Conditional logic below is for if we're on the base artists/albums page,
+                            // there are pages to page through, but no page number in the URL to add to.
+                            // If there are page links but no page number in URL, that means the next page is page 2
+                                to={(numPages && !pageNumInt) ? `page/2` : `page/${pageNumInt + 1}`}
+                                className="page-link" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span className="sr-only"></span>
                             </Link>

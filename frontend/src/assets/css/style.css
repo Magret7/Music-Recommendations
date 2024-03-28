@@ -1,0 +1,158 @@
+style for the table * {
+  box-sizing: border-box;
+}
+
+.row {
+  /* margin-left: 2rem; */
+  /* margin-right: 1rem; */
+}
+
+.column {
+  float: left;
+  /* width: 33.33%; */
+  width: 25rem;
+  /* max-height: 25rem; */
+  padding: 1rem;
+  /* margin-bottom: 1rem; */
+
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 0.75rem;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.column-RelatedArtists {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding: 1rem; */
+  max-width: 35rem;
+}
+
+/* .card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+} */
+
+.card-space {
+  margin-bottom: 20px;
+}
+
+#music-icon {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+
+.card-deck {
+  @media (min-width: 768px) {
+    &.two-col {
+      .card {
+        flex-basis: calc(50% - 30px);
+      }
+    }
+
+    &.three-col {
+      .card {
+        flex-basis: calc(33.33% - 30px);
+      }
+    }
+  }
+
+  .card {
+    flex-basis: 100%;
+  }
+}
+
+.artistCards--list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  justify-content: center;
+}
+
+.artistCard {
+  width: 320px;
+  font-size: 16px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TODO: Adjust box shadow for this and albumCard--img */
+.artistCard--img {
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
+}
+
+.artistCard--name {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.artistCard--followers {
+  font-size: 14px;
+  text-align: left;
+}
+
+.albumCard {
+  width: 320px;
+  font-size: 16px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.albumCard--img {
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
+}
+
+.albumCard--name {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.albumCard--info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.albumCard--artists {
+  display: flex;
+}
+
+/* TODO: Make more DRY with the album/artist card images.  Also think of better class name */
+.artistOrAlbum--img {
+  width: 100%;
+  border-radius: 9px;
+}

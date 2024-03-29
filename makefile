@@ -8,7 +8,7 @@ IDB3.log:
 	git log --since="Mar 28 2024" > IDB3.log
 
 models.html:
-	pydoc -w app/models.py
+	pydoc -w models.py
 
 test:
 	python app/tests.py

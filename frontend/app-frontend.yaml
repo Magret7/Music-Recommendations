@@ -1,6 +1,7 @@
 runtime: nodejs16
 handlers:
   # Serve all static files with url ending with a file extension
+
   - url: /(.*\..+)$
     static_files: build/\1
     upload: build/(.*\..+)$
@@ -8,3 +9,5 @@ handlers:
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
+
+ service: Our-Project

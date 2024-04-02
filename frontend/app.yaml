@@ -1,4 +1,4 @@
-runtime: nodejs16
+runtime: nodejs20
 handlers:
   # Serve all static files with url ending with a file extension
 
@@ -9,5 +9,3 @@ handlers:
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
-
-service: Our-Project

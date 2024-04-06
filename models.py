@@ -154,10 +154,10 @@ class Genres(db.Model):
        """
        return {
           'name': self.name,
-          'artist': self.artist,
-          'artist_id': self.artist_id,
+          'artist': self.artists,
+          'artist_ids': self.artist_ids,
           'albums': self.albums,
-          'albums_id': self.albums_id,
+          'album_ids': self.album_ids,
           'tracks': self.tracks,
           'popularity': self.popularity
         } 

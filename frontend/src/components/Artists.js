@@ -4,6 +4,12 @@ import Pagination from "./Pagination";
 
 
 export default function Artists() {
+
+    fetch("/artist/json/")
+    // .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
+
     let pageNum = useParams();
     pageNum = pageNum.pageNum
     console.log(pageNum)

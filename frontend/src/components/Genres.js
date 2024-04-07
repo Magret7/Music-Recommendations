@@ -2,6 +2,12 @@ import { Outlet, Link } from "react-router-dom";
 import genres from "../assets/js/genreData";
 
 export default function Genres() {
+
+    fetch("/genre/json/")
+    // .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
+
     const genreMap = genres.map(genre => {
         return (
             <div className="col">   {/* <!-- TODO: Why does this make it display well? --> */}

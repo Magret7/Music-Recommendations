@@ -3,6 +3,12 @@ import albums from "../assets/js/albumsData";
 import Pagination from "./Pagination";
 
 export default function Albums() {
+
+    fetch("/album/json/")
+    // .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
+
     let pageNum = useParams();
     pageNum = pageNum.pageNum
     // TODO: Is there a cleaner way to implement this?

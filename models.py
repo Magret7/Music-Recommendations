@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = "Adekunle2002"
+PASSWORD = "rwmpostgres"
 PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"
 
@@ -154,10 +154,10 @@ class Genres(db.Model):
        """
        return {
           'name': self.name,
-          'artist': self.artist,
-          'artist_id': self.artist_id,
+          'artists': self.artists,
+          'artist_id': self.artist_ids,
           'albums': self.albums,
-          'albums_id': self.albums_id,
+          'albums_id': self.album_ids,
           'tracks': self.tracks,
           'popularity': self.popularity
         } 

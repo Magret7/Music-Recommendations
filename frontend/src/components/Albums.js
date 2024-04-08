@@ -1,6 +1,8 @@
 import { useParams, Outlet, Link } from "react-router-dom";
 import albums from "../assets/js/albumsData";
 import Pagination from "./Pagination";
+import React from "react";
+
 
 export default function Albums() {
     let pageNum = useParams();
@@ -14,6 +16,42 @@ export default function Albums() {
         sliceLowerRange = sliceUpperRange - 4
     }
     const albumsSlice = albums.slice(sliceLowerRange, sliceUpperRange)
+
+    // Sorting by ascendingOrder or descendingOrder
+    // const [data, setData] = React.useState([]);
+
+    // React.useEffect(() => {
+    //   setData(albums);
+    // });
+
+    // const ascendingOrder = () => {
+    //   let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
+    //   setData([...ascendingItems]);
+    // };
+    // const descendingOrder = () => {
+    //   let descendingItems = data.sort((a,b) => (a.name < b.name) - (a.name > b.name));
+    //   setData([...descendingItems]);
+    // };
+
+    const [data, setData] = React.useState([albums]);
+
+    React.useEffect(() => {
+        setData(albums);
+    });
+
+    function onSelectionChange(e) {
+        const sortDirection = e.target.value;
+        const copyData = [...data]
+        if (sortDirection === "0") {
+            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
+            setData([...ascendingItems]);
+        }
+        if (sortDirection === "1") {
+            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
+            setData([...descendingItems]);
+        }
+    }
+
 
     const albumsMap = albumsSlice.map(album => {
         return (
@@ -61,6 +99,18 @@ export default function Albums() {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>All Albums</h1>
+
+            {/* TODO: Change to Dropdown for better look */}
+            {/* <div >
+                <button onClick={() => ascendingOrder()}>Ascending Order</button>
+                <button onClick={() => descendingOrder()}>Descending Order</button>
+            </div> */}
+            <select defaultValue={-1} onChange={onSelectionChange}>
+                <option value={-1} disabled>Select Soting Option</option>
+                <option value={0}>Ascending Order - Album Name</option>
+                <option value={1}>Descending Order - Album Name</option>
+            </select>
+
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}

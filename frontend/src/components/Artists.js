@@ -1,6 +1,7 @@
 import { useParams, Outlet, Link } from "react-router-dom";
 import artists from "../assets/js/artistsData";
 import Pagination from "./Pagination";
+import React from "react";
 
 
 export default function Artists() {
@@ -17,6 +18,26 @@ export default function Artists() {
         sliceLowerRange = sliceUpperRange - 4
     }
     const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
+
+    // Sorting by ascendingOrder or descendingOrder
+    const [data, setData] = React.useState([]);
+
+    React.useEffect(() => {
+        setData(artists);
+    });
+
+    function onSelectionChange(e) {
+        const sortDirection = e.target.value;
+
+        if (sortDirection === "0") {
+            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
+            setData([...ascendingItems]);
+        }
+        else {
+            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
+            setData([...descendingItems]);
+        }
+    }
 
     const artistsMap = artistsSlice.map((artist) => {
         return (
@@ -81,6 +102,14 @@ export default function Artists() {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>My Artists</h1>
+            
+            {/* TODO: Change to Dropdown for better look */}
+            <select defaultValue={-1} onChange={onSelectionChange}>
+                <option value={-1} disabled>Select Soting Option</option>
+                <option value={0}>Ascending Order - Artist Name</option>
+                <option value={1}>Descending Order - Artist Name</option>
+            </select>
+
             {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}

@@ -1,7 +1,33 @@
 import { Outlet, Link } from "react-router-dom";
 import genres from "../assets/js/genreData";
+import React from "react";
+
 
 export default function Genres() {
+    // Sorting by ascendingOrder or descendingOrder
+    const [data, setData] = React.useState([]);
+
+    React.useEffect(() => {
+        setData(genres);
+    });
+
+    function onSelectionChange(e) {
+        const sortDirection = e.target.value;
+
+        if (sortDirection === "0") {
+            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
+            setData([...ascendingItems]);
+        }
+        if (sortDirection === "1") {
+            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
+            setData([...descendingItems]);
+        }
+        // else {
+        //     let popularItems = data.sort((a, b) => (b.popularity -  a.popularity));
+        //     setData([...popularItems]);
+        // }
+    }
+
     const genreMap = genres.map(genre => {
         return (
             <div className="col">   {/* <!-- TODO: Why does this make it display well? --> */}
@@ -41,9 +67,23 @@ export default function Genres() {
     })
 
     return (
-        // TODO: Improve CSS styling here
-        <section className="row">
-            {genreMap}
-        </section>
+        <>
+            <h1 style={{ textAlign: "center" }}> Genres</h1>
+
+            {/* TODO: Change to Dropdown for better look */}
+            <select defaultValue={-1} onChange={onSelectionChange}>
+                <option value={-1} disabled>Select Soting Option</option>
+                <option value={0}>Ascending Order - Genre Name</option>
+                <option value={1}>Descending Order - Genre Name</option>
+                <option value={2}>Most Popular Genres </option>
+
+            </select>
+
+            {/* TODO: Improve CSS styling here */}
+            <section className="row">
+                {genreMap}
+            </section>
+    
+        </>
     )
 }

@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import React from "react";
 
 
+
 export default function Albums() {
     let pageNum = useParams();
     pageNum = pageNum.pageNum
@@ -33,7 +34,7 @@ export default function Albums() {
     //   setData([...descendingItems]);
     // };
 
-    const [data, setData] = React.useState([albums]);
+    const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
         setData(albums);
@@ -41,7 +42,6 @@ export default function Albums() {
 
     function onSelectionChange(e) {
         const sortDirection = e.target.value;
-        const copyData = [...data]
         if (sortDirection === "0") {
             let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
             setData([...ascendingItems]);
@@ -100,22 +100,18 @@ export default function Albums() {
         <>
             <h1 style={{ textAlign: "center" }}>All Albums</h1>
 
-            {/* TODO: Change to Dropdown for better look */}
-            {/* <div >
-                <button onClick={() => ascendingOrder()}>Ascending Order</button>
-                <button onClick={() => descendingOrder()}>Descending Order</button>
-            </div> */}
-            <select defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Soting Option</option>
+            
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
+                <option value={-1} disabled>Select A Soting Option</option>
                 <option value={0}>Ascending Order - Album Name</option>
                 <option value={1}>Descending Order - Album Name</option>
             </select>
 
-            <section className="row">
-                {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
+            <section className="row" style={{ marginLeft: "0.5rem" }}>
+                <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
                 {/* TODO: Make the CSS for rendering these work better */}
                 {albums.length > 0 ? albumsMap : <p>No Albums exist</p>}
-                {/* </div> */}
+                </div>
             </section>
 
             <Pagination pageNum={pageNum} arrayLength={albums.length} />

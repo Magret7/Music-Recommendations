@@ -104,19 +104,18 @@ export default function Artists() {
             <h1 style={{ textAlign: "center" }}>My Artists</h1>
             
             {/* TODO: Change to Dropdown for better look */}
-            <select defaultValue={-1} onChange={onSelectionChange}>
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
                 <option value={-1} disabled>Select Soting Option</option>
                 <option value={0}>Ascending Order - Artist Name</option>
                 <option value={1}>Descending Order - Artist Name</option>
             </select>
 
-            {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
-            <section className="row">
-                {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
+            <section className="row" style={{ marginLeft: "0.5rem" }}>
+                <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
                 {/* TODO: Make the CSS for rendering these work better */}
                 {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
-                {/* </div> */}
-            </section >
+                </div>
+            </section>
 
             <Pagination pageNum={pageNum} arrayLength={artists.length} />
         </>

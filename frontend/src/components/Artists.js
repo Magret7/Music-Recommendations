@@ -30,7 +30,7 @@ export default function Artists() {
     if (artistsSlice[0] == undefined) {console.log("it's undefined")}
     else {
         console.log("it's here")
-        console.log(eval(artistsSlice[0].image))
+        console.log(eval(artistsSlice[0].related_artists))
     }
     // console.log(eval(artistsSlice[0].image))
 
@@ -76,7 +76,9 @@ export default function Artists() {
                                 <b>Songs: </b>
 
                                 {eval(artist.tracks).map(
-                                    (track) => `${track}, `
+                                    (track, index) => { 
+                                        return (index ? ', ' : '') + track
+                                    }
                                 )}
                             </td>
                         </tr>
@@ -86,7 +88,7 @@ export default function Artists() {
                                 <b>Albums: </b>
                                 {eval(artist.albums).map((album) => (
                                     <>
-                                        <Link to={`/album/${album}`} className='mx-1'>{`${album}`}</Link>,
+                                        <Link to={`/album/${album}`} className='mx-1'>{`${album}`}</Link>
                                     </>
                                 ))}
                             </td>
@@ -106,21 +108,21 @@ export default function Artists() {
                             </td>
                         </tr> */}
 
-                        {/* <tr>
+                        <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
                                 {eval(artist.related_artists).map(
                                     (relatedArtist) => (
                                         <Link
-                                            to={`/artist/${relatedArtist}`}
+                                            to={`/artist/${relatedArtist.name}`}
                                             style={{ marginRight: 10 }}
                                         >
-                                            {relatedArtist}
+                                            {relatedArtist.name}
                                         </Link>
                                     )
                                 )}
                             </td>
-                        </tr> */}
+                        </tr>
                     </table>
                 </div>
                 {/* </div> */}

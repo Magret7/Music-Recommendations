@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, Outlet, Link } from "react-router-dom";
-import artists from "../assets/js/artistsData";
 import Pagination from "./Pagination";
 
 export default function Artists() {
@@ -10,8 +9,6 @@ export default function Artists() {
         fetch("/artist/json/")
             .then((res) => res.json())
             .then((data) => setArtistData(data.Artists));
-        // .then((data) => console.log(data.Artists));
-        // .then(console.log(artistData));
     }, []);
 
     let pageNum = useParams();
@@ -27,12 +24,6 @@ export default function Artists() {
         sliceLowerRange = sliceUpperRange - 4;
     }
     const artistsSlice = artistData.slice(sliceLowerRange, sliceUpperRange);
-    if (artistsSlice[0] == undefined) {console.log("it's undefined")}
-    else {
-        console.log("it's here")
-        console.log(eval(artistsSlice[0].related_artists))
-    }
-    // console.log(eval(artistsSlice[0].image))
 
     const artistsMap = artistsSlice.map((artist) => {
         return (
@@ -143,8 +134,7 @@ export default function Artists() {
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}
-                {/* {artistsMap ? artistsMap : <p>No Artists exist</p>} */}
-                {artistsMap}
+                {artistsMap ? artistsMap: <p>Loading...</p>}
                 {/* </div> */}
             </section>
             <Pagination pageNum={pageNum} arrayLength={artistData.length} />

@@ -1,13 +1,16 @@
+import { useState, useEffect } from "react";
 import { useParams, Outlet, Link } from "react-router-dom";
-import albums from "../assets/js/albumsData";
 import Pagination from "./Pagination";
 
 export default function Albums() {
 
-    fetch("/album/json/")
-    // .then(res => console.log(res))
-    .then(res => res.json())
-    .then(data => console.log(data))
+    const [albumData, setAlbumData] = useState([]);
+
+    useEffect(() => {
+        fetch("/album/json/")
+            .then((res) => res.json())
+            .then((data) => setAlbumData(data.Albums));
+    }, []);
 
     let pageNum = useParams();
     pageNum = pageNum.pageNum
@@ -19,7 +22,7 @@ export default function Albums() {
         sliceUpperRange = pageNum * 4
         sliceLowerRange = sliceUpperRange - 4
     }
-    const albumsSlice = albums.slice(sliceLowerRange, sliceUpperRange)
+    const albumsSlice = albumData.slice(sliceLowerRange, sliceUpperRange)
 
     const albumsMap = albumsSlice.map(album => {
         return (
@@ -37,25 +40,25 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Artists: </b>
-                                {album.artist.map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
+                                {eval(album.artist).map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Information: </b> {album.info}</td>
+                            <td><b>Released: </b> {JSON.parse(album.info).release_date}</td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Album Tracks:</b><br />
-                                {album.tracks.map(track => (<>{track} <br /></>))}
+                                {eval(album.tracks).map(track => (<>{track} <br /></>))}
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Genres of Albums: </b>
-                                {album.genres.map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
+                                {eval(album.genres).map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
                             </td>
                         </tr>
                     </table>
@@ -70,11 +73,11 @@ export default function Albums() {
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}
-                {albums.length > 0 ? albumsMap : <p>No Albums exist</p>}
+                {albumsMap ? albumsMap : <p>Loading...</p>}
                 {/* </div> */}
             </section>
 
-            <Pagination pageNum={pageNum} arrayLength={albums.length} />
+            <Pagination pageNum={pageNum} arrayLength={albumData.length} />
         </>
     )
 }

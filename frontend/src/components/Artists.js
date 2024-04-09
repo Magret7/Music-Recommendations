@@ -1,34 +1,46 @@
+import { useState, useEffect } from "react";
 import { useParams, Outlet, Link } from "react-router-dom";
 import artists from "../assets/js/artistsData";
 import Pagination from "./Pagination";
 
-
 export default function Artists() {
+    const [artistData, setArtistData] = useState([]);
 
-    fetch("/artist/json/")
-    // .then(res => console.log(res))
-    .then(res => res.json())
-    .then(data => console.log(data))
+    useEffect(() => {
+        fetch("/artist/json/")
+            .then((res) => res.json())
+            .then((data) => setArtistData(data.Artists));
+        // .then((data) => console.log(data.Artists));
+        // .then(console.log(artistData));
+    }, []);
 
     let pageNum = useParams();
-    pageNum = pageNum.pageNum
-    console.log(pageNum)
+    pageNum = pageNum.pageNum;
+    console.log(pageNum);
 
     // TODO: Is there a cleaner way to implement this?
-    let sliceLowerRange = 0
-    let sliceUpperRange = 4
+    let sliceLowerRange = 0;
+    let sliceUpperRange = 4;
 
     if (pageNum) {
-        sliceUpperRange = pageNum * 4
-        sliceLowerRange = sliceUpperRange - 4
+        sliceUpperRange = pageNum * 4;
+        sliceLowerRange = sliceUpperRange - 4;
     }
-    const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
+    const artistsSlice = artistData.slice(sliceLowerRange, sliceUpperRange);
+    if (artistsSlice[0] == undefined) {console.log("it's undefined")}
+    else {
+        console.log("it's here")
+        console.log(eval(artistsSlice[0].image))
+    }
+    // console.log(eval(artistsSlice[0].image))
 
     const artistsMap = artistsSlice.map((artist) => {
         return (
             <>
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
-                <div className="col">   {/* TODO: Why does this make it display well? */}
+                <div className="col">
+                    {" "}
+                    {/* TODO: Why does this make it display well? */}
                     <table>
                         {/* <!-- <tr>
                                 <td>
@@ -36,9 +48,14 @@ export default function Artists() {
                                 </td>
                             </tr> --> */}
 
-
                         <tr>
-                            <td><img src={artist.image} alt={artist.name} className="artistOrAlbum--img" /></td>
+                            <td>
+                                <img
+                                    src={eval(artist.image)[1].url}
+                                    alt={artist.name}
+                                    className="artistOrAlbum--img"
+                                />
+                            </td>
                         </tr>
 
                         <tr>
@@ -47,55 +64,88 @@ export default function Artists() {
                             </td>
                         </tr>
 
-                        <tr>
-                            <td><b>Biography: </b> {artist.info}</td>
-                        </tr>
+                        {/* <tr>
+                            <td>
+                                <b>Biography: </b> {artist.info}
+                            </td>
+                        </tr> */}
 
+                        {/* TODO: Remove trailing commas */}
                         <tr>
-                            {/* TODO: Remove trailing comma */}
-                            <td><b>Songs: </b>{artist.tracks.map(track => `${track}, `)}</td>
+                            <td>
+                                <b>Songs: </b>
+
+                                {eval(artist.tracks).map(
+                                    (track) => `${track}, `
+                                )}
+                            </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Albums: </b>
-                                {artist.albums.map(album => <Link to={`/album/${album}`}>{album}</Link>)}
+                                {eval(artist.albums).map((album) => (
+                                    <>
+                                        <Link to={`/album/${album}`} className='mx-1'>{`${album}`}</Link>,
+                                    </>
+                                ))}
                             </td>
                         </tr>
 
-                        <tr>
+                        {/* <tr>
                             <td>
                                 <b>Genres: </b>
-                                {artist.genres.map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
+                                {artist.genres.map((genre) => (
+                                    <Link
+                                        to={`/genre/${genre}`}
+                                        style={{ marginRight: 10 }}
+                                    >
+                                        {genre}
+                                    </Link>
+                                ))}
                             </td>
-                        </tr>
+                        </tr> */}
 
-                        <tr>
+                        {/* <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
-                                {artist.RelatedArtists.map(relatedArtist => <Link to={`/artist/${relatedArtist}`} style={{ marginRight: 10 }}>{relatedArtist}</Link>)}
+                                {eval(artist.related_artists).map(
+                                    (relatedArtist) => (
+                                        <Link
+                                            to={`/artist/${relatedArtist}`}
+                                            style={{ marginRight: 10 }}
+                                        >
+                                            {relatedArtist}
+                                        </Link>
+                                    )
+                                )}
                             </td>
-                        </tr>
+                        </tr> */}
                     </table>
                 </div>
                 {/* </div> */}
             </>
-        )
-    })
+        );
+    });
 
+    if (!artistData) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <>
+            {/* {artistData} */}
+            {/* <pre>{JSON.stringify(artistData, null, 2)}</pre> */}
             <h1 style={{ textAlign: "center" }}>My Artists</h1>
             {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}
-                {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
+                {/* {artistsMap ? artistsMap : <p>No Artists exist</p>} */}
+                {artistsMap}
                 {/* </div> */}
-            </section >
-
-            <Pagination pageNum={pageNum} arrayLength={artists.length} />
+            </section>
+            <Pagination pageNum={pageNum} arrayLength={artistData.length} />
         </>
-    )
+    );
 }

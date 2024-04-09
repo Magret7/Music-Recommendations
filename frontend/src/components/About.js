@@ -60,7 +60,7 @@ export default function About() {
     const developersMap = developers.map((developer) => {
         return (
             <>
-                <div className="col" style= {{ margintop: .5+'rem', marginBottom: .5+'rem', marginLeft: 'auto', marginRight: 'auto'}}>
+                <div className="col" style= {{ margintop: .5+'rem', marginBottom: .5+'rem', marginLeft: 'auto', marginRight: 'auto'}} >
                     <div className="card h-100">
                         <img src={developer.img} className="card-img-top"
                             alt={`${developer.firstName} ${developer.lastName}`} />

@@ -30,7 +30,7 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 def create_artist(sp):
     print('Creating artists...')
     for offset in range(0, 50, 50): 
-        artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items'] #spotify limits to 50 for a single search
+        artist_results = sp.search(q='artist', type='artist', limit=50, offset=offset)['artists']['items'] #spotify limits to 50 for a single search
         # print("Number of artists processed (Batch 1):", len(artist_results))
         # print("Sample artist data (Batch 1):", artist_results[0])
         
@@ -60,7 +60,7 @@ def create_artist(sp):
         print("Batch 1 of artists added")
 
     for offset in range(50, 100, 50): #for second batch of artists to get 100; can keep repeating for x artists
-        artist_results = sp.search(q='year:2020', type='artist', limit=50, offset=offset)['artists']['items']
+        artist_results = sp.search(q='artist', type='artist', limit=50, offset=offset)['artists']['items']
         # print("Number of artists processed (Batch 2):", len(artist_results))
         # print("Sample artist data (Batch 2):", artist_results[0])
         

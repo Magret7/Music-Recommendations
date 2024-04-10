@@ -34,7 +34,7 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Artists: </b>
-                                {eval(album.artist).map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
+                                {JSON.parse(album.artist).map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
                             </td>
                         </tr>
 
@@ -45,14 +45,14 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Album Tracks:</b><br />
-                                {eval(album.tracks).map(track => (<>{track} <br /></>))}
+                                {JSON.parse(album.tracks).map(track => (<>{track} <br /></>))}
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Genres of Albums: </b>
-                                {eval(album.genres).map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
+                                {JSON.parse(album.genres).map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
                             </td>
                         </tr>
                     </table>

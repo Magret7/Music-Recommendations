@@ -33,7 +33,7 @@ export default function Artists() {
                         <tr>
                             <td>
                                 <img
-                                    src={eval(artist.image)[1].url}
+                                    src={JSON.parse(artist.image)[1].url}
                                     alt={artist.name}
                                     className="artistOrAlbum--img"
                                 />
@@ -56,7 +56,7 @@ export default function Artists() {
                             <td>
                                 <b>Songs: </b>
 
-                                {eval(artist.tracks).map(
+                                {JSON.parse(artist.tracks).map(
                                     (track, index) => { 
                                         return (index ? ', ' : '') + track
                                     }
@@ -67,7 +67,7 @@ export default function Artists() {
                         <tr>
                             <td>
                                 <b>Albums: </b>
-                                {eval(artist.albums).map((album) => (
+                                {JSON.parse(artist.albums).map((album) => (
                                     <>
                                         <Link to={`/album/${album}`} className='mx-1'>{`${album}`}</Link>
                                     </>
@@ -92,7 +92,7 @@ export default function Artists() {
                         <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
-                                {eval(artist.related_artists).map(
+                                {JSON.parse(artist.related_artists).map(
                                     (relatedArtist) => (
                                         <Link
                                             to={`/artist/${relatedArtist.name}`}

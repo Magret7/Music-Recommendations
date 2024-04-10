@@ -13,7 +13,6 @@ export default function Artists() {
 
     let pageNum = useParams();
     pageNum = pageNum.pageNum;
-    console.log(pageNum);
 
     // TODO: Is there a cleaner way to implement this?
     let sliceLowerRange = 0;
@@ -30,7 +29,6 @@ export default function Artists() {
             <>
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
                 <div className="col">
-                    {" "}
                     {/* TODO: Why does this make it display well? */}
                     <table>
                         {/* <!-- <tr>
@@ -61,7 +59,6 @@ export default function Artists() {
                             </td>
                         </tr> */}
 
-                        {/* TODO: Remove trailing commas */}
                         <tr>
                             <td>
                                 <b>Songs: </b>
@@ -120,10 +117,6 @@ export default function Artists() {
             </>
         );
     });
-
-    if (!artistData) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <>

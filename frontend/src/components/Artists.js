@@ -2,6 +2,8 @@ import { useParams, Outlet, Link } from "react-router-dom";
 import artists from "../assets/js/artistsData";
 import Pagination from "./Pagination";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Artists() {
@@ -17,7 +19,7 @@ export default function Artists() {
         sliceUpperRange = pageNum * 4
         sliceLowerRange = sliceUpperRange - 4
     }
-    const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
+    // const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
 
     // Sorting by ascendingOrder or descendingOrder
     const [data, setData] = React.useState([]);
@@ -26,6 +28,40 @@ export default function Artists() {
         setData(artists);
     });
 
+    // Setting Up for Sorting
+    function onSelectionChange(e) {
+        const sortDirection = e.target.value;
+
+        if (sortDirection === "0") {
+            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
+            setData([...ascendingItems]);
+        }
+        else {
+            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
+            setData([...descendingItems]);
+        }
+    }
+
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [artistsSlice, setFilteredData] = React.useState(artists);
+
+    // Searching
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        setSearchTerm(value);
+        filterData(value);
+    };
+
+    const filterData = (searchTerm) => {
+        const tempartists = artists.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        console.log(`Searching for ${searchTerm}...`);
+        return setFilteredData([...tempartists]);
+    };
+
+    // Setting Up for Sorting
     function onSelectionChange(e) {
         const sortDirection = e.target.value;
 
@@ -102,7 +138,25 @@ export default function Artists() {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>My Artists</h1>
-            
+
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search for Genre ..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                />
+
+                <button onClick={handleInputChange}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+            </div>
+
+            {/* <form >
+                <input type="text" value={searchTerm} onChange={handleInputChange} />
+                <button type="submit">Search</button>
+            </form> */}
+
             {/* TODO: Change to Dropdown for better look */}
             <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
                 <option value={-1} disabled>Select Soting Option</option>
@@ -112,8 +166,8 @@ export default function Artists() {
 
             <section className="row" style={{ marginLeft: "0.5rem" }}>
                 <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
-                {/* TODO: Make the CSS for rendering these work better */}
-                {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
+                    {/* TODO: Make the CSS for rendering these work better */}
+                    {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
                 </div>
             </section>
 

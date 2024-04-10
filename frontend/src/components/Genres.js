@@ -2,6 +2,10 @@ import { useParams, Outlet, Link } from "react-router-dom";
 import genres from "../assets/js/genreData";
 import Pagination from "./Pagination";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 export default function Genres() {
@@ -15,16 +19,36 @@ export default function Genres() {
         sliceUpperRange = pageNum * 4
         sliceLowerRange = sliceUpperRange - 4
     }
-    const genresSlice = genres.slice(sliceLowerRange, sliceUpperRange)
+    // const genresSlice = genres.slice(sliceLowerRange, sliceUpperRange)
 
 
-    // Sorting by ascendingOrder or descendingOrder
-    const [data, setData] = React.useState([]);
+    // Setting Up Sorting by ascendingOrder or descendingOrder
+    const [data, setData] = React.useState([genres.name]);
+
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [genresSlice, setFilteredData] = React.useState(genres);
 
     React.useEffect(() => {
         setData(genres);
     });
 
+    // Searching
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        setSearchTerm(value);
+        filterData(value);
+    };
+
+    const filterData = (searchTerm) => {
+         const tempgenres = genres.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredData([...tempgenres]);
+    };
+
+
+    // Sorting by ascendingOrder or descendingOrder
     function onSelectionChange(e) {
         const sortDirection = e.target.value;
 
@@ -36,8 +60,8 @@ export default function Genres() {
             let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
             setData([...descendingItems]);
         }
-        if (sortDirection === "2"){
-            let popularItems = data.sort((a, b) => (b.popularity -  a.popularity));
+        if (sortDirection === "2") {
+            let popularItems = data.sort((a, b) => (b.popularity - a.popularity));
             setData([...popularItems]);
         }
     }
@@ -84,24 +108,33 @@ export default function Genres() {
         <>
             <h1 style={{ textAlign: "center" }}> Genres</h1>
 
-            {/* TODO: Change to Dropdown for better look */}
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Soting Option</option>
-                <option value={0}>Ascending Order - Genre Name</option>
-                <option value={1}>Descending Order - Genre Name</option>
-                <option value={2}>Most Popular Genres </option>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search for Genre ..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                />
+                <FontAwesomeIcon icon={faMagnifyingGlass}/> 
+            </div>
 
-            </select>
+                {/* TODO: Change to Dropdown for better look */}
+                <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
+                    <option value={-1} disabled>Select Soting Option</option>
+                    <option value={0}>Ascending Order - Genre Name</option>
+                    <option value={1}>Descending Order - Genre Name</option>
+                    <option value={2}>Most Popular Genres </option>
+                </select>
 
-            <section className="row" style={{ marginLeft: "0.5rem" }}>
-                <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
-                {/* TODO: Make the CSS for rendering these work better */}
-                {genres.length > 0 ? genreMap : <p>No Genres exist</p>}
-                </div>
-            </section>
+                <section className="row" style={{ marginLeft: "0.5rem" }}>
+                    <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
+                        {/* TODO: Make the CSS for rendering these work better */}
+                        {genres.length > 0 ? genreMap : <p>No Genres exist</p>}
+                    </div>
+                </section>
 
-            <Pagination pageNum={pageNum} arrayLength={genres.length} />
+                <Pagination pageNum={pageNum} arrayLength={genres.length} />
 
-        </>
-    )
+            </>
+            )
 }

@@ -1,4 +1,4 @@
-import { useParams, Outlet, Link } from "react-router-dom";
+import { useParams, Outlet, Link, useNavigate } from "react-router-dom";
 import artists from "../assets/js/artistsData";
 import Pagination from "./Pagination";
 import React from "react";
@@ -9,7 +9,12 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 export default function Artists() {
     let pageNum = useParams();
     pageNum = pageNum.pageNum
-    console.log(pageNum)
+
+    const navigate = useNavigate();
+
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [searchedArtists, setSearchedArtists] = React.useState(artists);
 
     // TODO: Is there a cleaner way to implement this?
     let sliceLowerRange = 0
@@ -19,7 +24,7 @@ export default function Artists() {
         sliceUpperRange = pageNum * 4
         sliceLowerRange = sliceUpperRange - 4
     }
-    // const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
+    const artistsSlice = searchedArtists.slice(sliceLowerRange, sliceUpperRange)
 
     // Sorting by ascendingOrder or descendingOrder
     const [data, setData] = React.useState([]);
@@ -41,25 +46,32 @@ export default function Artists() {
             setData([...descendingItems]);
         }
     }
+    
 
-    // Setting Up for Searching
-    const [searchTerm, setSearchTerm] = React.useState('');
-    const [artistsSlice, setFilteredData] = React.useState(artists);
 
     // Searching
     const handleInputChange = (event) => {
         const { value } = event.target;
         setSearchTerm(value);
-        filterData(value);
+        // filterData(value);
     };
 
-    const filterData = (searchTerm) => {
-        const tempartists = artists.filter((item) =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    function handleSearch(){
+        const searchResults = artists.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         console.log(`Searching for ${searchTerm}...`);
-        return setFilteredData([...tempartists]);
-    };
+        setSearchedArtists(searchResults);
+        navigate("page/1")
+    }
+
+    // const filterData = (searchTerm) => {
+        // const tempartists = artists.filter((item) =>
+        //     item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        // );
+        // console.log(`Searching for ${searchTerm}...`);
+        // return setFilteredData([...tempartists]);
+    // };
 
     // Setting Up for Sorting
     function onSelectionChange(e) {
@@ -147,7 +159,7 @@ export default function Artists() {
                     onChange={handleInputChange}
                 />
 
-                <button onClick={handleInputChange}>
+                <button onClick={handleSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
             </div>
@@ -159,7 +171,7 @@ export default function Artists() {
 
             {/* TODO: Change to Dropdown for better look */}
             <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Soting Option</option>
+                <option value={-1} disabled>Select Sorting Option</option>
                 <option value={0}>Ascending Order - Artist Name</option>
                 <option value={1}>Descending Order - Artist Name</option>
             </select>
@@ -171,7 +183,7 @@ export default function Artists() {
                 </div>
             </section>
 
-            <Pagination pageNum={pageNum} arrayLength={artists.length} />
+            <Pagination pageNum={pageNum} arrayLength={searchedArtists.length} />
         </>
     )
 }

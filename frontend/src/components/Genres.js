@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Outlet, Link } from "react-router-dom";
 import Pagination from "./Pagination";
+import { calculateSliceRange } from "../assets/js/helpers";
 
 export default function Genres() {
     const [genreData, setGenresData] = useState([]);
@@ -11,20 +12,14 @@ export default function Genres() {
             .then((data) => setGenresData(data.Genres));
     }, []);
 
-    let pageNum = useParams();
-    pageNum = pageNum.pageNum;
-    console.log(pageNum);
-
-    // TODO: Is there a cleaner way to implement this?
-    let sliceLowerRange = 0;
-    let sliceUpperRange = 4;
-
-    if (pageNum) {
-        sliceUpperRange = pageNum * 4;
-        sliceLowerRange = sliceUpperRange - 4;
-    }
+    // Retrieve slice of data returned from API
+    let pageNum = useParams().pageNum;
+    let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
     const genreSlice = genreData.slice(sliceLowerRange, sliceUpperRange);
-    if(genreSlice[0]){console.log(genreSlice[0].albums)}
+
+    if (genreSlice[0]) {
+        console.log(genreSlice[0].albums);
+    }
     // if(genreSlice[0]){console.log((JSON.parse(genreSlice[0].artists.replace("{", "[").replace("}", "]"))))}
     // if(genreSlice[0]){newSlice = (JSON.parse(genreSlice[0].artists.replace("{", "[").replace("}", "]")))}
     // if(genreSlice[0]){console.log(typeof(JSON.parse(genreSlice[0].artists.replace("{", "[").replace("}", "]"))))}
@@ -34,17 +29,24 @@ export default function Genres() {
     //     console.log(newSlice[i])
     // }
 
-    const genreMap = genreSlice.map(genre => {
+    const genreMap = genreSlice.map((genre) => {
         return (
-            <div className="col">   {/* <!-- TODO: Why does this make it display well? --> */}
+            <div className="col">
+                {" "}
+                {/* <!-- TODO: Why does this make it display well? --> */}
                 <table>
                     <tr>
                         {/* TODO: Can this be broken out of the .map() to make this cleaner? */}
-                        <th>{genre.name.charAt(0).toUpperCase() + genre.name.slice(1)}</th>
+                        <th>
+                            {genre.name.charAt(0).toUpperCase() +
+                                genre.name.slice(1)}
+                        </th>
                     </tr>
 
                     <tr>
-                        <td><b>Information: </b> {genre.info}</td>
+                        <td>
+                            <b>Information: </b> {genre.info}
+                        </td>
                     </tr>
 
                     <tr>
@@ -63,19 +65,23 @@ export default function Genres() {
 
                     <tr>
                         <td>
-                            <b>Related Songs: </b><br />
+                            <b>Related Songs: </b>
+                            <br />
                             {/* {JSON.parse(genre.artists.replace("{", "[").replace("}", "]")).map(track => (<>{track} <br /></>))} */}
                         </td>
                     </tr>
                 </table>
             </div>
-        )
-    })
+        );
+    });
 
     return (
         // TODO: Improve CSS styling here
-        <section className="row">
-            {genreMap ? genreMap : <p>Loading...</p>}
-        </section>
-    )
+        <>
+            <section className="row">
+                {genreMap ? genreMap : <p>Loading...</p>}
+            </section>
+            <Pagination pageNum={pageNum} arrayLength={genreData.length} />
+        </>
+    );
 }

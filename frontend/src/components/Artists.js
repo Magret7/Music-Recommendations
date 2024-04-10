@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Outlet, Link } from "react-router-dom";
 import Pagination from "./Pagination";
+import { calculateSliceRange } from "../assets/js/helpers";
 
 export default function Artists() {
     const [artistData, setArtistData] = useState([]);
@@ -11,17 +12,9 @@ export default function Artists() {
             .then((data) => setArtistData(data.Artists));
     }, []);
 
-    let pageNum = useParams();
-    pageNum = pageNum.pageNum;
-
-    // TODO: Is there a cleaner way to implement this?
-    let sliceLowerRange = 0;
-    let sliceUpperRange = 4;
-
-    if (pageNum) {
-        sliceUpperRange = pageNum * 4;
-        sliceLowerRange = sliceUpperRange - 4;
-    }
+    // Retrieve slice of data returned from API
+    let pageNum = useParams().pageNum
+    let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
     const artistsSlice = artistData.slice(sliceLowerRange, sliceUpperRange);
 
     const artistsMap = artistsSlice.map((artist) => {

@@ -33,7 +33,7 @@ export default function Artists() {
         setData(artists);
     });
 
-    // Setting Up for Sorting
+    // Sorting by ascendingOrder or descendingOrder
     function onSelectionChange(e) {
         const sortDirection = e.target.value;
 
@@ -46,46 +46,21 @@ export default function Artists() {
             setData([...descendingItems]);
         }
     }
-    
-
 
     // Searching
     const handleInputChange = (event) => {
         const { value } = event.target;
         setSearchTerm(value);
-        // filterData(value);
     };
 
-    function handleSearch(){
+    function handleSearch() {
         const searchResults = artists.filter((item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        console.log(`Searching for ${searchTerm}...`);
         setSearchedArtists(searchResults);
         navigate("page/1")
     }
 
-    // const filterData = (searchTerm) => {
-        // const tempartists = artists.filter((item) =>
-        //     item.name.toLowerCase().includes(searchTerm.toLowerCase())
-        // );
-        // console.log(`Searching for ${searchTerm}...`);
-        // return setFilteredData([...tempartists]);
-    // };
-
-    // Setting Up for Sorting
-    function onSelectionChange(e) {
-        const sortDirection = e.target.value;
-
-        if (sortDirection === "0") {
-            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
-            setData([...ascendingItems]);
-        }
-        else {
-            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
-            setData([...descendingItems]);
-        }
-    }
 
     const artistsMap = artistsSlice.map((artist) => {
         return (
@@ -93,13 +68,6 @@ export default function Artists() {
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
                 <div className="col">   {/* TODO: Why does this make it display well? */}
                     <table>
-                        {/* <!-- <tr>
-                                <td>
-                                    <b> <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist.name }}</a></b>
-                                </td>
-                            </tr> --> */}
-
-
                         <tr>
                             <td><img src={artist.image} alt={artist.name} className="artistOrAlbum--img" /></td>
                         </tr>
@@ -141,7 +109,6 @@ export default function Artists() {
                         </tr>
                     </table>
                 </div>
-                {/* </div> */}
             </>
         )
     })
@@ -154,7 +121,7 @@ export default function Artists() {
             <div>
                 <input
                     type="text"
-                    placeholder="Search for Genre ..."
+                    placeholder="Search for Artists ..."
                     value={searchTerm}
                     onChange={handleInputChange}
                 />
@@ -164,14 +131,8 @@ export default function Artists() {
                 </button>
             </div>
 
-            {/* <form >
-                <input type="text" value={searchTerm} onChange={handleInputChange} />
-                <button type="submit">Search</button>
-            </form> */}
-
-            {/* TODO: Change to Dropdown for better look */}
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Sorting Option</option>
+            <select style={{ marginTop: "0.5rem" }} onChange={onSelectionChange}>
+                <option value="" disabled selected>Select your option</option>
                 <option value={0}>Ascending Order - Artist Name</option>
                 <option value={1}>Descending Order - Artist Name</option>
             </select>

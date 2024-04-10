@@ -115,7 +115,7 @@ export default function Artists() {
         <>
             {/* {artistData} */}
             {/* <pre>{JSON.stringify(artistData, null, 2)}</pre> */}
-            <h1 style={{ textAlign: "center" }}>My Artists</h1>
+            <h1 style={{ textAlign: "center" }}>All Artists</h1>
             {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}

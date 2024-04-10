@@ -138,13 +138,13 @@ class Genres(db.Model):
     __tablename__ = 'genres'
 
     name = db.Column(db.String(512), primary_key = True)
-    artists = db.Column(db.String(512), nullable = False)
-    artist_ids = db.Column(db.String(512), nullable = False)
-    albums = db.Column(db.String(512), nullable = False)
-    album_ids = db.Column(db.String(512), nullable = False)
-    tracks = db.Column(db.String(512), nullable = False)
+    artists = db.Column(db.Text(512), nullable = False)
+    artist_ids = db.Column(db.Text(512), nullable = False)
+    albums = db.Column(db.Text(512), nullable = False)
+    album_ids = db.Column(db.Text(512), nullable = False)
+    tracks = db.Column(db.Text(512), nullable = False)
     popularity = db.Column(db.Integer, nullable = False)
-
+    
     # ------------
     # serialize
     # ------------

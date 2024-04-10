@@ -41,6 +41,7 @@ def create_artist(sp):
             name = artist['name']
             image = json.dumps(artist['images'])
             popularity = artist['popularity']
+            followers = artist['followers']['total']
             genres = json.dumps(artist['genres'])
 
             track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
@@ -52,7 +53,7 @@ def create_artist(sp):
 
             related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
             
-            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
+            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, followers = followers, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
             db.session.add(new_artist)
         
@@ -71,6 +72,7 @@ def create_artist(sp):
             name = artist['name']
             image = json.dumps(artist['images'])
             popularity = artist['popularity']
+            followers = artist['followers']['total']
             genres = json.dumps(artist['genres'])
 
             track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
@@ -82,7 +84,7 @@ def create_artist(sp):
 
             related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
             
-            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
+            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, followers = followers, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
             db.session.add(new_artist)
         

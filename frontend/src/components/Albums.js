@@ -151,7 +151,7 @@ export default function Albums() {
             <div>
                 <input
                     type="text"
-                    placeholder="Search for Artists ..."
+                    placeholder="Search for Albums ..."
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
@@ -165,9 +165,10 @@ export default function Albums() {
             <select
                 style={{ marginTop: "0.5rem" }}
                 onChange={onSelectionChange}
+                className="mb-3"
             >
                 <option value="" disabled selected>
-                    Select your option
+                    Select sorting option
                 </option>
                 <option value={0}>Ascending Order - Album Name</option>
                 <option value={1}>Descending Order - Album Name</option>

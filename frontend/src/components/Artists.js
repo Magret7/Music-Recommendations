@@ -192,9 +192,10 @@ export default function Artists() {
             <select
                 style={{ marginTop: "0.5rem" }}
                 onChange={onSelectionChange}
+                className="mb-3"
             >
                 <option value="" disabled selected>
-                    Select your option
+                    Select sorting option
                 </option>
                 <option value={0}>Ascending Order - Artist Name</option>
                 <option value={1}>Descending Order - Artist Name</option>

@@ -34,7 +34,7 @@ export default function Genres() {
         if (sortDirection === "0") {
             let ascendingItems = searchedGenres
                 ? searchedGenres.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
                   )
                 : genreData.sort(
                       (a, b) => (a.name > b.name) - (a.name < b.name)
@@ -171,7 +171,12 @@ export default function Genres() {
             <section className="row">
                 {genreMap ? genreMap : <p>Loading...</p>}
             </section>
-            <Pagination pageNum={pageNum} arrayLength={searchedGenres ? searchedGenres.length : genreData.length} />
+            <Pagination
+                pageNum={pageNum}
+                arrayLength={
+                    searchedGenres ? searchedGenres.length : genreData.length
+                }
+            />
         </>
     );
 }

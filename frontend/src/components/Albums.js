@@ -33,7 +33,7 @@ export default function Albums() {
         if (sortDirection === "0") {
             let ascendingItems = searchedAlbums
                 ? searchedAlbums.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
                   )
                 : albumData.sort(
                       (a, b) => (a.name > b.name) - (a.name < b.name)
@@ -162,8 +162,14 @@ export default function Albums() {
                 </button>
             </div>
 
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Sorting Option</option>
+            <select
+                style={{ marginTop: "0.5rem" }}
+                defaultValue={-1}
+                onChange={onSelectionChange}
+            >
+                <option value={-1} disabled>
+                    Select Sorting Option
+                </option>
                 <option value={0}>Ascending Order - Album Name</option>
                 <option value={1}>Descending Order - Album Name</option>
             </select>
@@ -175,7 +181,12 @@ export default function Albums() {
                 {/* </div> */}
             </section>
 
-            <Pagination pageNum={pageNum} arrayLength={searchedAlbums ? searchedAlbums.length : albumData.length} />
+            <Pagination
+                pageNum={pageNum}
+                arrayLength={
+                    searchedAlbums ? searchedAlbums.length : albumData.length
+                }
+            />
         </>
     );
 }

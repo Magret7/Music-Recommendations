@@ -34,7 +34,7 @@ export default function Artists() {
         if (sortDirection === "0") {
             let ascendingItems = searchedArtists
                 ? searchedArtists.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
                   )
                 : artistData.sort(
                       (a, b) => (a.name > b.name) - (a.name < b.name)

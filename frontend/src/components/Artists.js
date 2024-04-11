@@ -13,9 +13,12 @@ export default function Artists() {
     }, []);
 
     // Retrieve slice of data returned from API
-    let pageNum = useParams().pageNum
+    let pageNum = useParams().pageNum;
     let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
     const artistsSlice = artistData.slice(sliceLowerRange, sliceUpperRange);
+    if (artistsSlice[0]) {
+        console.log(JSON.parse(artistsSlice[0].related_artists).artists);
+    }
 
     const artistsMap = artistsSlice.map((artist) => {
         return (
@@ -29,20 +32,29 @@ export default function Artists() {
                                     <b> <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist.name }}</a></b>
                                 </td>
                             </tr> --> */}
-
                         <tr>
                             <td>
-                                <img
-                                    src={JSON.parse(artist.image)[1].url}
-                                    alt={artist.name}
-                                    className="artistOrAlbum--img"
-                                />
+                                <Link
+                                    to={`/artist/${artist.name}`}
+                                    className="nav-link link-dark"
+                                >
+                                    <img
+                                        src={JSON.parse(artist.image)[1].url}
+                                        alt={artist.name}
+                                        className="artistOrAlbum--img"
+                                    />
+                                </Link>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <b>{artist.name}</b>
+                                <Link
+                                    to={`/artist/${artist.name}`}
+                                    className="nav-link link-dark"
+                                >
+                                    <b>{artist.name}</b>
+                                </Link>
                             </td>
                         </tr>
 
@@ -55,10 +67,9 @@ export default function Artists() {
                         <tr>
                             <td>
                                 <b>Songs: </b>
-
                                 {JSON.parse(artist.tracks).map(
-                                    (track, index) => { 
-                                        return (index ? ', ' : '') + track
+                                    (track, index) => {
+                                        return (index ? ", " : "") + track;
                                     }
                                 )}
                             </td>
@@ -69,7 +80,10 @@ export default function Artists() {
                                 <b>Albums: </b>
                                 {JSON.parse(artist.albums).map((album) => (
                                     <>
-                                        <Link to={`/album/${album}`} className='mx-1'>{`${album}`}</Link>
+                                        <Link
+                                            to={`/album/${album}`}
+                                            className="mx-1"
+                                        >{`${album}`}</Link>
                                     </>
                                 ))}
                             </td>
@@ -92,7 +106,7 @@ export default function Artists() {
                         <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
-                                {JSON.parse(artist.related_artists).map(
+                                {JSON.parse(artist.related_artists).artists.map(
                                     (relatedArtist) => (
                                         <Link
                                             to={`/artist/${relatedArtist.name}`}
@@ -120,7 +134,7 @@ export default function Artists() {
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}
-                {artistsMap ? artistsMap: <p>Loading...</p>}
+                {artistsMap ? artistsMap : <p>Loading...</p>}
                 {/* </div> */}
             </section>
             <Pagination pageNum={pageNum} arrayLength={artistData.length} />

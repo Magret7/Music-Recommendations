@@ -189,14 +189,10 @@ export default function Artists() {
                 </button>
             </div>
 
-            <select
-                style={{ marginTop: "0.5rem" }}
-                onChange={onSelectionChange}
-                className="mb-3"
-            >
-                <option value="" disabled selected>
-                    Select sorting option
-                </option>
+
+            {/* TODO: Change to Dropdown for better look */}
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange} className="mb-3">
+                <option value={-1} disabled>Select Sorting Option</option>
                 <option value={0}>Ascending Order - Artist Name</option>
                 <option value={1}>Descending Order - Artist Name</option>
             </select>

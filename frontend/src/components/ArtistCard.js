@@ -10,7 +10,7 @@ export default function ArtistCard(props) {
                 <Link to={`/artist/${props.name}`} className="nav-link link-dark">
                     <p className="artistCard--name">{props.name}</p>
                 </Link>
-                <p className="artistCard--followers">{props.followers} Followers</p>
+                {/* <p className="artistCard--followers">{props.followers} Followers</p> */}
             </div>
         </div>
     )

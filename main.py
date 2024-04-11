@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-# from flask_paginate import Pagination, get_page_parameter
 from models import app, db, Artists, Albums, Genres
 
 @app.route('/artists/JSON')
@@ -62,9 +61,8 @@ def showArtists():
 @app.route('/albums/')
 def showAlbums():
     if albums:
-        return render_template('showAllAlbums.html', albums = albums)
-    	# albums_list = db.session.query(musicdb).all()
-	    # return render_template('showAllAlbums.html', albums_list = albums_list)
+        albums_list = db.session.query(musicdb).all()
+        return render_template('showAllAlbums.html', albums_list = albums_list)
     else:
         return "Albums not found", 404
     
@@ -72,9 +70,8 @@ def showAlbums():
 @app.route('/genres/')
 def showGenres():
     if genres:
-        return render_template('showAllGenres.html', genres = genres)
-        # genres_list = db.session.query(Genres).all()
-	    # return render_template('showAllAlbums.html', genres_list = genres_list)
+        genres_list = db.session.query(Genres).all()
+        return render_template('showAllAlbums.html', genres_list = genres_list)
     else:
         return "Genres not found", 404
 

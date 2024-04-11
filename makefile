@@ -11,4 +11,4 @@ models.html:
 	pydoc -w models.py
 
 test:
-	python app/tests.py
+	python tests.py

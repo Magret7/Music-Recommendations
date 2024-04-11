@@ -162,14 +162,8 @@ export default function Albums() {
                 </button>
             </div>
 
-            <select
-                style={{ marginTop: "0.5rem" }}
-                onChange={onSelectionChange}
-                className="mb-3"
-            >
-                <option value="" disabled selected>
-                    Select sorting option
-                </option>
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
+                <option value={-1} disabled>Select Sorting Option</option>
                 <option value={0}>Ascending Order - Album Name</option>
                 <option value={1}>Descending Order - Album Name</option>
             </select>

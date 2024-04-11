@@ -19,13 +19,13 @@ export default function Header() {
                     </Link>
                 </nav>
 
-                <Search />
+                {/* <Search /> */}
 
-                <div className="col-md-3 text-end">
+                {/* <div className="col-md-3 text-end">
                     <button type="button" className="btn btn-primary">
                         My Profile
                     </button>
-                </div>
+                </div> */}
             </header>
         </div>
     );

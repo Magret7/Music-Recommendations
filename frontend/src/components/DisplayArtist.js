@@ -19,8 +19,6 @@ export default function DisplayArtist() {
             .catch(error => setArtist());
     }, [artistName]);
 
-    console.log(artist);
-
     return (
         <>
             {artist ? (
@@ -76,7 +74,7 @@ export default function DisplayArtist() {
                             <tr>
                                 <td>
                                     <b>Recommended & Related Artists</b> <br />
-                                    {JSON.parse(artist.related_artists).artists.map(relatedArtist => <Link to={`/artist/${relatedArtist.name}`} style={{ marginRight: 10 }}>{relatedArtist.name}</Link>)}
+                                    {JSON.parse(artist.related_artists).map(relatedArtist => <Link to={`/artist/${relatedArtist.name}`} style={{ marginRight: 10 }}>{relatedArtist.name}</Link>)}
                                 </td>
                             </tr>
                         </table>

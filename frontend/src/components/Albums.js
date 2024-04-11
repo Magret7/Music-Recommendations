@@ -52,7 +52,8 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Genres of Albums: </b>
-                                {JSON.parse(album.genres).map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
+                                {JSON.parse(album.genres).map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre.charAt(0).toUpperCase() +
+                                            genre.slice(1)}</Link>)}
                             </td>
                         </tr>
                     </table>

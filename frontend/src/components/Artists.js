@@ -153,7 +153,7 @@ export default function Artists() {
                         <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
-                                {JSON.parse(artist.related_artists).artists.map(
+                                {JSON.parse(artist.related_artists).map(
                                     (relatedArtist) => (
                                         <Link
                                             to={`/artist/${relatedArtist.name}`}

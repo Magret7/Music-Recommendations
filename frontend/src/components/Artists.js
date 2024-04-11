@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
 import { calculateSliceRange } from "../assets/js/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Artists() {
     const [artistData, setArtistData] = useState([]);
@@ -12,12 +14,67 @@ export default function Artists() {
             .then((data) => setArtistData(data.Artists));
     }, []);
 
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchedArtists, setSearchedArtists] = useState();
+
     // Retrieve slice of data returned from API
     let pageNum = useParams().pageNum;
+    const navigate = useNavigate();
+
     let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
-    const artistsSlice = artistData.slice(sliceLowerRange, sliceUpperRange);
-    if (artistsSlice[0]) {
-        console.log(JSON.parse(artistsSlice[0].related_artists).artists);
+    const artistsSlice = searchedArtists
+        ? searchedArtists.slice(sliceLowerRange, sliceUpperRange)
+        : artistData.slice(sliceLowerRange, sliceUpperRange);
+
+    // Sorting by ascendingOrder or descendingOrder
+    function onSelectionChange(e) {
+        const sortDirection = e.target.value;
+
+        if (sortDirection === "0") {
+            let ascendingItems = searchedArtists
+                ? searchedArtists.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  )
+                : artistData.sort(
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
+                  );
+            setSearchedArtists([...ascendingItems]);
+            console.log(searchedArtists)
+        } else {
+            let descendingItems = searchedArtists
+                ? searchedArtists.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  )
+                : artistData.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  );
+            setSearchedArtists([...descendingItems]);
+            console.log(searchedArtists)
+        }
+    }
+
+    // Searching
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        setSearchTerm(value);
+    };
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            const searchResults = artistData.filter((item) =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setSearchedArtists(searchResults);
+            navigate("page/1");
+        }
+    };
+
+    function handleSearch() {
+        const searchResults = artistData.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSearchedArtists(searchResults);
+        navigate("page/1");
     }
 
     const artistsMap = artistsSlice.map((artist) => {
@@ -26,12 +83,7 @@ export default function Artists() {
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
                 <div className="col">
                     {/* TODO: Why does this make it display well? */}
-                    <table>
-                        {/* <!-- <tr>
-                                <td>
-                                    <b> <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist.name }}</a></b>
-                                </td>
-                            </tr> --> */}
+                    <table className="artistTable">
                         <tr>
                             <td>
                                 <Link
@@ -58,12 +110,6 @@ export default function Artists() {
                             </td>
                         </tr>
 
-                        {/* <tr>
-                            <td>
-                                <b>Biography: </b> {artist.info}
-                            </td>
-                        </tr> */}
-
                         <tr>
                             <td>
                                 <b>Songs: </b>
@@ -89,19 +135,20 @@ export default function Artists() {
                             </td>
                         </tr>
 
-                        {/* <tr>
+                        <tr>
                             <td>
                                 <b>Genres: </b>
-                                {artist.genres.map((genre) => (
+                                {JSON.parse(artist.genres).map((genre) => (
                                     <Link
                                         to={`/genre/${genre}`}
                                         style={{ marginRight: 10 }}
                                     >
-                                        {genre}
+                                        {genre.charAt(0).toUpperCase() +
+                                            genre.slice(1)}
                                     </Link>
                                 ))}
                             </td>
-                        </tr> */}
+                        </tr>
 
                         <tr>
                             <td>
@@ -130,6 +177,31 @@ export default function Artists() {
             {/* {artistData} */}
             {/* <pre>{JSON.stringify(artistData, null, 2)}</pre> */}
             <h1 style={{ textAlign: "center" }}>All Artists</h1>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search for Artists ..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                />
+
+                <button onClick={handleSearch}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+            </div>
+
+            <select
+                style={{ marginTop: "0.5rem" }}
+                onChange={onSelectionChange}
+            >
+                <option value="" disabled selected>
+                    Select your option
+                </option>
+                <option value={0}>Ascending Order - Artist Name</option>
+                <option value={1}>Descending Order - Artist Name</option>
+            </select>
+
             {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
@@ -137,7 +209,12 @@ export default function Artists() {
                 {artistsMap ? artistsMap : <p>Loading...</p>}
                 {/* </div> */}
             </section>
-            <Pagination pageNum={pageNum} arrayLength={artistData.length} />
+            <Pagination
+                pageNum={pageNum}
+                arrayLength={
+                    searchedArtists ? searchedArtists.length : artistData.length
+                }
+            />
         </>
     );
 }

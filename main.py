@@ -104,22 +104,13 @@ def showGenre(genre_name):
 # Showing A Single Album In Database
 @app.route('/album/<album_name>/',  methods=['GET', 'POST'])
 def showAlbum(album_name):
-    album = None
-    for a in albums:
-        if a['name'] == album_name:
-            album = a
-            break
-    if album:
-        return render_template('showAlbum.html', album = album)
-    else:
-        return "Genre not found", 404
+    album = db.session.query(Albums).filter(Albums.name == album_name).first()
+    return jsonify(album.serialize()) if album else ("Record not found", 400)
 
 # Showing A Single Artist In Database
 @app.route('/artist/<artist_name>/')
 def showArtist(artist_name):
     artist = db.session.query(Artists).filter(Artists.name == artist_name).first()
-    # print("record returned: ", artist)
-    # print('jsonified and serialized: ', jsonify(artist.serialize()))
     return jsonify(artist.serialize()) if artist else ("Record not found", 400)
 
 if __name__ == "__main__":

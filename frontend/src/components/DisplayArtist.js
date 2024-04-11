@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 export default function DisplayArtist() {
     // TODO: Is this the right way to get the URL parameters?  Refer to React Router tutorial
     let artistName = useParams().artistName;
 
     const [artist, setArtist] = useState();
-    // if(artist){console.log('artist here')} else{console.log('nah')}
 
     useEffect(() => {
         fetch(`/artist/${artistName}/`)

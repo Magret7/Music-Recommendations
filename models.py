@@ -43,6 +43,7 @@ class Artists(db.Model):
     name = db.Column(db.String(1024), nullable = False)
     image = db.Column(db.Text, nullable = False)
     popularity = db.Column(db.Integer, nullable = False)
+    followers = db.Column(db.Integer, nullable = False)
     tracks = db.Column(db.Text, nullable = False)
     albums = db.Column(db.Text, nullable = False)
     genres = db.Column(db.Text, nullable = False)
@@ -60,7 +61,8 @@ class Artists(db.Model):
           'id': self.id, 
           'name': self.name,
           'image': self.image, 
-          'info': self.popularity,
+          'popularity': self.popularity,
+          'followers': self.followers,
           'tracks': self.tracks, 
           'albums': self.albums,  
           'genres': self.genres, 

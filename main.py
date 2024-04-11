@@ -121,18 +121,9 @@ def showAlbum(album_name):
 @app.route('/artist/<artist_name>/')
 def showArtist(artist_name):
     artist = db.session.query(Artists).filter(Artists.name == artist_name).first()
-    print("record returned: ", artist)
-    print('jsonified and serialized: ', jsonify(artist.serialize()))
-    return jsonify(artist.serialize())
-    # return jsonify(Artist=[e.serialize() for e in artist])
-    # for a in artists:
-    #     if a['name'] == artist_name:
-    #         artist = a
-    #         break
-    # if artist:
-    #     return render_template('showArtist.html', artist = artist)
-    # else:
-    #     return "Artist not found", 404
+    # print("record returned: ", artist)
+    # print('jsonified and serialized: ', jsonify(artist.serialize()))
+    return jsonify(artist.serialize()) if artist else ("Record not found", 400)
 
 if __name__ == "__main__":
     app.debug = True

@@ -10,30 +10,16 @@ export default function DisplayArtist() {
 
     useEffect(() => {
         fetch(`/artist/${artistName}/`)
-            .then((res) => res.json())
-            .then((data) => setArtist(data));
-    }, []);
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Network error');
+                }
+                return res.json()})
+            .then((data) => {setArtist(data); console.log(data)})
+            .catch(error => setArtist());
+    }, [artistName]);
 
-    if (artist) {
-        console.log(JSON.parse(artist.related_artists).artists);
-    }
     console.log(artist);
-
-    // return (
-    //     <>
-    //         <div className='row'>
-    //             <div className='d-flex'>
-    //             <img
-    //                 src={artist.image}
-    //                 alt={artist.name}
-    //                 className="mx-5 displayArtist--img"
-    //             />
-    //             {/* <h1 style={{ textAlign: "center" }}>{artist.name}</h1> */}
-    //             <h1 className="align-text-top displayArtist--headerText">{artist.name}</h1>
-    //             </div>
-    //         </div>
-    //     </>
-    // );
 
     return (
         <>
@@ -56,7 +42,11 @@ export default function DisplayArtist() {
                             </tr> */}
 
                             <tr>
-                                {/* <td><b>Songs: </b> {artist.tracks.map(track => `${track}, `)}</td> */}
+                                <td><b>Songs</b>
+                                <br />
+                                {JSON.parse(artist.tracks).map((track, index) => {
+                                        return (index ? ", " : "") + track;
+                                    })}</td>
                             </tr>
 
                             <tr>
@@ -86,7 +76,6 @@ export default function DisplayArtist() {
                             <tr>
                                 <td>
                                     <b>Recommended & Related Artists</b> <br />
-                                    {/* TODO: Why doesn't this link work? */}
                                     {JSON.parse(artist.related_artists).artists.map(relatedArtist => <Link to={`/artist/${relatedArtist.name}`} style={{ marginRight: 10 }}>{relatedArtist.name}</Link>)}
                                 </td>
                             </tr>
@@ -94,7 +83,7 @@ export default function DisplayArtist() {
                     </div>
                 </>
             ) : (
-                <p>Artist "{artistName}" not found</p>
+                <h4 className='fw-light'>Artist "{artistName}" not found</h4>
             )}
         </>
     );

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
 import { calculateSliceRange } from "../assets/js/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Albums() {
-
     const [albumData, setAlbumData] = useState([]);
 
     useEffect(() => {
@@ -13,18 +14,81 @@ export default function Albums() {
             .then((data) => setAlbumData(data.Albums));
     }, []);
 
-    // Retrieve slice of data returned from API
-    let pageNum = useParams().pageNum
-    let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
-    const albumsSlice = albumData.slice(sliceLowerRange, sliceUpperRange)
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchedAlbums, setSearchedAlbums] = useState();
 
-    const albumsMap = albumsSlice.map(album => {
+    // Retrieve slice of data returned from API
+    let pageNum = useParams().pageNum;
+    const navigate = useNavigate();
+    let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
+    const albumsSlice = searchedAlbums
+        ? searchedAlbums.slice(sliceLowerRange, sliceUpperRange)
+        : albumData.slice(sliceLowerRange, sliceUpperRange);
+
+    // Sorting by ascendingOrder or descendingOrder
+    function onSelectionChange(e) {
+        const sortDirection = e.target.value;
+
+        if (sortDirection === "0") {
+            let ascendingItems = searchedAlbums
+                ? searchedAlbums.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  )
+                : albumData.sort(
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
+                  );
+            setSearchedAlbums([...ascendingItems]);
+            console.log(searchedAlbums);
+        } else {
+            let descendingItems = searchedAlbums
+                ? searchedAlbums.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  )
+                : albumData.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  );
+            setSearchedAlbums([...descendingItems]);
+            console.log(searchedAlbums);
+        }
+    }
+
+    // Searching
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        setSearchTerm(value);
+    };
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            const searchResults = albumData.filter((item) =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setSearchedAlbums(searchResults);
+            navigate("page/1");
+        }
+    };
+
+    function handleSearch() {
+        const searchResults = albumData.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSearchedAlbums(searchResults);
+        navigate("page/1");
+    }
+
+    const albumsMap = albumsSlice.map((album) => {
         return (
             <>
                 <div className="col">
-                    <table>
+                    <table className="artistOrAlbumTable">
                         <tr>
-                            <td><img src={album.image} alt={album.name} className="artistOrAlbum--img" /></td>
+                            <td>
+                                <img
+                                    src={album.image}
+                                    alt={album.name}
+                                    className="artistOrAlbum--img"
+                                />
+                            </td>
                         </tr>
 
                         <tr>
@@ -34,37 +98,81 @@ export default function Albums() {
                         <tr>
                             <td>
                                 <b>Artists: </b>
-                                {JSON.parse(album.artist).map(artist => <Link to={`/artist/${artist}`}>{artist}</Link>)}
+                                {JSON.parse(album.artist).map((artist) => (
+                                    <Link to={`/artist/${artist}`}>
+                                        {artist}
+                                    </Link>
+                                ))}
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Released: </b> {JSON.parse(album.info).release_date}</td>
+                            <td>
+                                <b>Released: </b>{" "}
+                                {JSON.parse(album.info).release_date}
+                            </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <b>Album Tracks:</b><br />
-                                {JSON.parse(album.tracks).map(track => (<>{track} <br /></>))}
+                                <b>Album Tracks:</b>
+                                <br />
+                                {JSON.parse(album.tracks).map((track) => (
+                                    <>
+                                        {track} <br />
+                                    </>
+                                ))}
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Genres of Albums: </b>
-                                {JSON.parse(album.genres).map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre.charAt(0).toUpperCase() +
-                                            genre.slice(1)}</Link>)}
+                                {JSON.parse(album.genres).map((genre) => (
+                                    <Link
+                                        to={`/genre/${genre}`}
+                                        style={{ marginRight: 10 }}
+                                    >
+                                        {genre.charAt(0).toUpperCase() +
+                                            genre.slice(1)}
+                                    </Link>
+                                ))}
                             </td>
                         </tr>
                     </table>
                 </div>
             </>
-        )
-    })
+        );
+    });
 
     return (
         <>
             <h1 style={{ textAlign: "center" }}>All Albums</h1>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search for Artists ..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                />
+
+                <button onClick={handleSearch}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+            </div>
+
+            <select
+                style={{ marginTop: "0.5rem" }}
+                onChange={onSelectionChange}
+            >
+                <option value="" disabled selected>
+                    Select your option
+                </option>
+                <option value={0}>Ascending Order - Album Name</option>
+                <option value={1}>Descending Order - Album Name</option>
+            </select>
+
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}
@@ -72,7 +180,7 @@ export default function Albums() {
                 {/* </div> */}
             </section>
 
-            <Pagination pageNum={pageNum} arrayLength={albumData.length} />
+            <Pagination pageNum={pageNum} arrayLength={searchedAlbums ? searchedAlbums.length : albumData.length} />
         </>
-    )
+    );
 }

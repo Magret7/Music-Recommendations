@@ -157,6 +157,6 @@ tr:nth-child(even) {
   border-radius: 9px;
 }
 
-.artistTable {
+.artistOrAlbumTable {
   max-width: 355px;
 }

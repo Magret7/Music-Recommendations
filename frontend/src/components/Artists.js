@@ -83,7 +83,7 @@ export default function Artists() {
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
                 <div className="col">
                     {/* TODO: Why does this make it display well? */}
-                    <table className="artistTable">
+                    <table className="artistOrAlbumTable">
                         <tr>
                             <td>
                                 <Link
@@ -174,8 +174,6 @@ export default function Artists() {
 
     return (
         <>
-            {/* {artistData} */}
-            {/* <pre>{JSON.stringify(artistData, null, 2)}</pre> */}
             <h1 style={{ textAlign: "center" }}>All Artists</h1>
             <div>
                 <input

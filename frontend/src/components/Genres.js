@@ -32,12 +32,6 @@ export default function Genres() {
 
                     <tr>
                         <td>
-                            <b>Information: </b> {genre.info}
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
                             <b>Artists</b>
                             <br/>
                             {JSON.parse(genre.artists).map(artist => <Link to={`/artist/${artist}`} style={{ marginRight: 10 }}>{artist}</Link>)}

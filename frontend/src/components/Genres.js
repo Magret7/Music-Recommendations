@@ -109,13 +109,14 @@ export default function Genres() {
 
             <div>
                 <input
+                    style={{ borderRadius: "4px", width: "20rem", height: "3rem", marginTop: "0.5rem" }}
                     type="text"
-                    placeholder="Search for Genres ..."
+                    placeholder="  Search for Albums ..."
                     value={searchTerm}
                     onChange={handleInputChange}
                 />
 
-                <button onClick={handleSearch}>
+                <button onClick={handleSearch} style={{ width: "3rem", height: "3rem" }}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
             </div>

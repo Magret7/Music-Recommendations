@@ -114,21 +114,22 @@ export default function Albums() {
 
             <div>
                 <input
+                    style={{ borderRadius: "4px", width: "20rem", height: "3rem", marginTop: "0.5rem" }}
                     type="text"
-                    placeholder="Search for Genre ..."
+                    placeholder="  Search for Albums ..."
                     value={searchTerm}
                     onChange={handleInputChange}
                 />
 
-                <button onClick={handleSearch}>
+                <button onClick={handleSearch} style={{ width: "3rem", height: "3rem" }}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
             </div>
 
             <select style={{ marginTop: "0.5rem" }} onChange={onSelectionChange}>
                 <option value="" disabled selected>Select your option</option>
-                <option value={0}>Ascending Order - Artist Name</option>
-                <option value={1}>Descending Order - Artist Name</option>
+                <option value={0}>Ascending Order - Album Name</option>
+                <option value={1}>Descending Order - Album Name</option>
             </select>
 
             <section className="row" style={{ marginLeft: "0.5rem" }}>

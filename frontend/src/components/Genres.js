@@ -84,10 +84,15 @@ export default function Genres() {
                 <table>
                     <tr>
                         <th>
-                            <h3>
-                                {genre.name.charAt(0).toUpperCase() +
-                                    genre.name.slice(1)}
-                            </h3>
+                            <Link
+                                to={`/genre/${genre.name}`}
+                                className="nav-link link-dark"
+                            >
+                                <h3>
+                                    {genre.name.charAt(0).toUpperCase() +
+                                        genre.name.slice(1)}
+                                </h3>
+                            </Link>
                         </th>
                     </tr>
 

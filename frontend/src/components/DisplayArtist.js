@@ -14,7 +14,7 @@ export default function DisplayArtist() {
                     throw new Error('Network error');
                 }
                 return res.json()})
-            .then((data) => {setArtist(data); console.log(data)})
+            .then((data) => {setArtist(data)})
             .catch(error => setArtist());
     }, [artistName]);
 

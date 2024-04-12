@@ -116,7 +116,7 @@ export default function Genres() {
                     onChange={handleInputChange}
                 />
 
-                <button onClick={handleSearch} style={{ width: "3rem", height: "3rem" }}>
+                <button onClick={handleSearch} style={{ width: "3rem", height: "3rem" }} class="btn btn-primary">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
             </div>

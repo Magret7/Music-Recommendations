@@ -2,7 +2,33 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
 import json
+from psycopg2.extras import Json
+import requests
 from models import app, db, Artists
+
+CLIENT_ID = '96f97854871b4f238d5b7e71b9efe33c'
+CLIENT_SECRET = 'd16dc9b864904c9c92b43cb697eab128'
+
+AUTH_URL = 'https://accounts.spotify.com/api/token'
+
+# POST
+auth_response = requests.post(AUTH_URL, {
+    'grant_type': 'client_credentials',
+    'client_id': CLIENT_ID,
+    'client_secret': CLIENT_SECRET,
+})
+
+# convert the response to JSON
+auth_response_data = auth_response.json()
+
+# save the access token
+access_token = auth_response_data['access_token']
+
+headers = {
+    'Authorization': 'Bearer {token}'.format(token=access_token)
+}
+# base URL of all Spotify API endpoints
+BASE_URL = 'https://api.spotify.com/v1/'
 
 #* Set up spotipy variables, tokens, etc.
 cid = 'c6f26740cc0b4cfe9c1217330e528549'
@@ -30,7 +56,7 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 def create_artist(sp):
     print('Creating artists...')
     for offset in range(0, 50, 50): 
-        artist_results = sp.search(q='artist', type='artist', limit=50, offset=offset)['artists']['items'] #spotify limits to 50 for a single search
+        artist_results = sp.search(q='artists', type='artist', limit=50, offset=offset)['artists']['items'] #spotify limits to 50 for a single search
         # print("Number of artists processed (Batch 1):", len(artist_results))
         # print("Sample artist data (Batch 1):", artist_results[0])
         
@@ -51,7 +77,7 @@ def create_artist(sp):
             albums = json.dumps([album['name'] for album in album_search])
             album_ids = json.dumps([album['id'] for album in album_search])
 
-            related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
+            related_artists = Json(requests.get(BASE_URL + 'artists/' + artist['id'] + '/related-artists', headers=headers).json())
             
             new_artist = Artists(id=id, name=name, image=image, popularity=popularity, followers = followers, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
@@ -61,7 +87,7 @@ def create_artist(sp):
         print("Batch 1 of artists added")
 
     for offset in range(50, 100, 50): #for second batch of artists to get 100; can keep repeating for x artists
-        artist_results = sp.search(q='artist', type='artist', limit=50, offset=offset)['artists']['items']
+        artist_results = sp.search(q='artists', type='artist', limit=50, offset=offset)['artists']['items']
         # print("Number of artists processed (Batch 2):", len(artist_results))
         # print("Sample artist data (Batch 2):", artist_results[0])
         
@@ -82,7 +108,7 @@ def create_artist(sp):
             albums = json.dumps([album['name'] for album in album_search])
             album_ids = json.dumps([album['id'] for album in album_search])
 
-            related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
+            related_artists = Json(requests.get(BASE_URL + 'artists/' + artist['id'] + '/related-artists', headers=headers).json())
             
             new_artist = Artists(id=id, name=name, image=image, popularity=popularity, followers = followers, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)

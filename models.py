@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Database Info
 app.app_context().push()
 # Change this accordingly 
-USER ="postgres"
+USER ="holly"
 PASSWORD = "spotify"
 PUBLIC_IP_ADDRESS ="localhost:5432"
 DBNAME ="musicdb"

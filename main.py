@@ -74,34 +74,12 @@ def showGenres():
         return render_template('showAllAlbums.html', genres_list = genres_list)
     else:
         return "Genres not found", 404
-
-# Showing all Artists related on another Artists
-@app.route('/<artist_name>/relatedArtists')
-def relatedArtists(artist_name):
-    artist = None
-    for a in artists:
-        if a['name'] == artist_name:
-            artist = a
-            break
-    if artist:
-        return render_template('relatedArtists.html', artist = artist, relatedArtists = relatedArtists)
-    else:
-        return "Artist not found", 404
     
 # Showing A Single Genre In Database
 @app.route('/genre/<genre_name>/',  methods=['GET', 'POST'])
 def showGenre(genre_name):
     genre = db.session.query(Genres).filter(Genres.name == genre_name).first()
     return jsonify(genre.serialize()) if genre else ("Record not found", 400)
-    # genre = None
-    # for g in genres:
-    #     if g['name'] == genre_name:
-    #         genre = g
-    #         break
-    # if genre:
-    #     return render_template('showGenre.html', genre = genre)
-    # else:
-    #     return "Genre not found", 404
     
 # Showing A Single Album In Database
 @app.route('/album/<album_name>/',  methods=['GET', 'POST'])

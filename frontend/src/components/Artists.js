@@ -77,6 +77,16 @@ export default function Artists() {
         navigate("page/1");
     }
 
+    function getHighlightedText(text, highlight) {
+        // Split on highlight term and include term into parts, ignore case
+        const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+        return <span> { parts.map((part, i) => 
+            <span key={i} className={part.toLowerCase() === highlight.toLowerCase() ? 'highlight' : '{}' }>
+                { part }
+            </span>)
+        } </span>;
+    }
+
     const artistsMap = artistsSlice.map((artist) => {
         return (
             <>
@@ -105,7 +115,8 @@ export default function Artists() {
                                     to={`/artist/${artist.name}`}
                                     className="nav-link link-dark"
                                 >
-                                    <b>{artist.name}</b>
+                                    {/* <b>{artist.name}</b> */}
+                                    <b>{searchedArtists ? getHighlightedText(artist.name, searchTerm): artist.name}</b>
                                 </Link>
                             </td>
                         </tr>

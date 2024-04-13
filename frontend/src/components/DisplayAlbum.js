@@ -40,7 +40,19 @@ export default function DisplayAlbum() {
                                     {JSON.parse(album.info).release_date}
                                 </p>
                                 <h4 className="fw-normal mt-4">Artist(s)</h4>
-                                {JSON.parse(album.artist).map((artist, index) => <>{index ? ", " : ""}<Link to={`/artist/${artist}`} className='nav-link link-dark'>{artist}</Link></>)}
+                                {JSON.parse(album.artist).map(
+                                    (artist, index) => (
+                                        <>
+                                            {index ? ", " : ""}
+                                            <Link
+                                                to={`/artist/${artist}`}
+                                                className="nav-link link-dark"
+                                            >
+                                                {artist}
+                                            </Link>
+                                        </>
+                                    )
+                                )}
                             </div>
                         </div>
 
@@ -49,14 +61,23 @@ export default function DisplayAlbum() {
                             <div className="d-flex flex-column text-start">
                                 {/* <div className='col-6'></div>
                                 <div className='col-6'>more stuff here</div> */}
-                            {JSON.parse(album.tracks).map((track, index) => <p>{index + 1}. {track}</p>)}
+                                <div className="albumTracks">
+                                    {JSON.parse(album.tracks).map(
+                                        (track, index) => (
+                                            <p>
+                                                {index + 1}. {track}
+                                            </p>
+                                        )
+                                    )}
+                                </div>
                             </div>
                         </div>
 
                         <div className="text-start">
                             <h3>Genres</h3>
                             {JSON.parse(album.genres).map((genre, index) => (
-                                <>{index ? ", " : ""}
+                                <>
+                                    {index ? ", " : ""}
                                     <Link
                                         to={`/genre/${genre}`}
                                         style={{ marginRight: 0 }}

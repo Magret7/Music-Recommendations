@@ -204,3 +204,11 @@ tr:nth-child(even) {
 .artistOrAlbumTable {
   max-width: 355px;
 }
+
+.albumTracks{
+  margin-left: 20px;
+}
+
+.highlight {
+  background-color: yellow;
+}

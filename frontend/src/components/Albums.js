@@ -51,7 +51,6 @@ export default function Albums() {
     const handleInputChange = (event) => {
         const { value } = event.target;
         setSearchTerm(value);
-        // filterData(value);
     };
 
     function handleSearch() {
@@ -112,21 +111,18 @@ export default function Albums() {
         <>
             <h1 style={{ textAlign: "center" }}>All Albums</h1>
 
-            <div>
-                <input
-                    style={{ borderRadius: "4px", width: "20rem", height: "3rem", marginTop: "0.5rem" }}
-                    type="text"
-                    placeholder="  Search for Albums ..."
+            <div class="input-group mb-3" style={{ height: "3rem", marginTop: "1.5rem", width: "40%", marginLeft: "auto", marginRight: "auto" }}>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Type Here To Search" 
                     value={searchTerm}
                     onChange={handleInputChange}
                 />
-
-                <button onClick={handleSearch} style={{ width: "3rem", height: "3rem" }}  class="btn btn-primary">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
+                  <button class="btn btn-primary" type="button" onClick={handleSearch} >Search</button>
             </div>
 
-            <select style={{ marginTop: "0.5rem" }} onChange={onSelectionChange}>
+            <select style={{ marginTop: "1.5rem" }} onChange={onSelectionChange}>
                 <option value="" disabled selected>Select your option</option>
                 <option value={0}>Ascending Order - Album Name</option>
                 <option value={1}>Descending Order - Album Name</option>

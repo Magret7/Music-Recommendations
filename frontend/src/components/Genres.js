@@ -107,26 +107,19 @@ export default function Genres() {
         <>
             <h1 style={{ textAlign: "center" }}> Genres</h1>
 
-            <form>
-                <input
-                    // style={{ borderRadius: "4px", width: "20rem", height: "3rem", marginTop: "0.5rem" }}
-                    style={{height: "3rem", marginTop: "0.5rem", width:"50%", marginLeft:"auto", marginRight:"auto"}}
+            <div class="input-group mb-3"  style={{ height: "3rem", marginTop: "1.5rem", width: "40%", marginLeft: "auto", marginRight: "auto" }}>
+                <input 
+                    type="text" 
                     class="form-control" 
-                    type="search"
-                    placeholder="Type Here To Search"
+                    placeholder="Type Here To Search" 
                     value={searchTerm}
                     onChange={handleInputChange}
-                >
-                </input>
-                <button onClick={handleSearch}  class="btn btn-primary"  type="submit">
-                    Search
-                </button>
-            </form>
-{/* 
-            <input class="form-control" type="search" placeholder="Type search here"  style={{ width: "50rem", height: "3rem" , alignItems:"center"}}></input>
-            <button class="btn btn-primary" type="submit">Search</button> */}
+                />
+                  <button class="btn btn-primary" type="button" onClick={handleSearch} >Search</button>
+            </div>
 
-            <select style={{ marginTop: "0.5rem" }} onChange={onSelectionChange}>
+
+            <select style={{ marginTop: "1.5rem" }} onChange={onSelectionChange}>
                 <option value="" disabled selected>Select your option</option>
                 <option value={0}>Ascending Order - Genre Name</option>
                 <option value={1}>Descending Order - Genre Name</option>

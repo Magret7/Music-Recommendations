@@ -35,6 +35,8 @@ export default function DisplayArtist() {
             .then((data) => setArtistData(data.Artists));
     }, [artistName]);
 
+    console.log(artist);
+
     // Display follower count with commas
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -94,23 +96,34 @@ export default function DisplayArtist() {
                             />
                             <div className="col text-start">
                                 <h1 className="fw-light">{artist.name}</h1>
-                                <p className="ml-5">
-                                    {numberWithCommas(artist.followers)}{" "}
-                                    Followers
-                                </p>
+                                {artist.followers ? (
+                                    <p className="ml-5">
+                                        {numberWithCommas(artist.followers)}{" "}
+                                        Followers
+                                    </p>
+                                ) : null}
                             </div>
                         </div>
 
-                        <h3 className="text-start">Album(s)</h3>
-                        {albumCards}
-                        <br />
-                        <h3 className="text-start">Related Artists</h3>
-                        <div className="row">{relatedArtistCards}</div>
+                        {albumCards.length ? (
+                            <>
+                                <h3 className="text-start">Album(s)</h3>
+                                {albumCards}
+                                <br />
+                            </>
+                        ) : null}
+                        {relatedArtistCards.length ? (
+                            <>
+                                <h3 className="text-start">Related Artists</h3>
+                                <div className="row">{relatedArtistCards}</div>
+                            </>
+                        ) : null}
 
                         <div className="text-start">
                             <h3>Genres</h3>
                             {JSON.parse(artist.genres).map((genre, index) => (
-                                <>{index ? ", " : ""}
+                                <>
+                                    {index ? ", " : ""}
                                     <Link
                                         to={`/genre/${genre}`}
                                         style={{ marginRight: 0 }}

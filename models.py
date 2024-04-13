@@ -10,8 +10,8 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = "Adekunle2002"
-PUBLIC_IP_ADDRESS ="localhost:5432"
+PASSWORD = "Varqac-6xursy-ritnop"
+PUBLIC_IP_ADDRESS ="34.171.182.155"
 DBNAME ="musicdb"
 
 # Configuration 
@@ -43,6 +43,7 @@ class Artists(db.Model):
     name = db.Column(db.String(1024), nullable = False)
     image = db.Column(db.Text, nullable = False)
     popularity = db.Column(db.Integer, nullable = False)
+    followers = db.Column(db.Integer)
     tracks = db.Column(db.Text, nullable = False)
     albums = db.Column(db.Text, nullable = False)
     genres = db.Column(db.Text, nullable = False)
@@ -60,15 +61,14 @@ class Artists(db.Model):
           'id': self.id, 
           'name': self.name,
           'image': self.image, 
-          'info': self.popularity,
+          'popularity': self.popularity, 
+          'followers': self.followers,
           'tracks': self.tracks, 
           'albums': self.albums,  
           'genres': self.genres, 
           'related_artists': self.related_artists,    
           'albums_id': self.albums_id
         }
-
-
 
 
 # ------------
@@ -138,13 +138,13 @@ class Genres(db.Model):
     __tablename__ = 'genres'
 
     name = db.Column(db.String(512), primary_key = True)
-    artists = db.Column(db.String(512), nullable = False)
-    artist_ids = db.Column(db.String(512), nullable = False)
-    albums = db.Column(db.String(512), nullable = False)
-    album_ids = db.Column(db.String(512), nullable = False)
-    tracks = db.Column(db.String(512), nullable = False)
+    artists = db.Column(db.Text, nullable = False)
+    artist_ids = db.Column(db.Text, nullable = False)
+    albums = db.Column(db.Text, nullable = False)
+    album_ids = db.Column(db.Text, nullable = False)
+    tracks = db.Column(db.Text, nullable = False)
     popularity = db.Column(db.Integer, nullable = False)
-
+    
     # ------------
     # serialize
     # ------------
@@ -154,7 +154,7 @@ class Genres(db.Model):
        """
        return {
           'name': self.name,
-          'artist': self.artists,
+          'artists': self.artists,
           'artist_ids': self.artist_ids,
           'albums': self.albums,
           'album_ids': self.album_ids,

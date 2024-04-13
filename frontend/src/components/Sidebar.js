@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faUsers, faMicrophone, faCompactDisc, faMusic } from '@fortawesome/free-solid-svg-icons';
 

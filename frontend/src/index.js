@@ -54,7 +54,13 @@ const router = createBrowserRouter([
       },
       {
         path: "genres",
-        element: <Genres />
+        element: <Genres />,
+        children: [
+          {
+            path:"page/:pageNum",
+            element: <Genres />
+          }
+        ]
       },
       {
         path: "genre/:genreName",

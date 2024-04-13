@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Header() {
     return (
@@ -17,16 +17,6 @@ export default function Header() {
                         <b style={{ fontSize: "1.75rem" }}> MusicRecommendations</b>
                     </Link>
                 </nav>
-
-                {/* <form className="col-md-3 text-end" role="search">
-            <input type="search" className="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
-        </form> */}
-
-                <div className="col-md-3 text-end">
-                    <button type="button" className="btn btn-primary">
-                        My Profile
-                    </button>
-                </div>
             </header>
         </div>
     );

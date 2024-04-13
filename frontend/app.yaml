@@ -10,4 +10,4 @@ handlers:
     static_files: build/index.html
     upload: build/index.html
 
-  - module: OurMusicApp
+module: Our-Music-App

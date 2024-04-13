@@ -166,6 +166,7 @@ export default function Albums() {
                 style={{ marginTop: "0.5rem" }}
                 defaultValue={-1}
                 onChange={onSelectionChange}
+                className='mb-3'
             >
                 <option value={-1} disabled>
                     Select Sorting Option

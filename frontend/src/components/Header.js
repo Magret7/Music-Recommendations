@@ -1,5 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
-import Search from "./Search";
+import { Link } from "react-router-dom";
 
 export default function Header() {
     return (
@@ -18,14 +17,6 @@ export default function Header() {
                         <b style={{ fontSize: "1.75rem" }}> MusicRecommendations</b>
                     </Link>
                 </nav>
-
-                {/* <Search /> */}
-
-                {/* <div className="col-md-3 text-end">
-                    <button type="button" className="btn btn-primary">
-                        My Profile
-                    </button>
-                </div> */}
             </header>
         </div>
     );

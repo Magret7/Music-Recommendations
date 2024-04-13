@@ -4,8 +4,8 @@ import spotipy.util as util
 from models import app, db, Albums, Artists
 import json
 
-cid = '518bb56f9b9f489db20b12846ba33dfb'
-secret = 'bd119741e86445aba2cf1306730b09a4'
+cid = '743874e5946242aca7a2b78363605dd4'
+secret = '4eb091f3739444ae9be89cf86154eb58'
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 

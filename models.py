@@ -10,8 +10,8 @@ app = Flask(__name__)
 app.app_context().push()
 # Change this accordingly 
 USER ="postgres"
-PASSWORD = "rwmpostgres"
-PUBLIC_IP_ADDRESS ="localhost:5432"
+PASSWORD = "Varqac-6xursy-ritnop"
+PUBLIC_IP_ADDRESS ="34.171.182.155"
 DBNAME ="musicdb"
 
 # Configuration 

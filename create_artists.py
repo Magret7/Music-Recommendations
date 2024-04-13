@@ -5,8 +5,8 @@ import json
 from models import app, db, Artists
 
 #* Set up spotipy variables, tokens, etc.
-cid = 'c6f26740cc0b4cfe9c1217330e528549'
-secret = '1a822f3c7e084c85b5b6e2b933d46531'
+cid = '743874e5946242aca7a2b78363605dd4'
+secret = '4eb091f3739444ae9be89cf86154eb58'
 auth_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
@@ -41,9 +41,10 @@ def create_artist(sp):
             name = artist['name']
             image = json.dumps(artist['images'])
             popularity = artist['popularity']
+            followers = artist['followers']['total']
             genres = json.dumps(artist['genres'])
 
-            track_search = sp.search(q='artist:' + name, type='track', limit=10)['tracks']['items']
+            track_search = sp.search(q='artist:' + name, type='track', limit=5)['tracks']['items']
             tracks = json.dumps([track['name'] for track in track_search])
 
             album_search = sp.search(q='artist:' + name, type='album')['albums']['items']
@@ -52,7 +53,7 @@ def create_artist(sp):
 
             related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
             
-            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
+            new_artist = Artists(id=id, name=name, image=image, popularity=popularity, followers=followers, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
             db.session.add(new_artist)
         
@@ -80,7 +81,7 @@ def create_artist(sp):
             albums = json.dumps([album['name'] for album in album_search])
             album_ids = json.dumps([album['id'] for album in album_search])
 
-            related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'])
+            related_artists = json.dumps(sp.artist_related_artists(artist['id'])['artists'][:5])
             
             new_artist = Artists(id=id, name=name, image=image, popularity=popularity, genres=genres,
                                  tracks=tracks, albums=albums, related_artists=related_artists, albums_id=album_ids)
@@ -92,4 +93,4 @@ def create_artist(sp):
 # db.drop_all()
 # db.create_all()
 
-# create_artist()
+# create_artist(sp)

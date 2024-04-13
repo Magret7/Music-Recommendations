@@ -25,9 +25,9 @@ def create_genre(sp):
         name = genre
 
         # artists
-        related_artists = sp.search(q='genre:' + genre, type='artist', limit=5)['artists']['items']
-        artists = [artist['name'] for artist in related_artists]
-        artist_ids = [artist['id'] for artist in related_artists]
+        related_artists = sp.search(q='genre:' + genre, type='artist', limit=3)['artists']['items']
+        artists = json.dumps([artist['name'] for artist in related_artists])
+        artist_ids = json.dumps([artist['id'] for artist in related_artists])
 
         # average popularity
         if related_artists:
@@ -37,12 +37,12 @@ def create_genre(sp):
 
         # albums
         related_albums = [sp.search(q='artist:' + artist['name'], type='album')['albums']['items'][0] for artist in related_artists]
-        albums = [album['name'] for album in related_albums]
-        album_ids = [album['id'] for album in related_albums]
+        albums = json.dumps([album['name'] for album in related_albums])
+        album_ids = json.dumps([album['id'] for album in related_albums])
 
         # tracks
-        tracks = sp.search(q='genre:' + genre, type='track', limit=5)['tracks']['items']
-        track_names = [track['name'] for track in tracks]
+        tracks = sp.search(q='genre:' + genre, type='track', limit=3)['tracks']['items']
+        track_names = json.dumps([track['name'] for track in tracks])
 
         # create genre instance and add to db
         newGenre = Genres(name = name, artists = artists, artist_ids = artist_ids, albums = albums, album_ids = album_ids, tracks = track_names, popularity = popularity)

@@ -33,21 +33,21 @@ export default function Albums() {
         if (sortDirection === "0") {
             let ascendingItems = searchedAlbums
                 ? searchedAlbums.sort(
-                      (a, b) => (a.name > b.name) - (a.name < b.name)
-                  )
+                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                )
                 : albumData.sort(
-                      (a, b) => (a.name > b.name) - (a.name < b.name)
-                  );
+                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                );
             setSearchedAlbums([...ascendingItems]);
             console.log(searchedAlbums);
         } else {
             let descendingItems = searchedAlbums
                 ? searchedAlbums.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
-                  )
+                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                )
                 : albumData.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
-                  );
+                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                );
             setSearchedAlbums([...descendingItems]);
             console.log(searchedAlbums);
         }
@@ -126,9 +126,9 @@ export default function Albums() {
                                 >
                                     {searchedAlbums
                                         ? getHighlightedText(
-                                              album.name,
-                                              searchTerm
-                                          )
+                                            album.name,
+                                            searchTerm
+                                        )
                                         : album.name}
                                 </Link>
                             </th>
@@ -151,7 +151,7 @@ export default function Albums() {
                                 {JSON.parse(album.info).release_date}
                             </td>
                         </tr>
-{/* 
+                        {/* 
                         <tr>
                             <td>
                                 <b>Album Tracks:</b>
@@ -187,19 +187,19 @@ export default function Albums() {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>All Albums</h1>
-            <div>
+
+            <div class="input-group mb-3" style={{ height: "3rem", marginTop: "1.5rem", width: "40%", marginLeft: "auto", marginRight: "auto" }}>
                 <input
                     type="text"
-                    placeholder="Search for Albums ..."
+                    class="form-control"
+                    placeholder="Type Here To Search"
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
-
-                <button onClick={handleSearch}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
+                <button class="btn btn-primary" type="button" onClick={handleSearch} >Search</button>
             </div>
+
 
             <select
                 style={{ marginTop: "0.5rem" }}

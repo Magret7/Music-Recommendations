@@ -34,21 +34,21 @@ export default function Genres() {
         if (sortDirection === "0") {
             let ascendingItems = searchedGenres
                 ? searchedGenres.sort(
-                      (a, b) => (a.name > b.name) - (a.name < b.name)
-                  )
+                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                )
                 : genreData.sort(
-                      (a, b) => (a.name > b.name) - (a.name < b.name)
-                  );
+                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                );
             setSearchedGenres([...ascendingItems]);
             console.log(searchedGenres);
         } else {
             let descendingItems = searchedGenres
                 ? searchedGenres.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
-                  )
+                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                )
                 : genreData.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
-                  );
+                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                );
             setSearchedGenres([...descendingItems]);
             console.log(searchedGenres);
         }
@@ -80,9 +80,9 @@ export default function Genres() {
     function getHighlightedText(text, highlight) {
         // Split on highlight term and include term into parts, ignore case
         const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-        return <span> { parts.map((part, i) => 
-            <span key={i} className={part.toLowerCase() === highlight.toLowerCase() ? 'highlight' : '{}' }>
-                { part }
+        return <span> {parts.map((part, i) =>
+            <span key={i} className={part.toLowerCase() === highlight.toLowerCase() ? 'highlight' : '{}'}>
+                {part}
             </span>)
         } </span>;
     }
@@ -99,9 +99,9 @@ export default function Genres() {
                                 className="nav-link link-dark"
                             >
                                 <h3>
-                                {searchedGenres ? getHighlightedText(genre.name.charAt(0).toUpperCase() +
-                                        genre.name.slice(1), searchTerm): genre.name.charAt(0).toUpperCase() +
-                                            genre.name.slice(1)}
+                                    {searchedGenres ? getHighlightedText(genre.name.charAt(0).toUpperCase() +
+                                        genre.name.slice(1), searchTerm) : genre.name.charAt(0).toUpperCase() +
+                                    genre.name.slice(1)}
                                 </h3>
                             </Link>
                         </th>
@@ -158,18 +158,17 @@ export default function Genres() {
         // TODO: Improve CSS styling here
         <>
             <h1 style={{ textAlign: "center" }}>All Genres</h1>
-            <div>
+
+            <div class="input-group mb-3" style={{ height: "3rem", marginTop: "1.5rem", width: "40%", marginLeft: "auto", marginRight: "auto" }}>
                 <input
                     type="text"
-                    placeholder="Search for Genres ..."
+                    class="form-control"
+                    placeholder="Type Here To Search"
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
-
-                <button onClick={handleSearch}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
+                <button class="btn btn-primary" type="button" onClick={handleSearch} >Search</button>
             </div>
 
             <select

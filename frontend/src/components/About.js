@@ -91,13 +91,12 @@ export default function About() {
                 <div class="card text-center" style= {{width: 70+'%', marginBottom: 3+'rem', marginLeft: 'auto', marginRight: 'auto'}}>
                     <div class="card-header display-6"> <b>GitLab Stats</b> </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> <b>Total Commits: </b>176</li>
+                        <li class="list-group-item"> <b>Total Commits: </b>208</li>
                         <li class="list-group-item"> <b>Total Issues: </b>33</li>
                         <li class="list-group-item"> <b>Total Unit Tests: </b>9</li>
-                        <li class="list-group-item"> <b>Postman API Collection: </b><a href="https://music-recommendation.postman.co/workspace/Team-Workspace~17d1e66a-099f-4ea0-833c-8973e17965de/collection/33692671-6403f3c6-d92b-49af-b5e0-21fc9aa5292a?tab=variables"> Postman </a> </li>
-                        <li class="list-group-item"> <b>GitLab Issues Tracker: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb/-/issues"> Issues </a> </li>
+                        <li class="list-group-item"> <b>Postman API Collection - Documentation: </b><a href="https://documenter.getpostman.com/view/33702459/2sA3BhdDr8"> Postman </a> </li>                        <li class="list-group-item"> <b>GitLab Issues Tracker: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb/-/issues"> Issues </a> </li>
                         <li class="list-group-item"> <b>GitLab Repository: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb"> Repository </a> </li>
-                        <li class="list-group-item"> <b>GitLab Wiki: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb/-/wikis/home"> ReaWikict</a> </li>
+                        <li class="list-group-item"> <b>GitLab Wiki: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb/-/wikis/home"> Wiki</a> </li>
                         <li class="list-group-item"> <b>Presentation Slides: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb/-/issues"> Slides </a> </li>
                     </ul>
                 </div>
@@ -109,8 +108,13 @@ export default function About() {
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"> <b>Spotify Web API: </b> <a href="https://developer.spotify.com/documentation/web-api/"> Spotify API </a> </li>
                         <li class="list-group-item"> <b>Library to access Spotify API: </b><a href="https://spotipy.readthedocs.io/en/2.22.1/"> Spotipy </a> </li>
-                        <li class="list-group-item"> <b>Published Postman Collection: </b> <a href=""> Postman Collection </a> </li>
-                        <li class="list-group-item"> <b>Description Of How Each Was Scraped: </b></li>
+                        <li class="list-group-item"> <b>Published Postman Collection - Tests: </b> <a href="https://documenter.getpostman.com/view/33702459/2sA3BhdDr7"> Postman Collection </a> </li>                        
+                        <li class="list-group-item"> <b>Description Of How Each Was Scraped: </b> <p></p>
+                        <p>The album, genre, and artists data displayed on this website was scraped using the spotipy python package.</p> 
+                        <p>This package uses Spotify API curl requests to gather Spotify's data on albums, artists, and genres.</p> 
+                        <p>Information about album track names, related artists, or song popularity--among many others--was collected, and the queried data was subsequently stored in a Postgres database for manipulation and display.</p>
+                        </li>
+
                     </ul>
                 </div>
             </section>

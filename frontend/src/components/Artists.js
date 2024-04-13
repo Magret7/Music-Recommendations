@@ -34,21 +34,21 @@ export default function Artists() {
         if (sortDirection === "0") {
             let ascendingItems = searchedArtists
                 ? searchedArtists.sort(
-                      (a, b) => (a.name > b.name) - (a.name < b.name)
-                  )
+                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                )
                 : artistData.sort(
-                      (a, b) => (a.name > b.name) - (a.name < b.name)
-                  );
+                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                );
             setSearchedArtists([...ascendingItems]);
             console.log(searchedArtists)
         } else {
             let descendingItems = searchedArtists
                 ? searchedArtists.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
-                  )
+                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                )
                 : artistData.sort(
-                      (a, b) => (a.name < b.name) - (a.name > b.name)
-                  );
+                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                );
             setSearchedArtists([...descendingItems]);
             console.log(searchedArtists)
         }
@@ -80,9 +80,9 @@ export default function Artists() {
     function getHighlightedText(text, highlight) {
         // Split on highlight term and include term into parts, ignore case
         const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-        return <span> { parts.map((part, i) => 
-            <span key={i} className={part.toLowerCase() === highlight.toLowerCase() ? 'highlight' : '{}' }>
-                { part }
+        return <span> {parts.map((part, i) =>
+            <span key={i} className={part.toLowerCase() === highlight.toLowerCase() ? 'highlight' : '{}'}>
+                {part}
             </span>)
         } </span>;
     }
@@ -116,7 +116,7 @@ export default function Artists() {
                                     className="nav-link link-dark"
                                 >
                                     {/* <b>{artist.name}</b> */}
-                                    <b>{searchedArtists ? getHighlightedText(artist.name, searchTerm): artist.name}</b>
+                                    <b>{searchedArtists ? getHighlightedText(artist.name, searchTerm) : artist.name}</b>
                                 </Link>
                             </td>
                         </tr>
@@ -186,18 +186,17 @@ export default function Artists() {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>All Artists</h1>
-            <div>
+
+            <div class="input-group mb-3" style={{ height: "3rem", marginTop: "1.5rem", width: "40%", marginLeft: "auto", marginRight: "auto" }}>
                 <input
                     type="text"
-                    placeholder="Search for Artists ..."
+                    class="form-control"
+                    placeholder="Type Here To Search"
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
-
-                <button onClick={handleSearch}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
+                <button class="btn btn-primary" type="button" onClick={handleSearch} >Search</button>
             </div>
 
 

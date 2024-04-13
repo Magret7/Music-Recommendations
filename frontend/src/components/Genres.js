@@ -77,6 +77,16 @@ export default function Genres() {
         navigate("page/1");
     }
 
+    function getHighlightedText(text, highlight) {
+        // Split on highlight term and include term into parts, ignore case
+        const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+        return <span> { parts.map((part, i) => 
+            <span key={i} className={part.toLowerCase() === highlight.toLowerCase() ? 'highlight' : '{}' }>
+                { part }
+            </span>)
+        } </span>;
+    }
+
     const genreMap = genreSlice.map((genre) => {
         return (
             <div className="col">
@@ -89,8 +99,9 @@ export default function Genres() {
                                 className="nav-link link-dark"
                             >
                                 <h3>
-                                    {genre.name.charAt(0).toUpperCase() +
-                                        genre.name.slice(1)}
+                                {searchedGenres ? getHighlightedText(genre.name.charAt(0).toUpperCase() +
+                                        genre.name.slice(1), searchTerm): genre.name.charAt(0).toUpperCase() +
+                                            genre.name.slice(1)}
                                 </h3>
                             </Link>
                         </th>

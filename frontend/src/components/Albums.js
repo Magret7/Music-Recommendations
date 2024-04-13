@@ -76,6 +76,28 @@ export default function Albums() {
         navigate("page/1");
     }
 
+    function getHighlightedText(text, highlight) {
+        // Split on highlight term and include term into parts, ignore case
+        const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+        return (
+            <span>
+                {" "}
+                {parts.map((part, i) => (
+                    <span
+                        key={i}
+                        className={
+                            part.toLowerCase() === highlight.toLowerCase()
+                                ? "highlight"
+                                : "{}"
+                        }
+                    >
+                        {part}
+                    </span>
+                ))}{" "}
+            </span>
+        );
+    }
+
     const albumsMap = albumsSlice.map((album) => {
         return (
             <>
@@ -83,16 +105,33 @@ export default function Albums() {
                     <table className="artistOrAlbumTable">
                         <tr>
                             <td>
-                                <img
-                                    src={album.image}
-                                    alt={album.name}
-                                    className="artistOrAlbum--img"
-                                />
+                                <Link
+                                    to={`/album/${album.name}`}
+                                    className="nav-link link-dark"
+                                >
+                                    <img
+                                        src={album.image}
+                                        alt={album.name}
+                                        className="artistOrAlbum--img"
+                                    />
+                                </Link>
                             </td>
                         </tr>
 
                         <tr>
-                            <th>{album.name}</th>
+                            <th>
+                                <Link
+                                    to={`/album/${album.name}`}
+                                    className="nav-link link-dark"
+                                >
+                                    {searchedAlbums
+                                        ? getHighlightedText(
+                                              album.name,
+                                              searchTerm
+                                          )
+                                        : album.name}
+                                </Link>
+                            </th>
                         </tr>
 
                         <tr>
@@ -112,7 +151,7 @@ export default function Albums() {
                                 {JSON.parse(album.info).release_date}
                             </td>
                         </tr>
-
+{/* 
                         <tr>
                             <td>
                                 <b>Album Tracks:</b>
@@ -123,7 +162,7 @@ export default function Albums() {
                                     </>
                                 ))}
                             </td>
-                        </tr>
+                        </tr> */}
 
                         <tr>
                             <td>
@@ -166,7 +205,7 @@ export default function Albums() {
                 style={{ marginTop: "0.5rem" }}
                 defaultValue={-1}
                 onChange={onSelectionChange}
-                className='mb-3'
+                className="mb-3"
             >
                 <option value={-1} disabled>
                     Select Sorting Option

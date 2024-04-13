@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Outlet, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 export default function DisplayGenre() {
     // TODO: Is this the right way to get the URL parameters?  Refer to React Router tutorial

@@ -43,9 +43,12 @@ export default function DisplayArtist() {
     }
 
     // Filter album data for this artist's albums
-    const artistAlbums = albumData.filter(
-        (album) => JSON.parse(album.artist)[0] === artist.name
-    );
+    let artistAlbums = []
+    if (artist) {
+        artistAlbums = albumData.filter(
+            (album) => JSON.parse(album.artist)[0] === artist.name
+        );
+    }
 
     const albumCards = artistAlbums.map((album) => {
         return (

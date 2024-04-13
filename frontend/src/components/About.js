@@ -5,8 +5,8 @@ export default function About() {
             lastName: "Adekunle",
             bio: "Magret is a senior at UT Austin majoring in Math and African & American Diaspora Studies. She is pursuing a Master's in Artificial intelligence (AI) at UT after her graduation.",
             role: "Group Leader: FullStack Development with Flask, Python, Bootstrap, & etc.",
-            img: "ryan.png",
-            commits: 74,
+            img: "magret.jpeg",
+            commits: 54,
             issues: 18,
             unitTests: 0,
             gitlabProfile: 'https://gitlab.com/magretadekunle'
@@ -17,7 +17,7 @@ export default function About() {
             bio: "George is a senior at UT Austin studying Biomedical Engineering and pursuing a Master's in Data Science after his graduation.",
             role: "Backend Development with Flask and Python",
             img: "george.png",
-            commits: 20,
+            commits: 23,
             issues: 0,
             unitTests: 6,
             gitlabProfile: 'https://gitlab.com/georgegmathew12'
@@ -39,8 +39,8 @@ export default function About() {
             bio: "Ryan is a software developer for UT's fundraising department, and enrolls in CS courses to broaden his skillset and fill in gaps in knowledge. He has a Bachelor's in History & Philosophy.",
             role: "Front-End Development with HTML, Bootstrap, and React",
             img: "ryan.png",
-            commits: 35,
-            issues: 14,
+            commits: 64,
+            issues: 15,
             unitTests: 0,
             gitlabProfile: 'https://gitlab.com/rwmullowney'
         },
@@ -91,9 +91,9 @@ export default function About() {
                 <div class="card text-center" style= {{width: 70+'%', marginBottom: 3+'rem', marginLeft: 'auto', marginRight: 'auto'}}>
                     <div class="card-header display-6"> <b>GitLab Stats</b> </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> <b>Total Commits: </b></li>
-                        <li class="list-group-item"> <b>Total Issues: </b></li>
-                        <li class="list-group-item"> <b>Total Unit Tests: </b></li>
+                        <li class="list-group-item"> <b>Total Commits: </b>176</li>
+                        <li class="list-group-item"> <b>Total Issues: </b>33</li>
+                        <li class="list-group-item"> <b>Total Unit Tests: </b>9</li>
                         <li class="list-group-item"> <b>Postman API Collection: </b><a href="https://music-recommendation.postman.co/workspace/Team-Workspace~17d1e66a-099f-4ea0-833c-8973e17965de/collection/33692671-6403f3c6-d92b-49af-b5e0-21fc9aa5292a?tab=variables"> Postman </a> </li>
                         <li class="list-group-item"> <b>GitLab Issues Tracker: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb/-/issues"> Issues </a> </li>
                         <li class="list-group-item"> <b>GitLab Repository: </b><a href="https://gitlab.com/magretadekunle/cs331e-idb"> Repository </a> </li>

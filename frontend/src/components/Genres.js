@@ -1,107 +1,187 @@
-import { useParams, Outlet, Link } from "react-router-dom";
-import genres from "../assets/js/genreData";
+import { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import React from "react";
-
+import { calculateSliceRange } from "../assets/js/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Genres() {
-    let pageNum = useParams();
-    pageNum = pageNum.pageNum
-    // TODO: Is there a cleaner way to implement this?
-    let sliceLowerRange = 0
-    let sliceUpperRange = 4
+    const [genreData, setGenresData] = useState([]);
 
-    if (pageNum) {
-        sliceUpperRange = pageNum * 4
-        sliceLowerRange = sliceUpperRange - 4
-    }
-    const genresSlice = genres.slice(sliceLowerRange, sliceUpperRange)
+    useEffect(() => {
+        fetch("/genre/json/")
+            .then((res) => res.json())
+            .then((data) => setGenresData(data.Genres));
+    }, []);
 
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchedGenres, setSearchedGenres] = useState();
+
+    // Retrieve slice of data returned from API
+    let pageNum = useParams().pageNum;
+    const navigate = useNavigate();
+
+    let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
+    const genreSlice = searchedGenres
+        ? searchedGenres.slice(sliceLowerRange, sliceUpperRange)
+        : genreData.slice(sliceLowerRange, sliceUpperRange);
 
     // Sorting by ascendingOrder or descendingOrder
-    const [data, setData] = React.useState([]);
-
-    React.useEffect(() => {
-        setData(genres);
-    });
-
     function onSelectionChange(e) {
         const sortDirection = e.target.value;
 
         if (sortDirection === "0") {
-            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
-            setData([...ascendingItems]);
-        }
-        if (sortDirection === "1") {
-            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
-            setData([...descendingItems]);
-        }
-        if (sortDirection === "2"){
-            let popularItems = data.sort((a, b) => (b.popularity -  a.popularity));
-            setData([...popularItems]);
+            let ascendingItems = searchedGenres
+                ? searchedGenres.sort(
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
+                  )
+                : genreData.sort(
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
+                  );
+            setSearchedGenres([...ascendingItems]);
+            console.log(searchedGenres);
+        } else {
+            let descendingItems = searchedGenres
+                ? searchedGenres.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  )
+                : genreData.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  );
+            setSearchedGenres([...descendingItems]);
+            console.log(searchedGenres);
         }
     }
 
-    const genreMap = genresSlice.map(genre => {
+    // Searching
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        setSearchTerm(value);
+    };
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            const searchResults = genreData.filter((item) =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setSearchedGenres(searchResults);
+            navigate("page/1");
+        }
+    };
+
+    function handleSearch() {
+        const searchResults = genreData.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSearchedGenres(searchResults);
+        navigate("page/1");
+    }
+
+    const genreMap = genreSlice.map((genre) => {
         return (
-            <div className="col">   {/* <!-- TODO: Why does this make it display well? --> */}
+            <div className="col">
+                {/* <!-- TODO: Why does this make it display well? --> */}
                 <table>
                     <tr>
-                        <th>{genre.name}</th>
-                    </tr>
-
-                    <tr>
-                        <td><b>Information: </b> {genre.info}</td>
+                        <th>
+                            <Link
+                                to={`/genre/${genre.name}`}
+                                className="nav-link link-dark"
+                            >
+                                <h3>
+                                    {genre.name.charAt(0).toUpperCase() +
+                                        genre.name.slice(1)}
+                                </h3>
+                            </Link>
+                        </th>
                     </tr>
 
                     <tr>
                         <td>
-                            <b>Artists: </b>
-                            {genre.artists.map(artist => <Link to={`/artist/${artist}`} style={{ marginRight: 10 }}>{artist}</Link>)}
-
+                            <b>Artists</b>
+                            <br />
+                            {JSON.parse(genre.artists).map((artist) => (
+                                <Link
+                                    to={`/artist/${artist}`}
+                                    style={{ marginRight: 10 }}
+                                >
+                                    {artist}
+                                </Link>
+                            ))}
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <b>Albums: </b>
-                            {genre.albums.map(album => <Link to={`/album/${album}`} style={{ marginRight: 10 }}>{album}</Link>)}
+                            <b>Albums</b>
+                            <br />
+
+                            {JSON.parse(genre.albums).map((album) => (
+                                <Link
+                                    to={`/album/${album}`}
+                                    style={{ marginRight: 10 }}
+                                >
+                                    {album}
+                                </Link>
+                            ))}
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <b>Related Songs: </b><br />
-                            {genre.tracks.map(track => (<>{track} <br /></>))}
+                            <b>Related Tracks</b>
+                            <br />
+                            {JSON.parse(genre.tracks).map((track) => (
+                                <>
+                                    {track} <br />
+                                </>
+                            ))}
                         </td>
                     </tr>
                 </table>
             </div>
-        )
-    })
+        );
+    });
 
     return (
+        // TODO: Improve CSS styling here
         <>
-            <h1 style={{ textAlign: "center" }}> Genres</h1>
+            <h1 style={{ textAlign: "center" }}>All Genres</h1>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search for Genres ..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                />
 
-            {/* TODO: Change to Dropdown for better look */}
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Soting Option</option>
+                <button onClick={handleSearch}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+            </div>
+
+            <select
+                style={{ marginTop: "0.5rem" }}
+                onChange={onSelectionChange}
+                className="mb-3"
+            >
+                <option value="" disabled selected>
+                    Select sorting option
+                </option>
                 <option value={0}>Ascending Order - Genre Name</option>
                 <option value={1}>Descending Order - Genre Name</option>
-                <option value={2}>Most Popular Genres </option>
-
             </select>
 
-            <section className="row" style={{ marginLeft: "0.5rem" }}>
-                <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
-                {/* TODO: Make the CSS for rendering these work better */}
-                {genres.length > 0 ? genreMap : <p>No Genres exist</p>}
-                </div>
+            <section className="row">
+                {genreMap ? genreMap : <p>Loading...</p>}
             </section>
-
-            <Pagination pageNum={pageNum} arrayLength={genres.length} />
-
+            <Pagination
+                pageNum={pageNum}
+                arrayLength={
+                    searchedGenres ? searchedGenres.length : genreData.length
+                }
+            />
         </>
-    )
+    );
 }

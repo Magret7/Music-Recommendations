@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import Search from "./Search";
 
 export default function Header() {
     return (
@@ -18,15 +19,13 @@ export default function Header() {
                     </Link>
                 </nav>
 
-                {/* <form className="col-md-3 text-end" role="search">
-            <input type="search" className="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
-        </form> */}
+                {/* <Search /> */}
 
-                <div className="col-md-3 text-end">
+                {/* <div className="col-md-3 text-end">
                     <button type="button" className="btn btn-primary">
                         My Profile
                     </button>
-                </div>
+                </div> */}
             </header>
         </div>
     );

@@ -1,72 +1,59 @@
-import { Outlet, Link } from "react-router-dom";
-import ArtistCard from "./ArtistCard"
+import { useState, useEffect } from "react";
+import ArtistCard from "./ArtistCard";
 import AlbumCard from "./AlbumCard";
 
 export default function Home() {
-    const artists = [
-        {
-            'name': "Ariana Grande",
-            'img': "https://i.scdn.co/image/ab6761610000517440b5c07ab77b6b1a9075fdc0",
-            'followers': 95293158
-        },
-        {
-            'name': 'J. Cole',
-            'img': "https://i.scdn.co/image/ab67616100005174add503b411a712e277895c8a",
-            'followers': 22953504
-        },
-        {
-            'name': 'SZA',
-            'img': "https://i.scdn.co/image/ab676161000051740895066d172e1f51f520bc65",
-            'followers': 18560294
-        },
-    ]
+    const [artistData, setArtistData] = useState([]);
+    const [albumData, setAlbumData] = useState([]);
 
-    const albums = [
-        {
-            'name': "Sweetener",
-            'img': "https://i.scdn.co/image/ab67616d00001e02c3af0c2355c24ed7023cd394",
-            'tracks': 15,
-            'artists': ["Ariana Grande", "Nicki Minaj"],
-            'releaseYear': 2018
-        },
-        {
-            'name': "2014 Forest Hills Drive",
-            'img': "https://i.scdn.co/image/ab67616d00001e02c6e0948bbb0681ff29cdbae8",
-            'tracks': 13,
-            'artists': ["J. Cole"],
-            'releaseYear': 2014
-        },
-        {
-            'name': "Ctrl",
-            'img': "https://i.scdn.co/image/ab67616d00001e024c79d5ec52a6d0302f3add25",
-            'tracks': 14,
-            'artists': ["SZA"],
-            'releaseYear': 2017
-        },
-    ]
+    useEffect(() => {
+        fetch("/artist/json/")
+            .then((res) => res.json())
+            .then((data) => setArtistData(data.Artists));
+        fetch("/album/json/")
+            .then((res) => res.json())
+            .then((data) => setAlbumData(data.Albums));
+    }, []);
 
-    const artistCardMap = artists.map(artist => {
+
+    // Find info for top 3 artists
+    artistData.sort((a, b) => b.followers - a.followers);
+    let artistSlice = artistData.slice(0, 3);
+    let topArtists = [];
+    for (let i = 0; i < artistSlice.length; i++) {
+        topArtists.push(artistSlice[i].name);
+    }
+
+    // Filter album data for an album from each top artist
+    let albumSlice = [];
+    albumData.filter(function (album) {
+        for (let i = 0; i < topArtists.length; i++) {
+            if (JSON.parse(album.artist)[0] === topArtists[i]) {
+                albumSlice.push(album);
+            }
+        }
+    });
+
+    const artistCardMap = artistSlice.map((artist) => {
         return (
             <ArtistCard
                 name={artist.name}
-                img={artist.img}
+                img={JSON.parse(artist.image)[1].url}
                 followers={artist.followers}
             />
-        )
-    })
+        );
+    });
 
-    const albumCardMap = albums.map(album => {
+    const albumCardMap = albumSlice.map((album) => {
         return (
             <AlbumCard
                 name={album.name}
-                img={album.img}
-                artists={album.artists}
-                tracks={album.tracks}
-                releaseYear={album.releaseYear}
+                img={album.image}
+                artists={JSON.parse(album.artist)}
+                releaseYear={JSON.parse(album.info).release_date.slice(0, 4)}
             />
-        )
-    })
-
+        );
+    });
 
     return (
         <>
@@ -76,9 +63,7 @@ export default function Home() {
             </section>
 
             <h1>Top Albums</h1>
-            <section className="artistCards--list">
-                {albumCardMap}
-            </section>
+            <section className="artistCards--list">{albumCardMap}</section>
         </>
-    )
+    );
 }

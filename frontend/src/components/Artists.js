@@ -1,123 +1,215 @@
-import { useParams, Outlet, Link } from "react-router-dom";
-import artists from "../assets/js/artistsData";
+import { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import React from "react";
-
+import { calculateSliceRange } from "../assets/js/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Artists() {
-    let pageNum = useParams();
-    pageNum = pageNum.pageNum
-    console.log(pageNum)
+    const [artistData, setArtistData] = useState([]);
 
-    // TODO: Is there a cleaner way to implement this?
-    let sliceLowerRange = 0
-    let sliceUpperRange = 4
+    useEffect(() => {
+        fetch("/artist/json/")
+            .then((res) => res.json())
+            .then((data) => setArtistData(data.Artists));
+    }, []);
 
-    if (pageNum) {
-        sliceUpperRange = pageNum * 4
-        sliceLowerRange = sliceUpperRange - 4
-    }
-    const artistsSlice = artists.slice(sliceLowerRange, sliceUpperRange)
+    // Setting Up for Searching
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchedArtists, setSearchedArtists] = useState();
+
+    // Retrieve slice of data returned from API
+    let pageNum = useParams().pageNum;
+    const navigate = useNavigate();
+
+    let [sliceLowerRange, sliceUpperRange] = calculateSliceRange(pageNum);
+    const artistsSlice = searchedArtists
+        ? searchedArtists.slice(sliceLowerRange, sliceUpperRange)
+        : artistData.slice(sliceLowerRange, sliceUpperRange);
 
     // Sorting by ascendingOrder or descendingOrder
-    const [data, setData] = React.useState([]);
-
-    React.useEffect(() => {
-        setData(artists);
-    });
-
     function onSelectionChange(e) {
         const sortDirection = e.target.value;
 
         if (sortDirection === "0") {
-            let ascendingItems = data.sort((a, b) => (a.name > b.name) - (a.name < b.name));
-            setData([...ascendingItems]);
+            let ascendingItems = searchedArtists
+                ? searchedArtists.sort(
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
+                  )
+                : artistData.sort(
+                      (a, b) => (a.name > b.name) - (a.name < b.name)
+                  );
+            setSearchedArtists([...ascendingItems]);
+            console.log(searchedArtists)
+        } else {
+            let descendingItems = searchedArtists
+                ? searchedArtists.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  )
+                : artistData.sort(
+                      (a, b) => (a.name < b.name) - (a.name > b.name)
+                  );
+            setSearchedArtists([...descendingItems]);
+            console.log(searchedArtists)
         }
-        else {
-            let descendingItems = data.sort((a, b) => (a.name < b.name) - (a.name > b.name));
-            setData([...descendingItems]);
+    }
+
+    // Searching
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        setSearchTerm(value);
+    };
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            const searchResults = artistData.filter((item) =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setSearchedArtists(searchResults);
+            navigate("page/1");
         }
+    };
+
+    function handleSearch() {
+        const searchResults = artistData.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSearchedArtists(searchResults);
+        navigate("page/1");
     }
 
     const artistsMap = artistsSlice.map((artist) => {
         return (
             <>
                 {/* <div className="row"> TODO: Why does this have a row but albums does not?*/}
-                <div className="col">   {/* TODO: Why does this make it display well? */}
-                    <table>
-                        {/* <!-- <tr>
-                                <td>
-                                    <b> <a href="{{ url_for('showArtist', artist_name=artist)}}">{{ artist.name }}</a></b>
-                                </td>
-                            </tr> --> */}
-
-
-                        <tr>
-                            <td><img src={artist.image} alt={artist.name} className="artistOrAlbum--img" /></td>
-                        </tr>
-
+                <div className="col">
+                    {/* TODO: Why does this make it display well? */}
+                    <table className="artistOrAlbumTable">
                         <tr>
                             <td>
-                                <b>{artist.name}</b>
+                                <Link
+                                    to={`/artist/${artist.name}`}
+                                    className="nav-link link-dark"
+                                >
+                                    <img
+                                        src={JSON.parse(artist.image)[1].url}
+                                        alt={artist.name}
+                                        className="artistOrAlbum--img"
+                                    />
+                                </Link>
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Biography: </b> {artist.info}</td>
+                            <td>
+                                <Link
+                                    to={`/artist/${artist.name}`}
+                                    className="nav-link link-dark"
+                                >
+                                    <b>{artist.name}</b>
+                                </Link>
+                            </td>
                         </tr>
 
                         <tr>
-                            {/* TODO: Remove trailing comma */}
-                            <td><b>Songs: </b>{artist.tracks.map(track => `${track}, `)}</td>
+                            <td>
+                                <b>Songs: </b>
+                                {JSON.parse(artist.tracks).map(
+                                    (track, index) => {
+                                        return (index ? ", " : "") + track;
+                                    }
+                                )}
+                            </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Albums: </b>
-                                {artist.albums.map(album => <Link to={`/album/${album}`}>{album}</Link>)}
+                                {JSON.parse(artist.albums).map((album) => (
+                                    <>
+                                        <Link
+                                            to={`/album/${album}`}
+                                            className="mx-1"
+                                        >{`${album}`}</Link>
+                                    </>
+                                ))}
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Genres: </b>
-                                {artist.genres.map(genre => <Link to={`/genre/${genre}`} style={{ marginRight: 10 }}>{genre}</Link>)}
+                                {JSON.parse(artist.genres).map((genre) => (
+                                    <Link
+                                        to={`/genre/${genre}`}
+                                        style={{ marginRight: 10 }}
+                                    >
+                                        {genre.charAt(0).toUpperCase() +
+                                            genre.slice(1)}
+                                    </Link>
+                                ))}
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
-                                {artist.RelatedArtists.map(relatedArtist => <Link to={`/artist/${relatedArtist}`} style={{ marginRight: 10 }}>{relatedArtist}</Link>)}
+                                {JSON.parse(artist.related_artists).map(
+                                    (relatedArtist) => (
+                                        <Link
+                                            to={`/artist/${relatedArtist.name}`}
+                                            style={{ marginRight: 10 }}
+                                        >
+                                            {relatedArtist.name}
+                                        </Link>
+                                    )
+                                )}
                             </td>
                         </tr>
                     </table>
                 </div>
                 {/* </div> */}
             </>
-        )
-    })
-
+        );
+    });
 
     return (
         <>
-            <h1 style={{ textAlign: "center" }}>My Artists</h1>
-            
+            <h1 style={{ textAlign: "center" }}>All Artists</h1>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search for Artists ..."
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                />
+
+                <button onClick={handleSearch}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+            </div>
+
+
             {/* TODO: Change to Dropdown for better look */}
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange}>
-                <option value={-1} disabled>Select Soting Option</option>
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange} className="mb-3">
+                <option value={-1} disabled>Select Sorting Option</option>
                 <option value={0}>Ascending Order - Artist Name</option>
                 <option value={1}>Descending Order - Artist Name</option>
             </select>
 
-            <section className="row" style={{ marginLeft: "0.5rem" }}>
-                <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-sm-3 mb-5">
+            {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
+            <section className="row">
+                {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
                 {/* TODO: Make the CSS for rendering these work better */}
-                {artists.length > 0 ? artistsMap : <p>No Artists exist</p>}
-                </div>
+                {artistsMap ? artistsMap : <p>Loading...</p>}
+                {/* </div> */}
             </section>
-
-            <Pagination pageNum={pageNum} arrayLength={artists.length} />
+            <Pagination
+                pageNum={pageNum}
+                arrayLength={
+                    searchedArtists ? searchedArtists.length : artistData.length
+                }
+            />
         </>
-    )
+    );
 }

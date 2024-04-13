@@ -5,8 +5,8 @@ export default function About() {
             lastName: "Adekunle",
             bio: "Magret is a senior at UT Austin majoring in Math and African & American Diaspora Studies. She is pursuing a Master's in Artificial intelligence (AI) at UT after her graduation.",
             role: "Group Leader: FullStack Development with Flask, Python, Bootstrap, & etc.",
-            img: "https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp",
-            commits: 33,
+            img: "ryan.png",
+            commits: 74,
             issues: 18,
             unitTests: 0,
             gitlabProfile: 'https://gitlab.com/magretadekunle'
@@ -15,8 +15,8 @@ export default function About() {
             firstName: "George",
             lastName: "Mathew",
             bio: "George is a senior at UT Austin studying Biomedical Engineering and pursuing a Master's in Data Science after his graduation.",
-            role: "Backend Development with Flask and Python.",
-            img: "https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp",
+            role: "Backend Development with Flask and Python",
+            img: "george.png",
             commits: 20,
             issues: 0,
             unitTests: 6,
@@ -26,8 +26,8 @@ export default function About() {
             firstName: "Holly",
             lastName: "Luebsen",
             bio: "Holly is a junior at UT Austin studying Mathematics and pursuing certificates in German, Elements of Computing and Science Communication.",
-            role: "Backend Development",
-            img: "https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp",
+            role: "Backend Development with Flask and Python",
+            img: "holly.jpg",
             commits: 24,
             issues: 0,
             unitTests: 0,
@@ -38,9 +38,9 @@ export default function About() {
             lastName: "Mullowney",
             bio: "Ryan is a software developer for UT's fundraising department, and enrolls in CS courses to broaden his skillset and fill in gaps in knowledge. He has a Bachelor's in History & Philosophy.",
             role: "Front-End Development with HTML, Bootstrap, and React",
-            img: "https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp",
-            commits: 30,
-            issues: 11,
+            img: "ryan.png",
+            commits: 35,
+            issues: 14,
             unitTests: 0,
             gitlabProfile: 'https://gitlab.com/rwmullowney'
         },
@@ -48,8 +48,8 @@ export default function About() {
             firstName: "Jack",
             lastName: "Yeung",
             bio: "Jack is a senior at UT Austin studying Biomedical Engineering pursuing the Elements of Computing Certificate.",
-            role: "Backend Development",
-            img: "https://mdbcdn.b-cdn.net/img/new/standard/city/046.webp",
+            role: "Backend Development with Flask and Python",
+            img: "jack.jpeg",
             commits: 11,
             issues: 0,
             unitTests: 3,
@@ -62,11 +62,11 @@ export default function About() {
             <>
                 <div className="col" style= {{ margintop: .5+'rem', marginBottom: .5+'rem', marginLeft: 'auto', marginRight: 'auto'}} >
                     <div className="card h-100">
-                        <img src={developer.img} className="card-img-top"
+                        <img src={require("../assets/images/about/" + developer.img)} className="card-img-top"
                             alt={`${developer.firstName} ${developer.lastName}`} />
                         <div className="card-body">
                             <h4 className="card-title">{developer.firstName} {developer.lastName}</h4>
-                            <p className="card-text"><b>Biogrpahy:</b> {developer.bio}</p>
+                            <p className="card-text"><b>Biography:</b> {developer.bio}</p>
                             <p className="card-text"><b>Main role: </b> {developer.role} </p>
                             <p className="card-text"><b>Commits by {developer.firstName}: </b>{developer.commits}</p>
                             <p className="card-text"><b>Issues Created: </b>{developer.issues}</p>

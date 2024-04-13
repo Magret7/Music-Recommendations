@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "_TODO": "Add a proxy to connect to the flask backend",
-  "proxy": "http://127.0.0.1:5000/",
+  "proxy":"http://localhost:5000/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",

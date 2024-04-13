@@ -91,41 +91,29 @@ def relatedArtists(artist_name):
 # Showing A Single Genre In Database
 @app.route('/genre/<genre_name>/',  methods=['GET', 'POST'])
 def showGenre(genre_name):
-    genre = None
-    for g in genres:
-        if g['name'] == genre_name:
-            genre = g
-            break
-    if genre:
-        return render_template('showGenre.html', genre = genre)
-    else:
-        return "Genre not found", 404
+    genre = db.session.query(Genres).filter(Genres.name == genre_name).first()
+    return jsonify(genre.serialize()) if genre else ("Record not found", 400)
+    # genre = None
+    # for g in genres:
+    #     if g['name'] == genre_name:
+    #         genre = g
+    #         break
+    # if genre:
+    #     return render_template('showGenre.html', genre = genre)
+    # else:
+    #     return "Genre not found", 404
     
 # Showing A Single Album In Database
 @app.route('/album/<album_name>/',  methods=['GET', 'POST'])
 def showAlbum(album_name):
-    album = None
-    for a in albums:
-        if a['name'] == album_name:
-            album = a
-            break
-    if album:
-        return render_template('showAlbum.html', album = album)
-    else:
-        return "Genre not found", 404
+    album = db.session.query(Albums).filter(Albums.name == album_name).first()
+    return jsonify(album.serialize()) if album else ("Record not found", 400)
 
 # Showing A Single Artist In Database
-@app.route('/artist/<artist_name>/',  methods=['GET', 'POST'])
+@app.route('/artist/<artist_name>/')
 def showArtist(artist_name):
-    artist = None
-    for a in artists:
-        if a['name'] == artist_name:
-            artist = a
-            break
-    if artist:
-        return render_template('showArtist.html', artist = artist)
-    else:
-        return "Artist not found", 404
+    artist = db.session.query(Artists).filter(Artists.name == artist_name).first()
+    return jsonify(artist.serialize()) if artist else ("Record not found", 400)
 
 if __name__ == "__main__":
     app.debug = True

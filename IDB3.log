@@ -1,0 +1,509 @@
+commit 7ab07a8d42ce5044f6037ae8858be58285eacce9
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 22:51:01 2024 +0000
+
+    update hosting url
+
+commit 026189dd00aedefa41397815733cb4a9b34d384c
+Merge: 893117b 88eeab9
+Author: Ryan Mullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 22:04:32 2024 +0000
+
+    Merge branch 'react-implementation' into 'main'
+    
+    Fix error on DisplayArtist if artist wasn't found
+    
+    See merge request magretadekunle/cs331e-idb!38
+
+commit 88eeab9e62a8fd8d16a026e0f60717c161060859
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 17:02:46 2024 -0500
+
+    Fix error on DisplayArtist if artist wasn't found
+
+commit 893117bb452127a080fa2e25b4daff2e3e522f38
+Author: Magret <magretadekunle@gmail.com>
+Date:   Sat Apr 13 16:48:39 2024 -0500
+
+    Updated Searchbar to look nice.
+
+commit 9e8e15343200962163296f1536d9f9ede444b42c
+Merge: 8325b00 c4b1e78
+Author: Ryan Mullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 21:07:04 2024 +0000
+
+    Merge branch 'react-implementation' into 'main'
+    
+    Update counts on About page.  Add final developer image.
+    
+    See merge request magretadekunle/cs331e-idb!37
+
+commit c4b1e7865cdb276b764e232a759fb9dbd0d1983e
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 16:06:01 2024 -0500
+
+    Update counts on About page.  Add final developer image.
+
+commit 8325b002ef551873f8b533c9748dabb2ca6a23ec
+Merge: 34cd4f6 db98a89
+Author: Ryan Mullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 20:59:49 2024 +0000
+
+    Merge branch 'react-implementation' into 'main'
+    
+    Merge latest React updates for Phase III
+    
+    See merge request magretadekunle/cs331e-idb!36
+
+commit db98a8941778838ee3258dd75da6ae089c0a788f
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 15:55:57 2024 -0500
+
+    Add highlighting on search query.  Update Albums page so you can click into the DisplayAlbum component.
+    
+    Remove tracks on All Albums page to make it cleaner.
+    
+    Add margin to list of tracks on DisplayAlbum.
+
+commit 34cd4f63162984047618bbb4b3cfe1ffe4e85191
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:53:41 2024 +0000
+
+    Newest file to app.yaml
+
+commit edb6119241bc14c8a085985fd73f7d7265abf5b9
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:49:28 2024 +0000
+
+    Added service
+
+commit c1d6b19513fa76283123d9d7ea32749f70f941e5
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:49:02 2024 +0000
+
+    New Changes
+
+commit b307f6b8a625d480ec02143f3d0951d682592256
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:41:49 2024 +0000
+
+    New update
+
+commit f042e5ad9c482165b92cf31f4c55307389e0461f
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:36:25 2024 +0000
+
+    add module to app.yaml
+
+commit 18983e38efd7447d9a20b44d8f2d49124ca8cd89
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:28:48 2024 +0000
+
+    Updated proxy
+
+commit f118d287a04eff5856b97aa00866f3f8e9c935e6
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:23:15 2024 +0000
+
+    Updated app.yaml
+
+commit 6b4742063e8b62bdd2082258f7c53aa590041570
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 13 20:10:01 2024 +0000
+
+    Added service to app.yaml
+
+commit 6e0b80a472f614575ec4e7612c03cec1b51282ed
+Author: Magret <magretadekunle@gmail.com>
+Date:   Sat Apr 13 14:56:04 2024 -0500
+
+    Changes for proxy
+
+commit 3701e70c5be9bbc3725717d4a3019d742365e35e
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 14:34:22 2024 -0500
+
+    Fix error if Followers is null.
+    
+    Conditionally render Albums/Related Artists so those elements don't appear if there are none
+
+commit d9a54068a203dc5b5ce76794924fbf4efee1e903
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 14:26:57 2024 -0500
+
+    Update styling of DisplayAlbum
+
+commit 1ae6f91f9a8fb061488ca8483ccef02a7abc5734
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 13:53:48 2024 -0500
+
+    Update styling for DisplayArtist component
+
+commit cea21342e199d46f4394d2d6534b83365162f604
+Merge: 2afd3cd 38d1620
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 11:09:05 2024 -0500
+
+    Merge remote-tracking branch 'origin/react-implementation' into react-implementation
+
+commit 2afd3cdccf3975c20ed75c240f738e60bbc3be77
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 11:07:14 2024 -0500
+
+    Cleanup of imports and unused Search component
+
+commit 9ce3267203b2e3efbedbb43147de32fb447359f7
+Merge: b013c4b 38d1620
+Author: Ryan Mullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 00:47:49 2024 +0000
+
+    Merge branch 'react-implementation' into 'main'
+    
+    Add Phase III React
+    
+    See merge request magretadekunle/cs331e-idb!35
+
+commit 38d1620532673d402019bf48ce6f7e570d112007
+Merge: d18d2ce b013c4b
+Author: Ryan Mullowney <rwmullowney@utexas.edu>
+Date:   Sat Apr 13 00:46:51 2024 +0000
+
+    Merge branch 'main' into 'react-implementation'
+    
+    # Conflicts:
+    #   models.py
+
+commit d18d2cee59ad1c94d1a6682a595a513ab76ee2b7
+Merge: 7584cb0 80423d2
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Fri Apr 12 19:45:31 2024 -0500
+
+    Merge branch 'main' into react-implementation
+
+commit b013c4b8d6b018244314aa189ab347ccaa33ebe3
+Merge: 80423d2 ac09590
+Author: George Mathew <georgegmathew12@gmail.com>
+Date:   Sat Apr 13 00:42:47 2024 +0000
+
+    Merge branch 'George' into 'main'
+    
+    Fixing db population timeout error
+    
+    See merge request magretadekunle/cs331e-idb!34
+
+commit ac095902861ebc2838c87aa7251ff7e8c01e6fce
+Author: George Mathew <georgegmathew12@gmail.com>
+Date:   Fri Apr 12 19:39:08 2024 -0500
+
+    Fixing db population timeout error
+
+commit 7584cb046ece585b2ac32b1be8cac6bf304f69a7
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Fri Apr 12 19:19:46 2024 -0500
+
+    Make home page dynamic by presenting actual most popular artists/albums in database.
+    
+    Add developer images to About page.
+    
+    Re-add follower count to artists on home page and add commas where needed
+
+commit 225b99d745befa0ddb1b766256499aaa776a73e8
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Fri Apr 12 17:45:35 2024 -0500
+
+    Connect DisplayGenre page to backend and Genres component
+
+commit eed451d90b0863f16af7966fd28bb213612fe6a4
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Thu Apr 11 09:54:44 2024 -0500
+
+    Fix sorting bug so now it consistently works
+
+commit e2a6b1177308b8d9e4ac14947c69a2238d3e1a8a
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Thu Apr 11 00:15:56 2024 -0500
+
+    Connect DisplayAlbum component to backend
+
+commit 25d332d707d1492148f51ad178ccfdcc7fdc3d10
+Merge: 3b642c7 a20575c
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 23:44:34 2024 -0500
+
+    Merge branch 'MagretsBranch' into react-implementation
+    
+    Remove extraneous elements on Header
+    
+    Update related_artists field for displayArtist page to prevent errors
+    
+    Remove followers count from homepage
+
+commit 3b642c7975e2098d4bc1e36914e28770d2dd2613
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 23:18:33 2024 -0500
+
+    Add sorting to Genres
+
+commit 997a6832e54933d96a48100187ae905b0960317e
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 23:10:49 2024 -0500
+
+    Add search to Albums component.
+    
+    Update CSS name for styling artist and album cards
+
+commit 176fae9dee3fa240efae3e092ded26fdd7569588
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 22:56:41 2024 -0500
+
+    Fix Artist related_artists pathing to original syntax
+    
+    Make first character of genre upper case on Album page
+
+commit 78f2a9f59f45f9b6557442d713b1524934b2f059
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 22:50:06 2024 -0500
+
+    Add searching and sorting to Artists page
+    
+    Add css to maintain column size for artist cards
+
+commit 8968917aee1731396163b4eb60daff6151b8674d
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 21:59:08 2024 -0500
+
+    Remove genre table row that wasn't being used
+
+commit af9cb4162553b09e0f86341dfcf4c4eecf58c87a
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 21:57:44 2024 -0500
+
+    Hook Genre component up to backend data
+
+commit e5c0bdf2879f417a81f7b2677d0f92209292ceba
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 21:49:43 2024 -0500
+
+    Add tracks to DisplayArtist and fix linking issue.  Add error handling to API call if artist isn't found.
+    
+    Update Artists model to include followers.
+    
+    Update font of "Artist not found" message.
+
+commit 3b0b31a80aa03f6f9f93128e9dd06c8597958620
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 20:57:49 2024 -0500
+
+    Add API data connection to DisplayArtist component
+
+commit b8ebef9a17ba4036597c4ca598f0077f3da5a323
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 20:40:42 2024 -0500
+
+    Make artist image and name clickable links to their main page
+
+commit a20575c34b2bd7a66265a055ebbee12f5e3fdb08
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 14:59:20 2024 -0500
+
+    Enable proper slicing/paging on artist search
+
+commit f891b5963e62a3cd3af7b4eab644fdbe4de0f008
+Author: Magret <magretadekunle@gmail.com>
+Date:   Wed Apr 10 14:11:04 2024 -0500
+
+    Updating Searching
+
+commit a8c0f4f664c7f06840af042ab292ea35cdf821d2
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 13:51:23 2024 -0500
+
+    Update main.py backend for individual artist page
+
+commit baf3abf71a3f3d9a5663f6d3afd31f762c46c5f1
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 13:48:57 2024 -0500
+
+    Change Artists page header. Partially connect DisplayArtist to API.
+
+commit 186813d30bbbafa53fa76581f84b8494f4207e71
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 00:30:55 2024 -0500
+
+    Replace usage of eval() with JSON.parse()
+
+commit d7e391c486aab5c8af7e4ad74c0c7f57ce6c6558
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 00:23:37 2024 -0500
+
+    Break out pagination slicing to helper function.
+    
+    Use new helper function on main components for cleaner code.
+    
+    Add pagination to Genres component.
+
+commit 80423d2618886f043da33f5e542448ae18d8b34b
+Merge: 13cbeec 24702d3
+Author: George Mathew <georgegmathew12@gmail.com>
+Date:   Wed Apr 10 05:15:56 2024 +0000
+
+    Merge branch 'George' into 'main'
+    
+    Fixed models.py
+    
+    See merge request magretadekunle/cs331e-idb!33
+
+commit 24702d3a844c003865d3d4bb1077bfbc87980674
+Author: George Mathew <georgegmathew12@gmail.com>
+Date:   Wed Apr 10 00:13:41 2024 -0500
+
+    Fixed models.py
+
+commit 13cbeec12061bc2790e3b9999c5ff0006d26460d
+Author: George Mathew <georgegmathew12@gmail.com>
+Date:   Wed Apr 10 00:06:24 2024 -0500
+
+    Fixing genre db data types
+
+commit 2d13fce4bb972e03f4414ad4ba8bd3b49db0826a
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Wed Apr 10 00:04:43 2024 -0500
+
+    Get part of Genres page returning data from API.
+    
+    Very light cleanup of Artists component.
+
+commit 7ddec37dd91ace626ac10b34de5a10b22f8da090
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Tue Apr 9 18:48:37 2024 -0500
+
+    Implement API data on Albums page.
+    Mild cleanup of Artists component.
+
+commit 7b1a083f7ad5bb6f3a1bad3b60b82c68b34411c3
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Tue Apr 9 18:35:28 2024 -0500
+
+    Finish displaying API data on Artists page
+
+commit ff23c0db8ba6f8ff9c58791cc9a872c3ad16d716
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Mon Apr 8 22:24:11 2024 -0500
+
+    Process Arist data returned from API and display on page
+
+commit d41aad65f2802cb1fbe9a079afb1f58c29138ee3
+Merge: 796bd18 f37413f
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Tue Apr 9 00:39:20 2024 +0000
+
+    Merge branch 'MagretsBranch' into 'main'
+    
+    Added icons to sidebar
+    
+    See merge request magretadekunle/cs331e-idb!32
+
+commit f37413f62bc64bae126a3dcd2e8c6205a893db36
+Author: Magret <magretadekunle@gmail.com>
+Date:   Mon Apr 8 19:29:07 2024 -0500
+
+    Added icons to sidebar
+
+commit 796bd185c8b4b366284d8c08eb5052f0d4e20a9c
+Merge: 1847d35 9d256bd
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Mon Apr 8 23:18:27 2024 +0000
+
+    Merge branch 'MagretsBranch' into 'main'
+    
+    Updated About me page and fix spacing for cards on Albums, Artist, and Genres
+    
+    See merge request magretadekunle/cs331e-idb!31
+
+commit 9d256bd95b3054408f14b0b48fc4042b3e6d89cc
+Author: Magret <magretadekunle@gmail.com>
+Date:   Mon Apr 8 18:16:23 2024 -0500
+
+    Updated About me page and fix spacing for cards on Albums, Artist, and Genres
+
+commit e7adfd534e055a7841beeca1580b0a55aa08783e
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Mon Apr 8 15:02:10 2024 -0500
+
+    Add basic (currently nonfunctioning) search bar
+    
+    Implement search bar on center of Header component
+
+commit 1847d35f8951c21e34b5a3b5b93a302fb51cbf2a
+Author: Magret <magretadekunle@gmail.com>
+Date:   Sun Apr 7 21:39:03 2024 -0500
+
+    removed models.html (not needed anymore)
+
+commit 7f52ea04ec599f3c963d67cc3eae2296c993f5a5
+Author: Magret <magretadekunle@gmail.com>
+Date:   Sun Apr 7 21:38:21 2024 -0500
+
+    Added basic Sorting Ascending and Descending order for Albums, Artist, and Genres
+
+commit d05a4f604f21d9dda2685993c52b1a6ee64567ab
+Author: rwmullowney <rwmullowney@utexas.edu>
+Date:   Sun Apr 7 17:00:01 2024 -0500
+
+    Add rudimentary API calls to main Album/Artist/Genre components.
+    
+    Update Genres model to avoid errors when populating db
+    
+    Add routes to retrieve jsonified data from db to display on frontend
+
+commit e624870375654c883f2f8319861948ecaf03b1d5
+Merge: 4df4d22 d666bd7
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Sat Apr 6 17:30:15 2024 +0000
+
+    Merge branch 'MagretsBranch' into 'main'
+    
+    Changes for json to coonect with react!
+    
+    See merge request magretadekunle/cs331e-idb!30
+
+commit d666bd7ba42ed6b262a30a05a3240085e3952936
+Author: Magret <magretadekunle@gmail.com>
+Date:   Sat Apr 6 12:27:51 2024 -0500
+
+    Changes for json to coonect with react!
+
+commit 4df4d22b858bba3aedcea3f8186fe47553014963
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Tue Apr 2 20:06:24 2024 +0000
+
+    Correct Changes to frontend app.yaml file
+
+commit 2e4c9179f6121d62cea9f24f70939ec8b04c5bc0
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Mon Apr 1 15:13:36 2024 +0000
+
+    Update to app.fronted.yaml
+
+commit 5b07f3176e33ab79532bac9b7df6b2b423f2d98a
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Mon Apr 1 14:44:31 2024 +0000
+
+    changes to app-fronted.yaml
+
+commit 50663c6931fc33b5722ece8b9db4c0aa370b2c90
+Merge: c500d6d b014a6d
+Author: Magret Adekunle <magretadekunle@gmail.com>
+Date:   Fri Mar 29 20:39:47 2024 +0000
+
+    Merge branch 'MagretsBranch' into 'main'
+    
+    Magrets branch
+    
+    See merge request magretadekunle/cs331e-idb!29
+
+commit b014a6de1dc201fda8bfd208418163b6a0c4acbe
+Author: Magret <magretadekunle@gmail.com>
+Date:   Fri Mar 29 15:38:26 2024 -0500
+
+    Final changes

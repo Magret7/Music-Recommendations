@@ -207,6 +207,13 @@ export default function Artists() {
                 <option value={1}>Descending Order - Artist Name</option>
             </select>
 
+            <Pagination
+                pageNum={pageNum}
+                arrayLength={
+                    searchedArtists ? searchedArtists.length : artistData.length
+                }
+            />
+
             {/* TODO: Maybe change to only even map if there's something there?  Will we always have somethign when the DB is populated? */}
             <section className="row">
                 {/* <div className="row d-flex row-cols-1 row-cols-md-2 row-cols-lg-3 g-lg-5 mb-5"> */}
@@ -214,12 +221,6 @@ export default function Artists() {
                 {artistsMap ? artistsMap : <p>Loading...</p>}
                 {/* </div> */}
             </section>
-            <Pagination
-                pageNum={pageNum}
-                arrayLength={
-                    searchedArtists ? searchedArtists.length : artistData.length
-                }
-            />
         </>
     );
 }

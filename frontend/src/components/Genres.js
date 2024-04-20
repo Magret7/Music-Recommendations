@@ -183,15 +183,16 @@ export default function Genres() {
                 <option value={1}>Descending Order - Genre Name</option>
             </select>
 
-            <section className="row">
-                {genreMap ? genreMap : <p>Loading...</p>}
-            </section>
             <Pagination
                 pageNum={pageNum}
                 arrayLength={
                     searchedGenres ? searchedGenres.length : genreData.length
                 }
             />
+            
+            <section className="row">
+                {genreMap ? genreMap : <p>Loading...</p>}
+            </section>
         </>
     );
 }

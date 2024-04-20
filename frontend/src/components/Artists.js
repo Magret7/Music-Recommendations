@@ -109,6 +109,7 @@ export default function Artists() {
                             </td>
                         </tr>
 
+
                         <tr>
                             <td>
                                 <Link
@@ -121,7 +122,14 @@ export default function Artists() {
                             </td>
                         </tr>
 
-                        <tr>
+                        {/* <tr>
+                        <td>
+                            <b>Popularity: </b>{" "}
+                            {JSON.parse(artist.popularity)}
+                        </td>
+                    </tr> */}
+
+                        {/* <tr>
                             <td>
                                 <b>Songs: </b>
                                 {JSON.parse(artist.tracks).map(
@@ -130,9 +138,9 @@ export default function Artists() {
                                     }
                                 )}
                             </td>
-                        </tr>
+                        </tr> */}
 
-                        <tr>
+                        {/* <tr>
                             <td>
                                 <b>Albums: </b>
                                 {JSON.parse(artist.albums).map((album) => (
@@ -144,9 +152,9 @@ export default function Artists() {
                                     </>
                                 ))}
                             </td>
-                        </tr>
+                        </tr> */}
 
-                        <tr>
+                        {/* <tr>
                             <td>
                                 <b>Genres: </b>
                                 {JSON.parse(artist.genres).map((genre) => (
@@ -159,8 +167,8 @@ export default function Artists() {
                                     </Link>
                                 ))}
                             </td>
-                        </tr>
-
+                        </tr> */}
+{/* 
                         <tr>
                             <td>
                                 <b>Recommended & Related Artists</b> <br />
@@ -175,7 +183,7 @@ export default function Artists() {
                                     )
                                 )}
                             </td>
-                        </tr>
+                        </tr> */}
                     </table>
                 </div>
                 {/* </div> */}

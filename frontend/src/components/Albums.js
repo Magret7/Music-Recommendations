@@ -133,7 +133,7 @@ export default function Albums() {
                                 </Link>
                             </th>
                         </tr>
-
+{/* 
                         <tr>
                             <td>
                                 <b>Artists: </b>
@@ -143,14 +143,14 @@ export default function Albums() {
                                     </Link>
                                 ))}
                             </td>
-                        </tr>
-
+                        </tr> */}
+{/* 
                         <tr>
                             <td>
                                 <b>Released: </b>{" "}
                                 {JSON.parse(album.info).release_date}
                             </td>
-                        </tr>
+                        </tr> */}
                         {/* 
                         <tr>
                             <td>
@@ -164,7 +164,7 @@ export default function Albums() {
                             </td>
                         </tr> */}
 
-                        <tr>
+                        {/* <tr>
                             <td>
                                 <b>Genres of Albums: </b>
                                 {JSON.parse(album.genres).map((genre) => (
@@ -177,7 +177,7 @@ export default function Albums() {
                                     </Link>
                                 ))}
                             </td>
-                        </tr>
+                        </tr> */}
                     </table>
                 </div>
             </>

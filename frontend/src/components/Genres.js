@@ -109,6 +109,13 @@ export default function Genres() {
 
                     <tr>
                         <td>
+                            <b>Popularity: </b>{" "}
+                            {JSON.parse(genre.popularity)}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
                             <b>Artists</b>
                             <br />
                             {JSON.parse(genre.artists).map((artist) => (
@@ -121,6 +128,7 @@ export default function Genres() {
                             ))}
                         </td>
                     </tr>
+                    
 
                     <tr>
                         <td>
@@ -149,6 +157,7 @@ export default function Genres() {
                             ))}
                         </td>
                     </tr>
+
                 </table>
             </div>
         );

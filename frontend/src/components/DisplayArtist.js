@@ -98,29 +98,25 @@ export default function DisplayArtist() {
                                 className="col artistOrAlbum--img"
                             />
                             <div className="col text-start">
-                                <h1 className="fw-light">{artist.name}</h1>
+                                <h1 className="fw-bold">{artist.name}</h1>
+                                <br></br>
                                 {artist.followers ? (
-                                    <p className="ml-5">
-                                        {numberWithCommas(artist.followers)}{" "}
-                                        Followers
-                                    </p>
+                                    <h3 className="ml-5">
+                                        Followers: {numberWithCommas(artist.followers)}{" "}
+
+                                    </h3>
                                 ) : null}
+
+                                {artist.popularity ? (
+                                    <h3 className="ml-5">
+                                        Popularity Score:  {numberWithCommas(artist.popularity)}{" "}
+                                    </h3>
+                                ) : null}
+
+
                             </div>
                         </div>
-
-                        {albumCards.length ? (
-                            <>
-                                <h3 className="text-start">Album(s)</h3>
-                                {albumCards}
-                                <br />
-                            </>
-                        ) : null}
-                        {relatedArtistCards.length ? (
-                            <>
-                                <h3 className="text-start">Related Artists</h3>
-                                <div className="row">{relatedArtistCards}</div>
-                            </>
-                        ) : null}
+                        <br></br>
 
                         <div className="text-start">
                             <h3>Genres</h3>
@@ -137,6 +133,40 @@ export default function DisplayArtist() {
                                 </>
                             ))}
                         </div>
+                        <br></br>
+
+                        {albumCards.length ? (
+                            <>
+                                <h3 className="text-start">Album(s)</h3>
+                                {albumCards}
+                                <br />
+                            </>
+                        ) : null}
+                        <br></br>
+
+                        {relatedArtistCards.length ? (
+                            <>
+                                <h3 className="text-start">Related Artists</h3>
+                                <div className="row">{relatedArtistCards}</div>
+                            </>
+                        ) : null}
+
+                        <br></br>
+                        {/* <div className="text-start">
+                            <h3>Genres</h3>
+                            {JSON.parse(artist.genres).map((genre, index) => (
+                                <>
+                                    {index ? ", " : ""}
+                                    <Link
+                                        to={`/genre/${genre}`}
+                                        style={{ marginRight: 0 }}
+                                    >
+                                        {genre.charAt(0).toUpperCase() +
+                                            genre.slice(1)}
+                                    </Link>
+                                </>
+                            ))}
+                        </div> */}
                     </div>
                 </>
             ) : (

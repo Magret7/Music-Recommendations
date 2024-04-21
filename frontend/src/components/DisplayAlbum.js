@@ -34,15 +34,16 @@ export default function DisplayAlbum() {
                                 className="col artistOrAlbum--img"
                             />
                             <div className="col text-start">
-                                <h1 className="fw-light">{album.name}</h1>
-                                <p>
+                                <h1 className="fw-bold">{album.name}</h1>
+                                <h4>
                                     Released{" "}
                                     {JSON.parse(album.info).release_date}
-                                </p>
-                                <h4 className="fw-normal mt-4">Artist(s)</h4>
+                                </h4><br></br>
+
+                                <h1 className="fw-light mt-4">Artist(s)</h1>
                                 {JSON.parse(album.artist).map(
                                     (artist, index) => (
-                                        <>
+                                        <h4>
                                             {index ? ", " : ""}
                                             <Link
                                                 to={`/artist/${artist}`}
@@ -50,13 +51,13 @@ export default function DisplayAlbum() {
                                             >
                                                 {artist}
                                             </Link>
-                                        </>
+                                        </h4>
                                     )
                                 )}
                             </div>
                         </div>
 
-                        <h3 className="text-start">Tracks</h3>
+                        <h2 className="text-start">Tracks</h2>
                         <div className="row">
                             <div className="d-flex flex-column text-start">
                                 {/* <div className='col-6'></div>
@@ -64,7 +65,7 @@ export default function DisplayAlbum() {
                                 <div className="albumTracks">
                                     {JSON.parse(album.tracks).map(
                                         (track, index) => (
-                                            <p>
+                                            <p style={{fontSize: "1.25rem"}}>
                                                 {index + 1}. {track}
                                             </p>
                                         )
@@ -72,9 +73,10 @@ export default function DisplayAlbum() {
                                 </div>
                             </div>
                         </div>
+                        <br></br>
 
                         <div className="text-start">
-                            <h3>Genres</h3>
+                            <h2>Genres</h2>
                             {JSON.parse(album.genres).map((genre, index) => (
                                 <>
                                     {index ? ", " : ""}

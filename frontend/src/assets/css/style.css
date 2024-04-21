@@ -116,6 +116,7 @@ tr:nth-child(even) {
   width: 100%;
   border-radius: 9px;
   margin-bottom: 9px;
+  max-height: 320px;
   box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
   /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
 }
@@ -127,7 +128,7 @@ tr:nth-child(even) {
 }
 
 .artistCard--followers {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 300;
   text-align: left;
 }
@@ -139,7 +140,7 @@ tr:nth-child(even) {
 
 .albumCard {
   width: 320px;
-  font-size: 16px;
+  font-size: 20px;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
@@ -155,6 +156,7 @@ tr:nth-child(even) {
   width: 100%;
   border-radius: 9px;
   margin-bottom: 9px;
+  max-height: 320px;
   box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
   /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
 }
@@ -175,13 +177,13 @@ tr:nth-child(even) {
 }
 
 .albumCard--nameDisplayPage {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   margin-bottom: 0px;
 }
 
 .albumCard--releaseYear{
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .albumCard--info {
@@ -198,6 +200,7 @@ tr:nth-child(even) {
   width: 100%;
   border-radius: 9px;
   max-width: 320px;
+  max-height: 300px;
   box-shadow: 0px 6.98256px 7.4564px rgba(0, 0, 0, 0.1);
 }
 

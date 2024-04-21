@@ -22,6 +22,8 @@ export default function ArtistCard(props) {
 
 
 
+
+
 // export default function ArtistCard(props) {
 //     return (
 //         <div className='artistCard'>

@@ -17,6 +17,8 @@ export default function Artists() {
     // Setting Up for Searching
     const [searchTerm, setSearchTerm] = useState("");
     const [searchedArtists, setSearchedArtists] = useState();
+    const [sortDirection, setSortDirection] = useState(0)
+    const [sortField, setSortField] = useState()
 
     // Retrieve slice of data returned from API
     let pageNum = useParams().pageNum;
@@ -28,30 +30,46 @@ export default function Artists() {
         : artistData.slice(sliceLowerRange, sliceUpperRange);
 
     // Sorting by ascendingOrder or descendingOrder
-    function onSelectionChange(e) {
+    function onSortDirectionChange(e) {
         const sortDirection = e.target.value;
+        setSortDirection(sortDirection)
 
         if (sortDirection === "0") {
             let ascendingItems = searchedArtists
                 ? searchedArtists.sort(
-                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                    (a, b) => (a[sortField] > b[sortField]) - (a[sortField] < b[sortField])
                 )
                 : artistData.sort(
-                    (a, b) => (a.name > b.name) - (a.name < b.name)
+                    (a, b) => (a[sortField] > b[sortField]) - (a[sortField] < b[sortField])
                 );
             setSearchedArtists([...ascendingItems]);
             console.log(searchedArtists)
         } else {
             let descendingItems = searchedArtists
                 ? searchedArtists.sort(
-                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                    (a, b) => (a[sortField] < b[sortField]) - (a[sortField] > b[sortField])
                 )
                 : artistData.sort(
-                    (a, b) => (a.name < b.name) - (a.name > b.name)
+                    (a, b) => (a[sortField] < b[sortField]) - (a[sortField] > b[sortField])
                 );
             setSearchedArtists([...descendingItems]);
             console.log(searchedArtists)
         }
+    }
+
+    function onSortFieldChange(e) {
+        const sortField = e.target.value;
+        setSortField(sortField)
+        console.log(sortField)
+        let newArtists = searchedArtists
+        ? searchedArtists.sort(
+            (a, b) => (a[sortField] > b[sortField]) - (a[sortField] < b[sortField])
+        )
+        : artistData.sort(
+            (a, b) => (a[sortField] > b[sortField]) - (a[sortField] < b[sortField])
+        );
+        console.log('new artists are ', newArtists)
+        setSearchedArtists([...newArtists])
     }
 
     // Searching
@@ -208,11 +226,15 @@ export default function Artists() {
             </div>
 
 
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSortFieldChange} className="mx-2">
+                <option value={-1} disabled>Sort By</option>
+                <option value='name'>Name</option>
+                <option value='popularity'>Popularity</option>
+            </select>
             {/* TODO: Change to Dropdown for better look */}
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSelectionChange} className="mb-3">
-                <option value={-1} disabled>Select Sorting Option</option>
-                <option value={0}>Ascending Order - Artist Name</option>
-                <option value={1}>Descending Order - Artist Name</option>
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSortDirectionChange} className="mx-2">
+                <option value={0}>Ascending Order</option>
+                <option value={1}>Descending Order</option>
             </select>
 
             <Pagination

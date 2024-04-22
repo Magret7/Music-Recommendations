@@ -17,6 +17,8 @@ export default function Genres() {
     // Setting Up for Searching
     const [searchTerm, setSearchTerm] = useState("");
     const [searchedGenres, setSearchedGenres] = useState();
+    const [sortDirection, setSortDirection] = useState("0");
+    const [sortField, setSortField] = useState();
 
     // Retrieve slice of data returned from API
     let pageNum = useParams().pageNum;
@@ -28,30 +30,70 @@ export default function Genres() {
         : genreData.slice(sliceLowerRange, sliceUpperRange);
 
     // Sorting by ascendingOrder or descendingOrder
-    function onSelectionChange(e) {
+    function onSortDirectionChange(e) {
         const sortDirection = e.target.value;
+        setSortDirection(sortDirection);
 
         if (sortDirection === "0") {
             let ascendingItems = searchedGenres
                 ? searchedGenres.sort(
-                    (a, b) => (a.name > b.name) - (a.name < b.name)
-                )
+                      (a, b) =>
+                          (a[sortField] > b[sortField]) -
+                          (a[sortField] < b[sortField])
+                  )
                 : genreData.sort(
-                    (a, b) => (a.name > b.name) - (a.name < b.name)
-                );
+                      (a, b) =>
+                          (a[sortField] > b[sortField]) -
+                          (a[sortField] < b[sortField])
+                  );
             setSearchedGenres([...ascendingItems]);
-            console.log(searchedGenres);
         } else {
             let descendingItems = searchedGenres
                 ? searchedGenres.sort(
-                    (a, b) => (a.name < b.name) - (a.name > b.name)
-                )
+                      (a, b) =>
+                          (a[sortField] < b[sortField]) -
+                          (a[sortField] > b[sortField])
+                  )
                 : genreData.sort(
-                    (a, b) => (a.name < b.name) - (a.name > b.name)
-                );
+                      (a, b) =>
+                          (a[sortField] < b[sortField]) -
+                          (a[sortField] > b[sortField])
+                  );
             setSearchedGenres([...descendingItems]);
-            console.log(searchedGenres);
         }
+    }
+
+    function onSortFieldChange(e) {
+        const sortField = e.target.value;
+        setSortField(sortField);
+        console.log(sortField);
+        let sortedGenres = []
+        if (sortDirection === "0") {
+            sortedGenres = searchedGenres
+                ? searchedGenres.sort(
+                      (a, b) =>
+                          (a[sortField] > b[sortField]) -
+                          (a[sortField] < b[sortField])
+                  )
+                : genreData.sort(
+                      (a, b) =>
+                          (a[sortField] > b[sortField]) -
+                          (a[sortField] < b[sortField])
+                  );
+        } else {
+            sortedGenres = searchedGenres
+                ? searchedGenres.sort(
+                      (a, b) =>
+                          (a[sortField] < b[sortField]) -
+                          (a[sortField] > b[sortField])
+                  )
+                : genreData.sort(
+                      (a, b) =>
+                          (a[sortField] < b[sortField]) -
+                          (a[sortField] > b[sortField])
+                  );
+        }
+        setSearchedGenres([...sortedGenres]);
     }
 
     // Searching
@@ -180,27 +222,27 @@ export default function Genres() {
                 <button class="btn btn-primary" type="button" onClick={handleSearch} >Search</button>
             </div>
 
-            <select
-                style={{ marginTop: "0.5rem" }}
-                onChange={onSelectionChange}
-                className="mb-3"
-            >
-                <option value="" disabled selected>
-                    Select sorting option
-                </option>
-                <option value={0}>Ascending Order - Genre Name</option>
-                <option value={1}>Descending Order - Genre Name</option>
+            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSortFieldChange} className="mx-2">
+                <option value={-1} disabled>Sort By</option>
+                <option value='name'>Name</option>
+                <option value='popularity'>Popularity</option>
+            </select>
+            {/* TODO: Change to Dropdown for better look */}
+            <select style={{ marginTop: "0.5rem" }} defaultValue={0} onChange={onSortDirectionChange} className="mx-2">
+                <option value={0}>Ascending Order</option>
+                <option value={1}>Descending Order</option>
             </select>
 
-            <section className="row">
-                {genreMap ? genreMap : <p>Loading...</p>}
-            </section>
             <Pagination
                 pageNum={pageNum}
                 arrayLength={
                     searchedGenres ? searchedGenres.length : genreData.length
                 }
             />
+            
+            <section className="row">
+                {genreMap ? genreMap : <p>Loading...</p>}
+            </section>
         </>
     );
 }

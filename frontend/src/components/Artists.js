@@ -93,7 +93,6 @@ export default function Artists() {
                           (a[sortField] > b[sortField])
                   );
         }
-        console.log("new artists are ", sortedArtists);
         setSearchedArtists([...sortedArtists]);
     }
 
@@ -298,7 +297,7 @@ export default function Artists() {
             {/* TODO: Change to Dropdown for better look */}
             <select
                 style={{ marginTop: "0.5rem" }}
-                defaultValue={-1}
+                defaultValue={0}
                 onChange={onSortDirectionChange}
                 className="mx-2"
             >

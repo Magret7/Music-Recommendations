@@ -93,7 +93,6 @@ export default function Genres() {
                           (a[sortField] > b[sortField])
                   );
         }
-        console.log("new artists are ", sortedGenres);
         setSearchedGenres([...sortedGenres]);
     }
 
@@ -229,7 +228,7 @@ export default function Genres() {
                 <option value='popularity'>Popularity</option>
             </select>
             {/* TODO: Change to Dropdown for better look */}
-            <select style={{ marginTop: "0.5rem" }} defaultValue={-1} onChange={onSortDirectionChange} className="mx-2">
+            <select style={{ marginTop: "0.5rem" }} defaultValue={0} onChange={onSortDirectionChange} className="mx-2">
                 <option value={0}>Ascending Order</option>
                 <option value={1}>Descending Order</option>
             </select>

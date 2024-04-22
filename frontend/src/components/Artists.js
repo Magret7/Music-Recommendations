@@ -66,7 +66,12 @@ export default function Artists() {
     function onSortFieldChange(e) {
         const sortField = e.target.value;
         setSortField(sortField);
-        console.log(sortField);
+        
+        if (sortField === 'popularity') {
+            setSortDirection("1");
+        }
+
+
         let sortedArtists = []
         if (sortDirection === "0") {
             sortedArtists = searchedArtists
